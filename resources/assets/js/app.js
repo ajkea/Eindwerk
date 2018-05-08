@@ -4,7 +4,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.axios = require('axios');
 window.Vue = require('vue');
 
 /**
@@ -14,6 +14,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('task-list', require('./components/TaskListComponent.vue'));
+
 
 const app = new Vue({
     el: '#app'
