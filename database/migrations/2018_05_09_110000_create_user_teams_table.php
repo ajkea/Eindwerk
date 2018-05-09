@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTacticsTable extends Migration
+class CreateUserTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateUserTacticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_tactics', function (Blueprint $table) {
+        Schema::create('user_teams', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('FKuserID');
             $table->foreign('FKuserID')->references('userID')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('FKtacticID');
-            $table->foreign('FKtacticID')->references('tacticID')->on('tactics')->onDelete('cascade');
+            $table->unsignedInteger('FKteamID');
+            $table->foreign('FKteamID')->references('teamID')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateUserTacticsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tactics');
+        Schema::dropIfExists('user_teams');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTacticsTable extends Migration
+class CreatePlayersInTacticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateUserTacticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_tactics', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('FKuserID');
-            $table->foreign('FKuserID')->references('userID')->on('users')->onDelete('cascade');
+        Schema::create('players_in_tactics', function (Blueprint $table) {
+            $table->increments('playersInTacticID');
+            $table->unsignedInteger('FKplayerID');
+            $table->foreign('FKplayerID')->references('playerID')->on('players')->onDelete('cascade');
             $table->unsignedInteger('FKtacticID');
             $table->foreign('FKtacticID')->references('tacticID')->on('tactics')->onDelete('cascade');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateUserTacticsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tactics');
+        Schema::dropIfExists('players_in_tactics');
     }
 }

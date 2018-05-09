@@ -15,11 +15,11 @@ class CreateCoordinatesTable extends Migration
     {
         Schema::create('coordinates', function (Blueprint $table) {
             $table->increments('coordinateID');
-            // $table->integer('xCoordinate');
-            // $table->integer('yCoordinate');
-            // $table->integer('step');
-            // $table->unsignedInteger('FKplayerInTacticID');
-            // $table->foreign('playerInTactic')->references('playerInTacticID')->on('playersInTactic')->onDelete('cascade');
+            $table->integer('xCoordinate');
+            $table->integer('yCoordinate');
+            $table->integer('step');
+            $table->unsignedInteger('FKplayersInTacticID');
+            $table->foreign('FKplayersInTacticID')->references('playersInTacticID')->on('players_in_tactics')->onDelete('cascade');
             $table->timestamps();
         });
     }
