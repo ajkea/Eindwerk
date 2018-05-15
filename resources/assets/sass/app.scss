@@ -1,4 +1,6 @@
-h1 {
-  color: red;
-  font-size: 4rem;
-}
+@import '00-initial/_bundle.scss';
+@import '01-atoms/_bundle.scss';
+@import '02-molecules/_bundle.scss';
+@import '03-organisms/_bundle.scss';
+@import '04-templates/_bundle.scss';
+@import '05-pages/_bundle.scss';
