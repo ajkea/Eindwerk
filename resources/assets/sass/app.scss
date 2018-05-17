@@ -1,11 +1,6 @@
-
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
-@import "variables";
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+@import '00-initial/_bundle.scss';
+@import '01-atoms/_bundle.scss';
+@import '02-molecules/_bundle.scss';
+@import '03-organisms/_bundle.scss';
+@import '04-templates/_bundle.scss';
+@import '05-pages/_bundle.scss';
