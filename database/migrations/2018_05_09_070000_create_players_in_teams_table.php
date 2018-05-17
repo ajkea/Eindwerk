@@ -14,11 +14,11 @@ class CreatePlayersInTeamsTable extends Migration
     public function up()
     {
         Schema::create('players_in_teams', function (Blueprint $table) {
-            $table->increments('playersInTeamID');
+            $table->increments('id');
             $table->unsignedInteger('FKteamID');
-            $table->foreign('FKteamID')->references('teamID')->on('teams')->onDelete('cascade');
+            $table->foreign('FKteamID')->references('id')->on('teams')->onDelete('cascade');
             $table->unsignedInteger('FKplayerID');
-            $table->foreign('FKplayerID')->references('playerID')->on('players')->onDelete('cascade');
+            $table->foreign('FKplayerID')->references('id')->on('players')->onDelete('cascade');
             $table->timestamps();
         });
     }
