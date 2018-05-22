@@ -21,10 +21,10 @@ class CreatePlayersTable extends Migration
             $table->string('description')
                 ->nullable();
             $table->unsignedInteger('FKpositionID')
-                ->nullable;
+                ->nullable();
             $table->foreign('FKpositionID')->references('id')->on('positions')->onDelete('cascade');
             $table->unsignedInteger('FKmediaID')
-                ->nullable;
+                ->nullable();
             $table->foreign('FKmediaID')->references('id')->on('media')->onDelete('cascade');
             $table->timestamps();
         });

@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/media', 'MediaController');
+Route::resource('/players', 'PlayerController');
+Route::resource('/positions', 'PositionController');
