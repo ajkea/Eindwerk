@@ -4,7 +4,7 @@
 <div class="container">
     <h6>{{ __('Register') }}</h6>
     <div class="row justify-content-center">
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" files="true">
             @csrf
             <div class="row">
                 {{ __('Username') }}
@@ -53,7 +53,7 @@
 
             <div class="row">
                 <h5>File</h5>
-                {{-- <input type="file" name="FKmediaID" id="FKmediaID"> --}}
+                <input type="file" name="media" id="media">
             </div>
             
             <div class="row">

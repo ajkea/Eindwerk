@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use App\Media;
+use File;
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -54,6 +58,7 @@ class RegisterController extends Controller
             'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'media' => 'file|mimes:jpeg,bmp,png,jpg',
         ]);
     }
 
@@ -65,12 +70,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $FKmediaID = $this->uploadMedia($data['media']);
+
         return User::create([
             'username' => $data['username'],
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'FKmediaID' => $FKmediaID,
         ]);
+    }
+
+    public function uploadMedia($media)
+    {
+
+        $extension = $media->getClientOriginalExtension();
+        $filename = 'user-'.time().'.'.$extension;
+        $media->move('images/upload/', $filename);
+        $media->source = $filename;
+
+        $media = Media::create(['source' => $filename, 'alt' => $filename]);
+        $media->save();
+        return $media->id;
     }
 }

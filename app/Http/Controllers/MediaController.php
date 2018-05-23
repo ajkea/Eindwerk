@@ -48,15 +48,17 @@ class MediaController extends Controller
             $file = $request->file('source');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $file->move('images/test/', $filename);
+            $file->move('images/upload/', $filename);
             $media->source = $filename;
 
             $media = Media::create(['source' => $filename, 'alt' => $request->alt]);
             $media->save();
             return redirect()->back()->with('succes', 'Foto goed toegevoegd');
         }
+        else {
             return redirect()->back()->with('failed', 'Foto toevoegen mislukt');
-
+        }
+            
     }
 
     /**
