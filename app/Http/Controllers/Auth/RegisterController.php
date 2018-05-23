@@ -84,6 +84,7 @@ class RegisterController extends Controller
 
     public function uploadMedia($media)
     {
+        $FKmediaID = new Media();
 
         $extension = $media->getClientOriginalExtension();
         $filename = 'user-'.time().'.'.$extension;
@@ -92,6 +93,7 @@ class RegisterController extends Controller
 
         $media = Media::create(['source' => $filename, 'alt' => $filename]);
         $media->save();
-        return $media->id;
+        $FKmediaID = Media::where('source',$filename)->first();
+        return $FKmediaID->id;
     }
 }
