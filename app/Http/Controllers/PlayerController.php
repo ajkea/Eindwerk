@@ -122,7 +122,7 @@ class PlayerController extends Controller
     {
         $FKmediaID = new Media();
         $extension = $media->getClientOriginalExtension();
-        $filename = 'player-'.$firstName.'-'.str_replace(' ','-',$lastName).time().'.'.$extension;
+        $filename = 'player-'.$firstName.'-'.str_replace(' ','-',$lastName).'-'.time().'.'.$extension;
         $altDescription = 'profile picture of player '.$firstName.' '.$lastName;
         $media->move('images/upload/', $filename);
         $media->source = $filename;
