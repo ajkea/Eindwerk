@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Player;
 use App\Position;
+use App\Media;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -42,15 +43,33 @@ class PlayerController extends Controller
             'firstName' => 'string|required|min:3',
             'lastName' => 'string|required|min:2',
             'birthDate' => 'date|required',
+            'FKpositionID' => 'required|integer',
+            'media' => 'file|mimes:jpeg,bmp,png,jpg',
         ]);
 
-        $player = Player::create([
-            'firstName' => $request->firstName, 
-            'lastName' => $request->lastName, 
-            'birthDate' => $request->birthDate, 
-            'description' => $request->description, 
-            'FKpositionID' => $request->FKpositionID
+
+        if(isset($request->media)) {
+            $FKmediaID = $this->uploadMedia($request->media, $request->firstName, $request->lastName);
+
+            $player = Player::create([
+                'firstName' => $request->firstName, 
+                'lastName' => $request->lastName, 
+                'birthDate' => $request->birthDate, 
+                'description' => $request->description, 
+                'FKpositionID' => $request->FKpositionID,
+                'FKmediaID' => $FKmediaID,
+                ]);
+        }
+        else {
+            $player = Player::create([
+                'firstName' => $request->firstName, 
+                'lastName' => $request->lastName, 
+                'birthDate' => $request->birthDate, 
+                'description' => $request->description, 
+                'FKpositionID' => $request->FKpositionID
             ]);
+        }
+
         return redirect('/players');
     }
 
@@ -97,5 +116,20 @@ class PlayerController extends Controller
     public function destroy(Player $player)
     {
         //
+    }
+
+    public function uploadMedia($media, $firstName, $lastName)
+    {
+        $FKmediaID = new Media();
+        $extension = $media->getClientOriginalExtension();
+        $filename = 'player-'.$firstName.'-'.str_replace(' ','-',$lastName).time().'.'.$extension;
+        $altDescription = 'profile picture of player '.$firstName.' '.$lastName;
+        $media->move('images/upload/', $filename);
+        $media->source = $filename;
+
+        $media = Media::create(['source' => $filename, 'alt' => $altDescription]);
+        $media->save();
+        $FKmediaID = Media::where('source',$filename)->first();
+        return $FKmediaID->id;
     }
 }

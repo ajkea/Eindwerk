@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <form action="/players" method="post">
+  <form action="/players" enctype="multipart/form-data" method="post" files="true">
     @csrf
     <div class="row">
       <label for="firstName">Voornaam:</label>
@@ -29,7 +29,7 @@
     </div>
     <div class="row">
       <label for="FKmediaID">Foto:</label>
-      {{-- <input type="file" name="FKmediaID" id="FKmediaID"> --}}
+      <input type="file" name="media" id="media">
     </div>
     <button type="submit">Toevoegen</button>
   </form>

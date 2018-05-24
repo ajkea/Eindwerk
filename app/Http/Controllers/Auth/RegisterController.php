@@ -94,13 +94,13 @@ class RegisterController extends Controller
         }
     }
 
-    public function uploadMedia($media, $username)
+    public function uploadMedia($media, $name)
     {
         $FKmediaID = new Media();
 
         $extension = $media->getClientOriginalExtension();
-        $filename = 'user-'.$username.'-'.time().'.'.$extension;
-        $altDescription = 'profile picture of user '.$username;
+        $filename = 'user-'.$name.'-'.time().'.'.$extension;
+        $altDescription = 'profile picture of user '.$name;
         $media->move('images/upload/', $filename);
         $media->source = $filename;
 
