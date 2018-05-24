@@ -14,7 +14,7 @@ class CoordinateController extends Controller
      */
     public function index()
     {
-        //
+        $coordinates = Coordinate::all();
     }
 
     /**
@@ -35,7 +35,16 @@ class CoordinateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'xCoordinate' => 'required|integer',
+            'yCoordinate' => 'required|integer',
+            'step' => 'required|integer',
+            'FKplayersInTactic' => 'required|integer',
+        ]);
+
+        Coordinate::create($request->all());
+
+        return redirect()->route('index');
     }
 
     /**
@@ -44,9 +53,10 @@ class CoordinateController extends Controller
      * @param  \App\Coordinate  $coordinate
      * @return \Illuminate\Http\Response
      */
-    public function show(Coordinate $coordinate)
+    public function show($coordinateID)
     {
-        //
+        $coordinate = new Coordinate();
+        $coordinate = showCoordinate($coordinateID);
     }
 
     /**
@@ -55,9 +65,10 @@ class CoordinateController extends Controller
      * @param  \App\Coordinate  $coordinate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Coordinate $coordinate)
+    public function edit($coordinateID)
     {
-        //
+        $coordinate = new Coordinate();
+        $coordinate = showCoordinate($coordinateID);
     }
 
     /**
@@ -80,6 +91,6 @@ class CoordinateController extends Controller
      */
     public function destroy(Coordinate $coordinate)
     {
-        //
+        Coordinate::destroy($coordinate);
     }
 }
