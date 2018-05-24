@@ -14,7 +14,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::all();
+
+        return view('positions.index', compact('positions', $positions));
     }
 
     /**
@@ -24,7 +26,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('positions.create');
     }
 
     /**
@@ -35,7 +37,16 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'positionName' => 'required|string',
+            'positionDescription' => 'required|string|min:10'
+        ]);
+
+        $position = Position::create([
+            'positionName' => $request->positionName,
+            'positionDescription' => $request->positionDescription
+        ]);
+        return redirect('/positions');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use App\Position;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -14,7 +15,8 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+        $players = Player::all();
+        return view('players.index', compact('players', $players));
     }
 
     /**
@@ -24,7 +26,8 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        $positions = Position::all();
+        return view('players.create', compact('positions', $positions));
     }
 
     /**
@@ -35,7 +38,20 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'firstName' => 'string|required|min:3',
+            'lastName' => 'string|required|min:2',
+            'birthDate' => 'date|required',
+        ]);
+
+        $player = Player::create([
+            'firstName' => $request->firstName, 
+            'lastName' => $request->lastName, 
+            'birthDate' => $request->birthDate, 
+            'description' => $request->description, 
+            'FKpositionID' => $request->FKpositionID
+            ]);
+        return redirect('/players');
     }
 
     /**
