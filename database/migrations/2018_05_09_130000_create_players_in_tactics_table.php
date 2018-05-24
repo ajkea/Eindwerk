@@ -14,11 +14,11 @@ class CreatePlayersInTacticsTable extends Migration
     public function up()
     {
         Schema::create('players_in_tactics', function (Blueprint $table) {
-            $table->increments('playersInTacticID');
+            $table->increments('id');
             $table->unsignedInteger('FKplayerID');
-            $table->foreign('FKplayerID')->references('playerID')->on('players')->onDelete('cascade');
+            $table->foreign('FKplayerID')->references('id')->on('players')->onDelete('cascade');
             $table->unsignedInteger('FKtacticID');
-            $table->foreign('FKtacticID')->references('tacticID')->on('tactics')->onDelete('cascade');
+            $table->foreign('FKtacticID')->references('id')->on('tactics')->onDelete('cascade');
             $table->timestamps();
         });
     }

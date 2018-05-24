@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, .h1 {
+  font-size: 8rem;
+  letter-spacing: -1.5pt;
+  font-weight: 300;
+}
+
+h2, .h2 {
+  font-size: 5rem;
+  letter-spacing: -.5pt;
+  font-weight: 300;
+}
+
+h3, .h3 {
+  font-size: 4rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+h4, .h4 {
+  font-size: 2.8333rem;
+  letter-spacing: .25pt;
+  font-weight: 400;
+}
+
+h5, .h5 {
+  font-size: 2rem;
+  letter-spacing: 0; 
+  font-weight: 400;
+}
+
+h6, .h6 {
+  font-size: 1.66666rem;
+  letter-spacing: .15pt;
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 1.4em;
+  letter-spacing: .5pt;
+  font-weight: 400;
+}
+
+p, a {
+  font-size: 1.1666rem;
+  font-weight: 400;
+  letter-spacing: .25pt;
+}
+
+a {
+  text-decoration: none;
+  color: $color-black;
+}
+
+button, .button, .btn {
+  font-size: 1.16666rem;
+  font-weight: 500;
+  letter-spacing: .75pt;
+  text-transform: uppercase;
+}

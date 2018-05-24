@@ -14,12 +14,12 @@ class CreateFormationsTable extends Migration
     public function up()
     {
         Schema::create('formations', function (Blueprint $table) {
-            $table->increments('formationID');
+            $table->increments('id');
             $table->string('formationName');
             $table->string('formationComment');
             $table->unsignedInteger('FKmediaID')
                 ->nullable;
-            $table->foreign('FKmediaID')->references('mediaID')->on('media')->onDelete('cascade');
+            $table->foreign('FKmediaID')->references('id')->on('media')->onDelete('cascade');
             $table->timestamps();
         });
     }

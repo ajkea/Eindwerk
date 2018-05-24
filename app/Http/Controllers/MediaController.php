@@ -14,7 +14,9 @@ class MediaController extends Controller
      */
     public function index()
     {
-        //
+        $media = Media::all();
+
+        return view('media.index', compact('media', $media));
     }
 
     /**
@@ -24,7 +26,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        //
+        return view('media.create');
     }
 
     /**
@@ -35,7 +37,28 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'source' => 'required|image|mimes:jpep,png,jpg,svg|max:2048',
+            'alt' => 'required|string',
+        ]);
+
+        $media = new Media();
+
+        if($request->hasfile('source')) {
+            $file = $request->file('source');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/upload/', $filename);
+            $media->source = $filename;
+
+            $media = Media::create(['source' => $filename, 'alt' => $request->alt]);
+            $media->save();
+            return redirect()->back()->with('succes', 'Foto goed toegevoegd');
+        }
+        else {
+            return redirect()->back()->with('failed', 'Foto toevoegen mislukt');
+        }
+            
     }
 
     /**

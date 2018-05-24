@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use App\Media;
+use File;
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -49,9 +53,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users|alpha_dash',
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'media' => 'file|mimes:jpeg,bmp,png,jpg',
         ]);
     }
 
@@ -63,10 +70,43 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $username = $data['username'];
+        if(isset($data->media)) {
+            $FKmediaID = $this->uploadMedia($data['media'], $username);
+
+            return User::create([
+                'username' => $data['username'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'FKmediaID' => $FKmediaID,
+            ]);
+        }
+        else {
+            return User::create([
+                'username' => $data['username'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+    }
+
+    public function uploadMedia($media, $username)
+    {
+        $FKmediaID = new Media();
+
+        $extension = $media->getClientOriginalExtension();
+        $filename = 'user-'.$username.'-'.time().'.'.$extension;
+        $altDescription = 'profile picture of user '.$username;
+        $media->move('images/upload/', $filename);
+        $media->source = $filename;
+
+        $media = Media::create(['source' => $filename, 'alt' => $altDescription]);
+        $media->save();
+        $FKmediaID = Media::where('source',$filename)->first();
+        return $FKmediaID->id;
     }
 }

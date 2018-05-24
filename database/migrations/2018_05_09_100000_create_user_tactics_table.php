@@ -16,9 +16,9 @@ class CreateUserTacticsTable extends Migration
         Schema::create('user_tactics', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('FKuserID');
-            $table->foreign('FKuserID')->references('userID')->on('users')->onDelete('cascade');
+            $table->foreign('FKuserID')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('FKtacticID');
-            $table->foreign('FKtacticID')->references('tacticID')->on('tactics')->onDelete('cascade');
+            $table->foreign('FKtacticID')->references('id')->on('tactics')->onDelete('cascade');
             $table->timestamps();
         });
     }
