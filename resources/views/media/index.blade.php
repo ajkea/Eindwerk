@@ -14,7 +14,7 @@
         <h1>Index media</h1>
         @foreach ($media as $mediaItem)
         <div class="row">
-            <img style="max-width: 20%" src="{{ URL::to('/images/test/').'/'.$mediaItem->source }}" alt="{{ URL::to('/images/test/').'/'.$mediaItem->source }}">
+            <img style="max-width: 20%" src="{{ URL::to('/images/upload/').'/'.$mediaItem->source }}" alt="image {{ $mediaItem->source }}">
         </div>
         @endforeach
     </body>
