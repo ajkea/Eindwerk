@@ -20,4 +20,4 @@ Homestead.json
 npm-debug.log
 yarn-error.log
 
-public/images/upload/*
+public/images/upload/
