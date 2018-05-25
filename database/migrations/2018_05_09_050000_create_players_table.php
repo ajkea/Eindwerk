@@ -25,7 +25,7 @@ class CreatePlayersTable extends Migration
             $table->foreign('FKpositionID')->references('id')->on('positions')->onDelete('cascade');
             $table->unsignedInteger('FKmediaID')
                 ->nullable();
-            $table->foreign('FKmediaID')->references('id')->on('media');
+            $table->foreign('FKmediaID')->references('id')->on('media')->onDelete('cascade');
             $table->timestamps();
         });
     }
