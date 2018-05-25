@@ -1,7 +1,7 @@
 ## Eindwerk Hendrik Van Dijck
 # soccerapp
 
-- do not forget public/upload folder
+- do not forget public/images/upload folder
 
 # canvas eventListeners
 canvas.addEventListener('//event//', function(e) {
