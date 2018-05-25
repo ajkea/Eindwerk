@@ -42,7 +42,7 @@ class PlayerController extends Controller
         $request->validate([
             'firstName' => 'string|required|min:3',
             'lastName' => 'string|required|min:2',
-            'birthDate' => 'date|required',
+            'birthDate' => 'date|required|before:-12 Years',
             'FKpositionID' => 'required|integer',
             'media' => 'file|mimes:jpeg,bmp,png,jpg',
         ]);
@@ -92,7 +92,8 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        //
+        $positions = Position::all();
+        return view('players.edit', compact('player', $player, 'positions', $positions));
     }
 
     /**
@@ -104,7 +105,39 @@ class PlayerController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-        //
+        
+        $request->validate([
+            'firstName' => 'string|required|min:3',
+            'lastName' => 'string|required|min:2',
+            'birthDate' => 'date|required|before:-12 Years',
+            'FKpositionID' => 'required|integer',
+            'media' => 'file|mimes:jpeg,bmp,png,jpg',
+        ]);
+
+
+        if(isset($request->media)) {
+            $FKmediaID = $this->uploadMedia($request->media, $request->firstName, $request->lastName);
+
+            $player = Player::create([
+                'firstName' => $request->firstName, 
+                'lastName' => $request->lastName, 
+                'birthDate' => $request->birthDate, 
+                'description' => $request->description, 
+                'FKpositionID' => $request->FKpositionID,
+                'FKmediaID' => $FKmediaID,
+                ]);
+        }
+        else {
+            $player = Player::create([
+                'firstName' => $request->firstName, 
+                'lastName' => $request->lastName, 
+                'birthDate' => $request->birthDate, 
+                'description' => $request->description, 
+                'FKpositionID' => $request->FKpositionID
+            ]);
+        }
+
+        return redirect('/players');
     }
 
     /**
@@ -135,5 +168,11 @@ class PlayerController extends Controller
         $media->save();
         $FKmediaID = Media::where('source',$filename)->first();
         return $FKmediaID->id;
+    }
+
+    public function deleteImage($mediaID)
+    {
+        Media::destroy($mediaID);
+        return redirect('players/');
     }
 }

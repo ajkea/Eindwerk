@@ -9,10 +9,10 @@
           <li>{{ $player->lastName }}</li>
           <li>{{ $player->description }}</li>
           @if($player->media)
-            <img src="{{ URL::to('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
+            <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
           @endif
         </ul>
-        <a href="/players/{{ $player->id }}">Edit</a>
+        <a href="/players/{{ $player->id }}/edit">Edit</a>
         <form action="{{ url('players', [$player->id]) }}" method="POST">
           @csrf
           <input type="hidden" name="_method" value="DELETE">

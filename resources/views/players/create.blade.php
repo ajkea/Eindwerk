@@ -13,6 +13,9 @@
     </div>
     <div class="row">
       <label for="birthDate">Geboortedatum:</label>
+      @if($errors->has('birthDate'))
+        <p>De toegevoegde speler moet ouder dan 12 jaar zijn.</p>
+      @endif
       <input type="date" name="birthDate" id="birthDate" class="{{ $errors->has('birthDate') ? ' error' : '' }}" required>
     </div>
     <div class="row">
