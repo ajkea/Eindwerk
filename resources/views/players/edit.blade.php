@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <form action="{{ url('players') }}" method="post" enctype="multipart/form-data" files="true">
+  <form action="{{ url('players', [$player->id]) }}" method="post" enctype="multipart/form-data" files="true">
+    <input type="hidden" name="_method" value="PUT">
     @csrf
     <div class="row">
       <label for="firstName">Voornaam:</label>
@@ -20,7 +21,6 @@
       <select name="FKpositionID" id="FKpositionID" required>
         @foreach($positions as $position)
             <option value="{{ $position->id }}" {{ $position->id == $player->FKpositionID ? 'selected' : '' }}>{{ $position->positionName }}</option>
-            <option value="{{ $position->id }}">{{ $position->positionName }}</option>
         @endforeach
       </select>
     </div>
@@ -37,7 +37,7 @@
         <input type="file" name="media" id="media">
       @endif
     </div>
-    <button type="submit">Toevoegen</button>
+    <button type="submit">Bijwerken</button>
   </form>
 </div>
 @endsection

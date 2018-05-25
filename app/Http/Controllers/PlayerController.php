@@ -118,25 +118,24 @@ class PlayerController extends Controller
         if(isset($request->media)) {
             $FKmediaID = $this->uploadMedia($request->media, $request->firstName, $request->lastName);
 
-            $player = Player::create([
-                'firstName' => $request->firstName, 
-                'lastName' => $request->lastName, 
-                'birthDate' => $request->birthDate, 
-                'description' => $request->description, 
-                'FKpositionID' => $request->FKpositionID,
-                'FKmediaID' => $FKmediaID,
-                ]);
+            $player = Player::find($player->id);
+            $player->firstName = $request->firstName;
+            $player->lastName = $request->lastName;
+            $player->birthDate = $request->birthDate;
+            $player->description = $request->description;
+            $player->FKpositionID = $request->FKpositionID;
+            $player->FKmediaID = $FKmediaID;
+            $player->save();
         }
         else {
-            $player = Player::create([
-                'firstName' => $request->firstName, 
-                'lastName' => $request->lastName, 
-                'birthDate' => $request->birthDate, 
-                'description' => $request->description, 
-                'FKpositionID' => $request->FKpositionID
-            ]);
+            $player = Player::find($player->id);
+            $player->firstName = $request->firstName;
+            $player->lastName = $request->lastName;
+            $player->birthDate = $request->birthDate;
+            $player->description = $request->description;
+            $player->FKpositionID = $request->FKpositionID;
+            $player->save();
         }
-
         return redirect('/players');
     }
 
@@ -148,9 +147,11 @@ class PlayerController extends Controller
      */
     public function destroy(Player $player)
     {
-
-        $playerImage = Media::find($player->FKmediaID);
-        $playerImage->delete();
+        if(isset($player->FKmediaID))
+        {
+            $playerImage = Media::find($player->FKmediaID);
+            $playerImage->delete();
+        }
         $player->delete();
         return redirect('players');
     }
@@ -172,6 +173,7 @@ class PlayerController extends Controller
 
     public function deleteImage($mediaID)
     {
+        $player = Player::where('FKmediaID', $mediaID)->update(['FKmediaID' => null]);
         Media::destroy($mediaID);
         return redirect('players/');
     }

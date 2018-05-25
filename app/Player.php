@@ -13,4 +13,8 @@ class Player extends Model
     public function media() {
         return $this->hasOne('App\Media', 'id','FKmediaID');
     }
+
+    public function position() {
+        return $this->hasOne('App\Position', 'id','FKpositionID');
+    }
 }
