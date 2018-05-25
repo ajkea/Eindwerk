@@ -10,7 +10,9 @@
           <li>{{ $player->description }}</li>
           <li>{{ $player->position->positionName }}</li>
           @if($player->media)
+          <div style="max-width:100px;">
             <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
+          </div>
           @endif
         </ul>
         <a href="/players/{{ $player->id }}/edit">Edit</a>
