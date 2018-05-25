@@ -81,7 +81,7 @@ class PlayerController extends Controller
      */
     public function show(Player $player)
     {
-        //
+        return view('players.show', compact('player', $player));
     }
 
     /**
@@ -115,7 +115,11 @@ class PlayerController extends Controller
      */
     public function destroy(Player $player)
     {
-        //
+
+        $playerImage = Media::find($player->FKmediaID);
+        $playerImage->delete();
+        $player->delete();
+        return redirect('players');
     }
 
     public function uploadMedia($media, $firstName, $lastName)

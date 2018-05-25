@@ -12,6 +12,12 @@
             <img src="{{ URL::to('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
           @endif
         </ul>
+        <a href="/players/{{ $player->id }}">Edit</a>
+        <form action="{{ url('players', [$player->id]) }}" method="POST">
+          @csrf
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete">
+        </form>
       </div>
       @endforeach
     </div>
