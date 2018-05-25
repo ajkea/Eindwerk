@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Player;
 use App\Position;
 use App\Media;
+use File;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -150,7 +151,10 @@ class PlayerController extends Controller
         if(isset($player->FKmediaID))
         {
             $playerImage = Media::find($player->FKmediaID);
+            $imagePath = "images/upload/" . $playerImage->source;
+            File::delete($imagePath);
             $playerImage->delete();
+            
         }
         $player->delete();
         return redirect('players');
@@ -173,6 +177,9 @@ class PlayerController extends Controller
 
     public function deleteImage($mediaID)
     {
+        $imageFile = Media::find($mediaID);
+        $imagePath = "images/upload/" . $imageFile->source;
+        File::delete($imagePath);
         $player = Player::where('FKmediaID', $mediaID)->update(['FKmediaID' => null]);
         Media::destroy($mediaID);
         return redirect('players/');
