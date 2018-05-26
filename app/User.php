@@ -29,9 +29,13 @@ class User extends Authenticatable
     ];
 
 
-    public function teams()
-    {
-        return $this->belongsToMany('App\Team');
+    public function teams(){
+        return $this->belongsToMany('App\Team', 'user_teams', 'FKuserID', 'FKteamID');
+    }
+
+
+    public function media() {
+        return $this->hasOne('App\Media', 'id','FKmediaID');
     }
 }
 

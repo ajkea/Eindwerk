@@ -22,6 +22,7 @@ Route::resource('/media', 'MediaController')->middleware('auth');
 Route::resource('/players', 'PlayerController')->middleware('auth');
 Route::resource('/positions', 'PositionController')->middleware('auth');
 Route::resource('/teams', 'TeamController')->middleware('auth');
+Route::resource('/users', 'UserController')->middleware('auth');
 
 
 Route::get('/players/{id}/deleteImage', 'PlayerController@deleteImage');
