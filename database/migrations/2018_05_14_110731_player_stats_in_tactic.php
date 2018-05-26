@@ -16,7 +16,7 @@ class PlayerStatsInTactic extends Migration
         Schema::create('player_stats_in_tactic', function (Blueprint $table) {
             $table->increments('playerStatsInTacticID');
             $table->unsignedInteger('FKplayersInTacticID');
-            $table->foreign('FKplayersInTacticID')->references('playersInTacticID')->on('players_in_tactics')->onDelete('cascade');
+            $table->foreign('FKplayersInTacticID')->references('id')->on('players_in_tactics')->onDelete('cascade');
             $table->integer('goals')
                 ->nullable();
             $table->integer('assists')

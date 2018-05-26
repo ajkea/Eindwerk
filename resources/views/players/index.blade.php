@@ -8,7 +8,19 @@
           <h6>{{ $player->firstName }}</h6>
           <li>{{ $player->lastName }}</li>
           <li>{{ $player->description }}</li>
+          <li>{{ $player->position->positionName }}</li>
+          @if($player->media)
+          <div style="max-width:100px;">
+            <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
+          </div>
+          @endif
         </ul>
+        <a href="/players/{{ $player->id }}/edit">Edit</a>
+        <form action="{{ url('players', [$player->id]) }}" method="POST">
+          @csrf
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete">
+        </form>
       </div>
       @endforeach
     </div>
