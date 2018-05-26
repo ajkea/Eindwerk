@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Team;
+use App\UserTeam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -24,7 +26,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('teams.create');
     }
 
     /**
@@ -35,7 +37,27 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'teamName' => 'string|required|unique:teams,teamName',
+            'teamDescription' => 'string|required',
+        ]);
+
+        $team = Team::create([
+            'teamName' => $request->teamName,
+            'teamDescription' => $request->teamDescription,
+        ]);
+
+        $FKuserID = Auth::id();
+        $FKteamID = Team::where('teamName',$request->teamName)->first();
+
+        $userTeam = UserTeam::create([
+            'FKuserID' => $FKuserID,
+            'FKteamID' => $FKteamID->id,
+
+        ]);
+
+
+        return redirect('/users');
     }
 
     /**
