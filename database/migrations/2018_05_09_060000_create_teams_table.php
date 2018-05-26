@@ -19,7 +19,7 @@ class CreateTeamsTable extends Migration
             $table->string('teamDescription')
                 ->nullable();
             $table->unsignedInteger('FKmediaID')
-                ->nullable;
+                ->nullable();
             $table->foreign('FKmediaID')->references('id')->on('media')->onDelete('cascade');
             $table->timestamps();
         });
