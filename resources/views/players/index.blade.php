@@ -9,6 +9,11 @@
           <li>{{ $player->lastName }}</li>
           <li>{{ $player->description }}</li>
           <li>{{ $player->position->positionName }}</li>
+          <h6>Skills:</h6>
+          @if($player->playerskill)
+            <li>Shooting: {{ $player->playerskill->shooting }}</li>
+            <li>Defending: {{ $player->playerskill->defending }}</li>
+          @endif
           @if($player->media)
           <div style="max-width:100px;">
             <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">

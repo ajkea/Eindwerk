@@ -19,7 +19,7 @@ class Player extends Model
     }
 
     public function playerskill() {
-        return $this->hasOne('App\PlayerSkill');
+        return $this->hasOne('App\PlayerSkill', 'FKplayerID');
     }
 
     public function playersInTeam(){
