@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Team;
 use App\UserTeam;
+use App\Team;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::all();
+
+        return view('teams.index', compact('teams', $teams));
     }
 
     /**
@@ -68,7 +71,8 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        $userTeams = UserTeam::where('FKteamID', $team->id)->get();
+        return view('teams.show', compact('team', 'userTeams', $team, $userTeams));
     }
 
     /**
@@ -103,5 +107,18 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         //
+    }
+
+    public function addUserToTeam(Request $request)
+    {
+            $user = User::where('username', $request->username)->first();
+            if(isset($user)){
+            $team = Team::find($request->teamID);
+            $team->users()->attach($user);
+            return back();
+        }
+        else {
+            return redirect('players');
+        }
     }
 }

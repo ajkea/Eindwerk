@@ -2,11 +2,15 @@
 @section('content')
 <div class="container">
   <ul>
-    <li>{{ $player->firstName.' '.$player->lastName }}</li>
-    <li>{{ $player->id }}</li>
-    @if($player->media)
+    <li>{{ $user->username }}</li>
+    @if($user->teams)
+      @foreach($user->teams as $team)
+      <li>{{ $team->teamName }}</li>
+      @endforeach
+    @endif
+    @if($user->media)
     <div style="max-width: 200px;">
-      <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
+      <img src="{{ url('/images/upload/').'/'.$user->media->source }}" alt="{{ $user->media->alt }}">
     </div>
     @endif
   </ul>
