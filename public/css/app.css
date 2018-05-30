@@ -447,6 +447,47 @@ button,
   text-transform: uppercase;
 }
 
-img {
-  max-width: 100%;
+.container {
+  background-color: #9fffe0;
 }
+
+.navbar {
+  height: 50px;
+  background: #03DAC6;
+}
+
+.navbar .container {
+  background: #03DAC6;
+}
+
+.navbar-content {
+  height: 50px;
+}
+
+.navbar-list--left li,
+.navbar-list--right li {
+  display: inline;
+}
+
+.navbar-list--left {
+  float: left;
+  padding-left: 0;
+}
+
+.navbar-list--left li {
+  margin-right: 1rem;
+}
+
+.navbar-list--right {
+  float: right;
+}
+
+.navbar-list--right li {
+  margin-left: 1rem;
+  text-align: center;
+}
+
+.navbar-link {
+  color: #FFFFFF;
+}
+
