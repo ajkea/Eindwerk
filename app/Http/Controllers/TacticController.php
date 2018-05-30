@@ -14,7 +14,8 @@ class TacticController extends Controller
      */
     public function index()
     {
-        //
+        $tactics = Tactic::all();
+        return view('tactic.index', compact('tactics', $tactics));
     }
 
     /**

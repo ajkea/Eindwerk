@@ -19,4 +19,8 @@ class Team extends Model
     public function media() {
         return $this->hasOne('App\Media', 'id','FKmediaID');
     }
+
+    public function tactics() {
+        return $this->hasMany('App\Tactic', 'FKteamID');
+    }
 }

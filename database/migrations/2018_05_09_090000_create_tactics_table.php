@@ -18,6 +18,9 @@ class CreateTacticsTable extends Migration
             $table->string('tacticName');
             $table->string('tacticDescription');
             $table->string('tacticType');
+            $table->unsignedInteger('FKteamID')
+                ->nullable;
+            $table->foreign('FKteamID')->references('id')->on('tactics')->onDelete('cascade');
             $table->unsignedInteger('FKformationID')
                 ->nullable;
             $table->foreign('FKformationID')->references('id')->on('formations')->onDelete('cascade');
