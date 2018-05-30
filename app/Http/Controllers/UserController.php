@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\UserTeam;
 use App\User;
-use App\Team;
 use Illuminate\Http\Request;
 
-class UserTeamController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,9 @@ class UserTeamController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::find(\Auth::user());
+        
+        return view('users.index', compact('users', $users));
     }
 
     /**
@@ -37,32 +37,29 @@ class UserTeamController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::where('username',$request->FKuserID)->get();
-        $team = Team::find($request->teamID);
-
-        $team->users()->attach($user->id);
-
-        return view('index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserTeam  $userTeam
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserTeam $userTeam)
+    public function show($id)
     {
-        //
+        $user = User::find($id);
+        
+        return view('users.show', compact('user', $user));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserTeam  $userTeam
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserTeam $userTeam)
+    public function edit($id)
     {
         //
     }
@@ -71,10 +68,10 @@ class UserTeamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserTeam  $userTeam
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserTeam $userTeam)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -82,10 +79,10 @@ class UserTeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserTeam  $userTeam
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserTeam $userTeam)
+    public function destroy($id)
     {
         //
     }
