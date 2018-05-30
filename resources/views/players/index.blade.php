@@ -14,6 +14,12 @@
             <li>Shooting: {{ $player->playerskill->shooting }}</li>
             <li>Defending: {{ $player->playerskill->defending }}</li>
           @endif
+          @if($player->teams->isNotEmpty())
+          <h6>Teams:</h6>
+            @foreach($player->teams as $team)
+              <li>{{ $team->teamName }}</li>
+            @endforeach
+          @endif
           @if($player->media)
           <div style="max-width:100px;">
             <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">

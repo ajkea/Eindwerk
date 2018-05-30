@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Player;
 use App\Position;
 use App\Media;
+use App\PlayersInTeam;
+use App\UserTeam;
+use DB;
 use File;
 use Illuminate\Http\Request;
 
@@ -70,6 +73,13 @@ class PlayerController extends Controller
                 'FKpositionID' => $request->FKpositionID
             ]);
         }
+        $defaultTeam = UserTeam::where('FKuserID', \Auth::user()->id)->first();
+        $player = DB::table('players')->latest()->first();
+
+        PlayersInTeam::create([
+            'FKplayerID' => $player->id,
+            'FKteamID' => $defaultTeam->id,
+        ]);
 
         return redirect('/players');
     }

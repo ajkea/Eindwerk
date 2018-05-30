@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::find(\Auth::user());
         
         return view('users.index', compact('users', $users));
     }

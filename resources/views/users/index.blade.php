@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       @foreach($users as $user)
-      <div class="col-12 col-md-3">
+      <div class="col-12">
           <h6>{{ $user->username }}</h6>
           {{ $user->email }}
           @if($user->media)
@@ -16,7 +16,9 @@
           @if($user->teams)
           <h6>Teams:</h6>
             @foreach($user->teams as $team)
+              @if($team->teamName !== $user->username)
               <li>{{ $team->teamName }}</li>
+              @endif
             @endforeach
           @endif
         <a href="/users/{{ $user->id }}/edit">Edit</a>

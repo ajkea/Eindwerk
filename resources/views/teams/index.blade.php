@@ -4,6 +4,8 @@
   <ul>
   @foreach($teams as $team)
     <li>{{ $team->teamName }}</li>
+    @if($team->players)
+    @endif
   @endforeach
   </ul>
 </div>

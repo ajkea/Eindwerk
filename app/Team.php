@@ -8,12 +8,12 @@ class Team extends Model
 {
     protected $fillable = ['FKuserID', 'teamName', 'teamDescription', 'FKmediaID'];
 
-    public function users(){
-        return $this->belongsToMany('App\User', 'user_teams', 'FkteamID', 'FKuserID');
+    public function users() {
+        return $this->belongsToMany('App\User', 'user_teams', 'FKteamID', 'FKuserID');
     }
 
-    public function playersInTeam(){
-        return $this->belongsToMany('App\PlayersInTeam', 'players_in_team', 'FkteamID', 'FKplayerID');
+    public function players(){
+        return $this->belongsToMany('App\Players', 'players_in_teams', 'FKteamID', 'FKplayerID');
     }
 
     public function media() {

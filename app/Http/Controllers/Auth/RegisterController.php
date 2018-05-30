@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Media;
+use App\Team;
+use App\UserTeam;
 use File;
 
 use App\User;
@@ -32,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/users';
 
     /**
      * Create a new controller instance.
@@ -41,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -74,7 +76,7 @@ class RegisterController extends Controller
         if(isset($data->media)) {
             $FKmediaID = $this->uploadMedia($data['media'], $username);
 
-            return User::create([
+            $user = User::create([
                 'username' => $data['username'],
                 'firstName' => $data['firstName'],
                 'lastName' => $data['lastName'],
@@ -84,7 +86,7 @@ class RegisterController extends Controller
             ]);
         }
         else {
-            return User::create([
+            $user = User::create([
                 'username' => $data['username'],
                 'firstName' => $data['firstName'],
                 'lastName' => $data['lastName'],
@@ -92,6 +94,8 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
         }
+        $this->createDefaultTeam($data['username']);
+        return $user;
     }
 
     public function uploadMedia($media, $name)
@@ -108,5 +112,21 @@ class RegisterController extends Controller
         $media->save();
         $FKmediaID = Media::where('source',$filename)->first();
         return $FKmediaID->id;
+    }
+
+    public function createDefaultTeam($userName)
+    {
+        Team::create([
+            'teamName' => $userName,
+            'teamDescription' => 'team with players created by '.$userName,
+        ]);
+
+        $team = Team::where('teamName', $userName)->first();
+        $user = User::where('userName', $userName)->first();
+        
+        UserTeam::create([
+            'FKteamID' => $team->id,
+            'FKuserID' => $user->id,
+        ]);
     }
 }
