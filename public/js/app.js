@@ -230,7 +230,7 @@ Vue.component('example-component', __webpack_require__(8));
 Vue.component('playername', __webpack_require__(11));
 
 var app = new Vue({
-  el: '#app'
+  el: '#vue'
 });
 
 /***/ }),
@@ -11827,12 +11827,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['playerName'],
-    mounted: function mounted() {
-        console.dir(this.playername);
-    }
+    props: ['player'],
+    mounted: function mounted() {}
 });
 
 /***/ }),
@@ -11843,9 +11870,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("iets")])
+  return _c("div", { staticClass: "player-bio-card" }, [
+    _c("img", {
+      staticClass: "img",
+      attrs: {
+        src:
+          "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/05/26/22/ronaldo-transfer.jpg",
+        alt: "profile ronaldo"
+      }
+    }),
+    _vm._v(" "),
+    _c("h2", [_vm._v(_vm._s(_vm.player.firstName))]),
+    _vm._v(" "),
+    _c("h6", [_vm._v("Spits")]),
+    _vm._v(" "),
+    _c("h1", [_vm._v("7")]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "Wereldspeler, one of a kind. Perfecte afwerking, skills en snelheid. GOAT"
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-3" }, [
+        _c("i", { staticClass: "fal fa-futbol fa-4x" }),
+        _vm._v(" "),
+        _c("h4", [_vm._v("Goals")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "bold" }, [_vm._v("14")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-4" }, [
+            _c("i", { staticClass: "fal fa-futbol fa-4x" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [_c("h4", [_vm._v("Assists")])])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "bold" }, [_vm._v("14")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }, [
+        _c("i", { staticClass: "fal fa-futbol fa-4x" }),
+        _vm._v(" "),
+        _c("h4", [_vm._v("Kaarten")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "bold" }, [_vm._v("14")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

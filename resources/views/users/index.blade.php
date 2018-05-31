@@ -5,6 +5,7 @@
       @foreach($users as $user)
       <div class="col-12">
           <h6>{{ $user->username }}</h6>
+          <playername firstname="{{ $user->username }}"></playername>
           {{ $user->email }}
           @if($user->media)
           <div style="max-width:100px;">

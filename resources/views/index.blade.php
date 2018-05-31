@@ -3,9 +3,6 @@
 @section('content')
 <div class="container">
     <h1>Home</h1>
-    <div id="vue">
-        <playername></playername>
-        <example-component></example-component>
-    </div>
+    <playername firstname="hendrik"></playername>
 </div>
 @endsection

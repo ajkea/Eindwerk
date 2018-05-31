@@ -447,6 +447,10 @@ button,
   text-transform: uppercase;
 }
 
+img {
+  width: 100%;
+}
+
 .container {
   background-color: #9fffe0;
 }

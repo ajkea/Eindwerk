@@ -92,7 +92,8 @@ class PlayerController extends Controller
      */
     public function show(Player $player)
     {
-        return view('players.show', compact('player', $player));
+        $playerJson = $player->toJson();
+        return view('players.show', compact('playerJson', $playerJson));
     }
 
     /**
