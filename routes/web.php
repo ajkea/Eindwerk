@@ -24,6 +24,7 @@ Route::resource('/positions', 'PositionController')->middleware('auth');
 Route::resource('/teams', 'TeamController')->middleware('auth');
 Route::resource('/users', 'UserController')->middleware('auth');
 Route::post('/userteams/addUser', 'TeamController@addUserToTeam')->middleware('auth');
+Route::post('tactics/addToTeam', 'TacticController@store')->middleware('auth');
 
 // Team toevoegen nodig? anders kans op toevoegen van random teams andere personen
 // Route::post('/userteams/addTeam', 'TeamController@addTeamToUser')->middleware('auth');

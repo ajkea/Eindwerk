@@ -20,10 +20,7 @@ class CreateTacticsTable extends Migration
             $table->string('tacticType');
             $table->unsignedInteger('FKteamID')
                 ->nullable;
-            $table->foreign('FKteamID')->references('id')->on('tactics')->onDelete('cascade');
-            $table->unsignedInteger('FKformationID')
-                ->nullable;
-            $table->foreign('FKformationID')->references('id')->on('formations')->onDelete('cascade');
+            $table->foreign('FKteamID')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

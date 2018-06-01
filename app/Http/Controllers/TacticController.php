@@ -36,7 +36,21 @@ class TacticController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'string|required',
+            'description' => 'string|required',
+            'type' => 'string|required',
+            'FKteamID' => 'integer|required',
+        ]);
+
+        Tactic::create([
+            'tacticName' => $request->name,
+            'tacticDescription' => $request->description,
+            'tacticType' => $request->type,
+            'FKteamID' => $request->FKteamID,
+        ]);
+
+        return back()->with('succes', 'De tactiek '.$request->name.' is succesvol toegevoegd');
     }
 
     /**

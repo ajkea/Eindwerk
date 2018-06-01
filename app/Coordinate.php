@@ -25,5 +25,7 @@ class Coordinate extends Model
                 ->first();
     }
 
-    
+    public function playersInTactic() {
+        $this->belongsTo('App\PlayersInTactic');
+    }
 }
