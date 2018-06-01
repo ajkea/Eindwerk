@@ -21,6 +21,7 @@ class PlayerController extends Controller
     public function index()
     {
         $players = Player::all();
+        // $players = $players->toJson();
         return view('players.index', compact('players', $players));
     }
 

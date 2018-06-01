@@ -227,7 +227,7 @@ window.Vue = __webpack_require__(4);
  */
 
 Vue.component('example-component', __webpack_require__(8));
-Vue.component('playername', __webpack_require__(11));
+Vue.component('playersbio', __webpack_require__(11));
 
 var app = new Vue({
   el: '#vue'
@@ -11797,7 +11797,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Playername.vue"
+Component.options.__file = "resources/assets/js/components/PlayersBio.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -11806,9 +11806,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6b0cb463", Component.options)
+    hotAPI.createRecord("data-v-044af06d", Component.options)
   } else {
-    hotAPI.reload("data-v-6b0cb463", Component.options)
+    hotAPI.reload("data-v-044af06d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11856,10 +11856,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['player'],
-    mounted: function mounted() {}
+    props: ['player', 'position', 'image'],
+    mounted: function mounted() {
+        console.log(JSON.parse(this.player).id);
+    },
+
+    computed: {
+        playerJSON: function playerJSON() {
+            return JSON.parse(this.player);
+        }
+    }
 });
 
 /***/ }),
@@ -11871,72 +11881,24 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "player-bio-card" }, [
-    _c("img", {
-      staticClass: "img",
-      attrs: {
-        src:
-          "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/05/26/22/ronaldo-transfer.jpg",
-        alt: "profile ronaldo"
-      }
-    }),
+    _c("img", { staticClass: "img", attrs: { src: "", alt: "" } }),
     _vm._v(" "),
-    _c("h2", [_vm._v(_vm._s(_vm.player.firstName))]),
+    _c("p", [_vm._v(_vm._s(_vm.playerJSON.firstName))]),
     _vm._v(" "),
-    _c("h6", [_vm._v("Spits")]),
+    _c("p", [_vm._v(_vm._s(_vm.playerJSON.shirtNumber))]),
     _vm._v(" "),
-    _c("h1", [_vm._v("7")]),
+    _c("p", [_vm._v(_vm._s(_vm.position))]),
     _vm._v(" "),
-    _c("p", [
-      _vm._v(
-        "Wereldspeler, one of a kind. Perfecte afwerking, skills en snelheid. GOAT"
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
+    _c("p", [_vm._v(_vm._s(_vm.playerJSON.description))])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-3" }, [
-        _c("i", { staticClass: "fal fa-futbol fa-4x" }),
-        _vm._v(" "),
-        _c("h4", [_vm._v("Goals")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "bold" }, [_vm._v("14")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-4" }, [
-            _c("i", { staticClass: "fal fa-futbol fa-4x" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-8" }, [_c("h4", [_vm._v("Assists")])])
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "bold" }, [_vm._v("14")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [
-        _c("i", { staticClass: "fal fa-futbol fa-4x" }),
-        _vm._v(" "),
-        _c("h4", [_vm._v("Kaarten")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "bold" }, [_vm._v("14")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6b0cb463", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-044af06d", module.exports)
   }
 }
 
