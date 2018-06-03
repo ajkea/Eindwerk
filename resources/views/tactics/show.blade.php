@@ -6,8 +6,12 @@
     @foreach($tactic->players as $player)
       <li>{{ $player->firstName.' '.$player->lastName }}</li>
         <h6>Coordinates:</h6>
-        @foreach($player->coordinates as $coordinate)
-          <p>{{ $coordinate->xCoordinate. ' '.$coordinate->yCoordinate }}</p>
+        @foreach($tactic->playersInTactic as $playerIT)
+          @if($playerIT->FKplayerID == $player->id)
+            @foreach($playerIT->coordinates as $coordinate)
+              <p>{{ $coordinate->xCoordinate.' '.$coordinate->yCoordinate }}</p>
+            @endforeach
+          @endif
         @endforeach
     @endforeach
   @endif

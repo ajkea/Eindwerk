@@ -15,4 +15,8 @@ class Tactic extends Model
     public function players(){
         return $this->belongsToMany('App\Player', 'players_in_tactics', 'FKtacticID', 'FKplayerID');
     }
+
+    public function playersInTactic() {
+        return $this->hasMany('App\PlayersInTactic', 'FKtacticID');
+    }
 }
