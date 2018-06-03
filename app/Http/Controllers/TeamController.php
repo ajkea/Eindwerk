@@ -59,7 +59,6 @@ class TeamController extends Controller
 
         ]);
 
-
         return redirect('/users');
     }
 
@@ -71,8 +70,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $userTeams = UserTeam::where('FKteamID', $team->id)->get();
-        return view('teams.show', compact('team', 'userTeams', $team, $userTeams));
+        return view('teams.show', compact('team', $team));
     }
 
     /**
@@ -111,14 +109,15 @@ class TeamController extends Controller
 
     public function addUserToTeam(Request $request)
     {
-            $user = User::where('username', $request->username)->first();
-            if(isset($user)){
+        $user = User::where('username', $request->username)->first();
+        if(isset($user)){
             $team = Team::find($request->teamID);
             $team->users()->attach($user);
-            return back();
+            return back()->with('succes', $user->username.' is toegevoegd');
         }
         else {
-            return redirect('players');
+
+            return back()->with('error', 'Deze gebruiker bestaat niet');
         }
     }
 }

@@ -13,10 +13,14 @@ class Team extends Model
     }
 
     public function players(){
-        return $this->belongsToMany('App\Players', 'players_in_teams', 'FKteamID', 'FKplayerID');
+        return $this->belongsToMany('App\Player', 'players_in_teams', 'FKteamID', 'FKplayerID');
     }
 
     public function media() {
         return $this->hasOne('App\Media', 'id','FKmediaID');
+    }
+
+    public function tactics() {
+        return $this->hasMany('App\Tactic', 'FKteamID');
     }
 }
