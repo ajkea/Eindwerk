@@ -4,10 +4,22 @@
   <col-4>
     <ul>
       <li>{{ $team->teamName }}</li>
-      <p>Users:</p>
       @if($team->users)
+      <p>Users:</p>
         @foreach($team->users as $user)
           <li>{{ $user->username }}</li>
+        @endforeach
+      @endif
+      @if($team->players)
+      <p>Players:</p>
+        @foreach($team->players as $player)
+          <li>{{ $player->firstName.' '.$player->lastName }}</li>
+        @endforeach
+      @endif
+      @if($team->tactics)
+      <p>Tactieken:</p>
+        @foreach($team->tactics as $tactic)
+        <li>{{ $tactic->tacticName }}</li>
         @endforeach
       @endif
     </ul>

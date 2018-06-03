@@ -70,8 +70,8 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $userTeams = UserTeam::where('FKteamID', $team->id)->get();
-        return view('teams.show', compact('team', 'userTeams', $team, $userTeams));
+        $userTeams = UserTeam::find($team);
+        return view('teams.show', compact('team', $team));
     }
 
     /**

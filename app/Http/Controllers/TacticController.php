@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Tactic;
+use App\Team;
+use App\PlayersInTactic;
+use App\Coordinate;
 use Illuminate\Http\Request;
 
 class TacticController extends Controller
@@ -15,7 +18,7 @@ class TacticController extends Controller
     public function index()
     {
         $tactics = Tactic::all();
-        return view('tactic.index', compact('tactics', $tactics));
+        return view('tactics.index', compact('tactics', $tactics));
     }
 
     /**
@@ -61,7 +64,9 @@ class TacticController extends Controller
      */
     public function show(Tactic $tactic)
     {
-        //
+        $team = Team::find($tactic->FKteamID)->first();
+        $coordinates = Coordinate::where('FKplayersInTacticID', $tactic->id)->get();
+        return view('tactics.show', compact('tactic', $tactic, 'team', $team, 'coordinates', $coordinates));
     }
 
     /**
@@ -96,5 +101,30 @@ class TacticController extends Controller
     public function destroy(Tactic $tactic)
     {
         //
+    }
+
+    public function addPlayer(Request $request)
+    {
+        $playersInTactic = PlayersInTactic::create([
+            'FKtacticID' => $request->tacticID,
+            'FKplayerID' => $request->playerID,
+        ]);
+
+        return back()->with('succes', 'Gelukt!');
+    }
+
+    public function addCoordinate(Request $request)
+    {
+        $player = PlayersInTactic::where('FKtacticID', $request->tacticID)
+            ->where('FKplayerID', $request->playerID)->first();
+
+        $coordinate = Coordinate::create([
+            'FKplayersInTacticID' => $player->id,
+            'xCoordinate' => $request->x,
+            'yCoordinate' => $request->y,
+            'step' => $request->step,
+        ]);
+
+        return back()->with('succe', 'Extra positie toegevoegd');
     }
 }
