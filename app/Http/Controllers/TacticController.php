@@ -64,7 +64,7 @@ class TacticController extends Controller
      */
     public function show(Tactic $tactic)
     {
-        $team = Team::find($tactic->FKteamID)->first();
+        $team = Team::where('id', $tactic->FKteamID)->first();
         $coordinates = Coordinate::where('FKplayersInTacticID', $tactic->id)->get();
         return view('tactics.show', compact('tactic', $tactic, 'team', $team, 'coordinates', $coordinates));
     }
