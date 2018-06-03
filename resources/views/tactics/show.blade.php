@@ -6,8 +6,12 @@
     @foreach($tactic->players as $player)
       <li>{{ $player->firstName.' '.$player->lastName }}</li>
         <h6>Coordinates:</h6>
-        @foreach($player->coordinates as $coordinate)
-          <p>{{ $coordinate->xCoordinate. ' '.$coordinate->yCoordinate }}</p>
+        @foreach($tactic->playersInTactic as $playerIT)
+          @if($playerIT->FKplayerID == $player->id)
+            @foreach($playerIT->coordinates as $coordinate)
+              <p>{{ $coordinate->xCoordinate.' '.$coordinate->yCoordinate }}</p>
+            @endforeach
+          @endif
         @endforeach
     @endforeach
   @endif
@@ -28,8 +32,8 @@
     <p>Speler toevoegen aan tactiek: {{ $tactic->tacticName }}</p>
     <p>Speler die je wilt toevoegen:</p>
     <select name="playerID" id="playerID">
-      @foreach($team->players as $play)
-        <option value="{{ $play->id }}">{{ $play->firstName.' '.$play->lastName }}</option>
+      @foreach($team->players as $player)
+        <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
       @endforeach
     </select>
     <button type="submit">Toevoegen</button>
@@ -50,8 +54,8 @@
     <p>Coördinaten toevoegen aan tactiek: {{ $tactic->tacticName }}</p>
     <p>Speler die je een coördinaat wil geven:</p>
     <select name="playerID" id="playerID">
-      @foreach($tactic->players as $playe)
-        <option value="{{ $playe->id }}">{{ $playe->firstName.' '.$playe->lastName }}</option>
+      @foreach($tactic->players as $player)
+        <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
       @endforeach
     </select>
     <p>x coördinaat</p>
