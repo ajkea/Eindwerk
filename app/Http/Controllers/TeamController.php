@@ -70,7 +70,6 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $userTeams = UserTeam::find($team);
         return view('teams.show', compact('team', $team));
     }
 
