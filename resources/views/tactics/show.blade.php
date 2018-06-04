@@ -27,9 +27,9 @@
     @endforeach
 
     function updateStep(step) {
+      canvas.width = canvas.width;
       @foreach($coordinates as $coordinate)
-      if({{$coordinate->step}} == step){
-        canvas.width = canvas.width;
+      if({{$coordinate->step}} == step || {{$coordinate->step}} == (step -1)){
         ctx.beginPath();
         ctx.arc({{$coordinate->xCoordinate}}, {{$coordinate->yCoordinate}}, 2, 0, 2 * Math.PI);
         ctx.fillStyle = color[step];
