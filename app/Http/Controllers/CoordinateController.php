@@ -15,6 +15,7 @@ class CoordinateController extends Controller
     public function index()
     {
         $coordinates = Coordinate::all();
+        return $coordinates;
     }
 
     /**

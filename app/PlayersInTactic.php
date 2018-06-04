@@ -11,4 +11,8 @@ class PlayersInTactic extends Model
     public function coordinates() {
         return $this->hasMany('App\Coordinate', 'FKplayersInTacticID');
     }
+
+    public function players() {
+        return $this->belongsTo('App\Players');
+    }
 }

@@ -64,8 +64,18 @@ class TacticController extends Controller
      */
     public function show(Tactic $tactic)
     {
+        $playersInTactic = PlayersInTactic::where('FKtacticID', $tactic->id)->get();
+        $pitID = array();
+        foreach($playersInTactic as $player){
+            array_push($pitID, $player->id);
+        }
+
+        $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)->get();
+
+        $max = Coordinate::whereIn('FKplayersInTacticID', $pitID)->max('step');
+
         $team = Team::where('id', $tactic->FKteamID)->first();
-        return view('tactics.show', compact('tactic', $tactic, 'team', $team));
+        return view('tactics.show', compact('tactic', $tactic, 'team', $team, 'coordinates', $coordinates, 'max', $max));
     }
 
     /**

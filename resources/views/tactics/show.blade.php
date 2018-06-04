@@ -1,5 +1,47 @@
 @extends('layouts.app')
 @section('content')
+  <div class="row">
+    <div class="col-6">
+      <input type="number" name="step" id="step" value=1 onchange="updateStep(this.value)" min="1" max="{{$max}}">
+      <canvas id="soccerfield" height="105" width="68" style="background: blue; width:100%;"></canvas>
+    </div>
+    <div class="col-6">
+      {{$max}}
+        {{ $coordinates[0] }}
+    </div>
+  </div>
+
+  <script>
+    var canvas = document.getElementById("soccerfield");
+    var ctx = canvas.getContext("2d");
+    var step = 1;
+    var color = ["#000000","#222222","#444444","#666666","#888888","#AAAAAA",]
+    
+    @foreach($coordinates as $coordinate)
+      if({{$coordinate->step}} == 1){
+        ctx.beginPath();
+        ctx.arc({{$coordinate->xCoordinate}}, {{$coordinate->yCoordinate}}, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+      }
+    @endforeach
+
+    function updateStep(step) {
+      @foreach($coordinates as $coordinate)
+      if({{$coordinate->step}} == step){
+        canvas.width = canvas.width;
+        ctx.beginPath();
+        ctx.arc({{$coordinate->xCoordinate}}, {{$coordinate->yCoordinate}}, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = color[step];
+        ctx.fill();
+      }
+      @endforeach
+    }
+  </script>
+
+
+
+
   <h6>Tactiek: {{ $tactic->tacticName }}</h6>
   <p>{{ $tactic->tacticDescription }}</p>
   @if($tactic->players)
