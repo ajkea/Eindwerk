@@ -17,6 +17,7 @@
     var step = 1;
     var color = ["#000000","#222222","#444444","#666666","#888888","#AAAAAA",]
     
+    
     @foreach($coordinates as $coordinate)
       if({{$coordinate->step}} == 1){
         ctx.beginPath();
@@ -29,10 +30,16 @@
     function updateStep(step) {
       canvas.width = canvas.width;
       @foreach($coordinates as $coordinate)
-      if({{$coordinate->step}} == step || {{$coordinate->step}} == (step -1)){
+      if({{$coordinate->step}} == step){
         ctx.beginPath();
         ctx.arc({{$coordinate->xCoordinate}}, {{$coordinate->yCoordinate}}, 2, 0, 2 * Math.PI);
-        ctx.fillStyle = color[step];
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+      }
+      else if({{$coordinate->step}} == (step -1)){
+        ctx.beginPath();
+        ctx.arc({{$coordinate->xCoordinate}}, {{$coordinate->yCoordinate}}, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = "#444444";
         ctx.fill();
       }
       @endforeach
