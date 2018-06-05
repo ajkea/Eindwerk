@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserTeam;
 use App\Team;
 use App\User;
+use App\PlayersInTeam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,6 +58,12 @@ class TeamController extends Controller
             'FKuserID' => $FKuserID,
             'FKteamID' => $FKteamID->id,
 
+        ]);
+        
+        $ball = Players::where('position', '100');
+        $ball = PlayersInTeam::create([
+            'FKplayerID' => $ball->id,
+            'FKteamID' => $FKteamID->id,
         ]);
 
         return redirect('/users');
