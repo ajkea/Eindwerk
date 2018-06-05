@@ -31,6 +31,7 @@ Route::post('/userteams/addUser', 'TeamController@addUserToTeam')->middleware('a
 Route::post('tactics/addToTeam', 'TacticController@store')->middleware('auth');
 Route::post('tactics/addPlayer', 'TacticController@addPlayer')->middleware('auth');
 Route::post('tactics/addCoordinates', 'TacticController@addCoordinate')->middleware('auth');
+Route::post('tactics/removeCoordinates', 'TacticController@removeCoordinate')->middleware('auth');
 
 Route::post('tactics/addOnCanvas', array('as' => 'changeStatus', 'uses' => 'TacticController@addCoordinate'));
 

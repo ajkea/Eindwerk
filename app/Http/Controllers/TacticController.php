@@ -134,6 +134,22 @@ class TacticController extends Controller
             'step' => $request->step,
         ]);
 
-        return back()->with('succe', 'Extra positie toegevoegd');
+        return back()->with('succes', 'Extra positie toegevoegd');
+    }
+
+    public function removeCoordinate(Request $request)
+    {
+        $minX = ($request->x) - 2.5;
+        $maxX = ($request->x) + 2.5;
+        $minY = ($request->y) - 2.5;
+        $maxY = ($request->y) + 2.5;
+        $coordinate = DB::table('coordinates')
+            ->whereBetween('xCoordinate',[$minX,$maxX])
+            ->whereBetween('yCoordinate',[$minY,$maxY])
+            ->where('step', $request->step)
+            ->where('FKtacticID', $request->tacticID)
+            ->first();
+        Coordinate::destroy($coordinate);
+        return back()->with('succesRemove', 'Coördinaat verwijderd');
     }
 }
