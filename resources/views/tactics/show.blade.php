@@ -8,7 +8,10 @@
       <canvas id="soccerfield" height="410" width="272" style="background: blue; width:100%;"></canvas>
     </div>
     <div class="col-6">
-      {{$max}}
+        <p>Speler waar je coordinaten voor wil toevoegen:</p>
+        @foreach($tactic->players as $player)
+          <input type="radio" name="playerID" id="playerID" value="{{ $player->id }}"> {{ $player->firstName.' '.$player->lastName }}<br>
+        @endforeach
     </div>
   </div>
 
@@ -83,11 +86,15 @@
         };
       }
 
-      canvas.addEventListener('click', function(evt) {
+      canvas.addEventListener('dblclick', function(evt) {
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
         console.log(message);
       }, false);
+
+      canvas.AddEventListener('contextmenu', function(evt){
+        var mousePos = getMousePos(canvas, evt);
+      });
   </script>
 
 
