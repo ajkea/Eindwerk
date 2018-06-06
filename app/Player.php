@@ -25,5 +25,15 @@ class Player extends Model
     public function teams() {
         return $this->belongsToMany('App\Team', 'players_in_teams', 'FKteamID', 'FKplayerID');
     }
+
+    public function coordinates() {
+        return $this->hasManyThrough(
+            'App\Coordinate', 
+            'App\PlayersInTactic',
+            'FKplayerID',
+            'FKplayersInTacticID',
+            'id',
+            'id');
+    }
     
 }
