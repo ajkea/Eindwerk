@@ -88,10 +88,16 @@ window.resetCanvas = function () {
 
 window.resetSteps = function () {
     updateStep(1);
+    console.log('iets');
     document.getElementById('step').value = '1';
 };
 
-window.updateStep = function (step) {
+window.iets = function (step) {
+    console.log(step);
+    updateStep(step);
+};
+window.updateStep = function () {
+    var step = document.getElementById('step').value;
     this.resetCanvas();
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
@@ -99,17 +105,13 @@ window.updateStep = function (step) {
     var i = 0;
 
     while (i < coordinates.length) {
-        console.log('hoeveel keer?' + i);
+        console.log(coordinates[i].id + coordinates[i].step);
         if (coordinates[i].step == step) {
-            drawCurrentCoordinate(step, i);
-
-            if (typeof coordinates[i - 1] !== "undefined") {
-                drawPreviousCoordinate(step, i);
-            }
-
-            if (coordinates[i].FKplayersInTacticID == coordinates[i - 1].FKplayersInTacticID && typeof coordinates[i - 1] !== "undefined") {
-                drawLineBetweenCoordinates(step, i);
-            }
+            drawCurrentCoordinate(i);
+        }
+        if (coordinates[i].step == step - 1) {
+            drawPreviousCoordinate(i);
+            console.log('draw previous step:' + coordinates[i].step);
         }
         i++;
     }
@@ -128,7 +130,7 @@ window.getMousePos = function (canvas, evt) {
     };
 };
 
-window.drawCurrentCoordinate = function (step, i) {
+window.drawCurrentCoordinate = function (i) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
@@ -141,25 +143,23 @@ window.drawCurrentCoordinate = function (step, i) {
     ctx.fillText(coordinates[i].id, coordinates[i].xCoordinate - 6, coordinates[i].yCoordinate + 5);
 };
 
-window.drawPreviousCoordinate = function (step, i) {
+window.drawPreviousCoordinate = function (i) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
-    console.log('previous functie werkt');
     ctx.beginPath();
-    ctx.arc(coordinates[i - 1].xCoordinate, coordinates[i - 1].yCoordinate, 8, 0, 2 * Math.PI);
+    ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 8, 0, 2 * Math.PI);
     ctx.fillStyle = "#666666";
     ctx.fill();
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "8px Arial";
-    ctx.fillText(coordinates[i - 1].id, coordinates[i - 1].xCoordinate - 3, coordinates[i - 1].yCoordinate + 3.5);
+    ctx.fillText(coordinates[i].id, coordinates[i].xCoordinate - 3, coordinates[i].yCoordinate + 3.5);
 };
 
-window.drawLineBetweenCoordinates = function (step, i) {
+window.drawLineBetweenCoordinates = function (i) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
-    console.log('lijnen trekken werkt');
     ctx.beginPath();
     ctx.setLineDash([5, 5]);
     ctx.moveTo(coordinates[i].xCoordinate, coordinates[i].yCoordinate);

@@ -9,7 +9,7 @@
   <script type="text/javascript" src="{{ asset('js/canvas.js') }}"></script>
   <div class="row">
     <div class="col-6">
-      <input type="number" name="step" id="step" value=1 onchange="updateStep(this.value)" min="1" max="{{$max+1}}">
+      <input type="number" name="step" id="step" value="1" onchange="updateStep()" min="1" max="{{$max+1}}">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
       <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" style="background: #DDDDDD;" onload="onLoad()"></canvas>
@@ -73,7 +73,7 @@
         @foreach($tactic->playersInTactic as $playerIT)
           @if($playerIT->FKplayerID == $player->id)
             @foreach($playerIT->coordinates as $coordinate)
-              <p>{{ $coordinate->xCoordinate.' '.$coordinate->yCoordinate }}</p>
+              <p>id.{{ $coordinate->step.' '.$coordinate->xCoordinate.' '.$coordinate->yCoordinate }}</p>
             @endforeach
           @endif
         @endforeach
