@@ -1,0 +1,90 @@
+.head-feature {
+  min-height: 3rem;
+}
+
+.section {
+  min-height: 20rem;
+  padding: 2rem 0;
+}
+
+#features {
+  background-color: $color-primary-light;
+  color: $color-white;
+  margin-top: 90vh;
+
+  @media (min-width: $break-md){
+    margin-top: 99vh;
+  }
+}
+
+.hero-image {
+  background-image: url('/images/static/hero-image.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  padding-right: 2rem;
+}
+
+.hero-logo {
+  font-size: 3rem;
+  color: $color-white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  letter-spacing: .1rem;
+  margin-bottom: 1rem;
+
+  @media (min-width: $break-md){
+    font-size: 4rem;
+  }
+  @media (min-width: $break-lg){
+    font-size: 6rem;
+  }
+}
+
+.hero-logo--description {
+  color: $color-white;
+  margin-top: 0;
+  padding-top: 0;
+  font-family: 'Raleway', sans-serif;
+  margin-top: 0;
+  margin-bottom: 10rem;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 26.5rem;
+    bottom: -1rem;
+    right: 1rem;
+    border-bottom: .5rem solid $color-yellow;
+  }
+}
+
+.hero-slogan--text {
+  color: $color-yellow;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+.hero-slogan--person {
+  color: $color-white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  margin-top: .5rem;
+  margin-bottom: 4rem;
+  
+  &:after {
+    content: "";
+    position: absolute;
+    width: 4rem;
+    bottom: -1rem;
+    right: 1rem;
+    border-bottom: 1rem solid $color-yellow;
+  }
+}

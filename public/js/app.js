@@ -11834,35 +11834,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['player', 'position', 'image'],
-    mounted: function mounted() {},
+    mounted: function mounted() {
+        console.log(JSON.parse(this.player).id);
+    },
 
     computed: {
         playerJSON: function playerJSON() {
@@ -11882,7 +11859,13 @@ var render = function() {
   return _c("div", { staticClass: "player-bio-card" }, [
     _c("h6", [_vm._v("vue component playerbio")]),
     _vm._v(" "),
-    _c("img", { staticClass: "img", attrs: { src: "", alt: "" } }),
+    _c("img", {
+      staticClass: "img",
+      attrs: {
+        src: "https://noink.abs-cbn.com/HTML/no-profile-pic.png",
+        alt: "stock profile"
+      }
+    }),
     _vm._v(" "),
     _c("p", [
       _vm._v(_vm._s(_vm.playerJSON.firstName + " " + _vm.playerJSON.lastName))
