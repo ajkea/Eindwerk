@@ -1,7 +1,8 @@
 <template>
     <div class="player-bio-card">
+        <h6>vue component playerbio</h6>
         <img class="img" src="" alt="">
-        <p>{{ playerJSON.firstName }}</p>
+        <p>{{ playerJSON.firstName + ' ' + playerJSON.lastName }}</p>
         <p>{{ playerJSON.shirtNumber }}</p>
         <p>{{ position }}</p>
         <p>{{ playerJSON.description }}</p>
@@ -36,7 +37,6 @@
     export default {
         props: ['player', 'position', 'image'],
         mounted() {
-            console.log(JSON.parse(this.player).id)
         },
         computed: {
             playerJSON: function(){

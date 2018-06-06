@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <playername :player="{{ $playerJson }}"></playername>
+  <playersbio player="{{ $playerJson }}"></playersbio>
   <ul>
   </ul>
 </div>

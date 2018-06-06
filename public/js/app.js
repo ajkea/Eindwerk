@@ -226,12 +226,8 @@ window.Vue = __webpack_require__(4);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-<<<<<<< HEAD
-Vue.component('example-component', __webpack_require__(7));
-Vue.component('playersbio', __webpack_require__(18));
-=======
 Vue.component('example-component', __webpack_require__(8));
->>>>>>> 072a2b3f43ac70b98a7cea0d8021a164bcd81410
+Vue.component('playersbio', __webpack_require__(11));
 
 var app = new Vue({
   el: '#vue'
@@ -11776,30 +11772,15 @@ if (false) {
 }
 
 /***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(8)
+var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(19)
+var __vue_script__ = __webpack_require__(12)
 /* template */
-var __vue_template__ = __webpack_require__(20)
+var __vue_template__ = __webpack_require__(13)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -11838,7 +11819,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11877,12 +11858,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['player', 'position', 'image'],
-    mounted: function mounted() {
-        console.log(JSON.parse(this.player).id);
-    },
+    mounted: function mounted() {},
 
     computed: {
         playerJSON: function playerJSON() {
@@ -11892,7 +11872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 20 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -11900,9 +11880,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "player-bio-card" }, [
+    _c("h6", [_vm._v("vue component playerbio")]),
+    _vm._v(" "),
     _c("img", { staticClass: "img", attrs: { src: "", alt: "" } }),
     _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.playerJSON.firstName))]),
+    _c("p", [
+      _vm._v(_vm._s(_vm.playerJSON.firstName + " " + _vm.playerJSON.lastName))
+    ]),
     _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.playerJSON.shirtNumber))]),
     _vm._v(" "),
@@ -11920,6 +11904,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-044af06d", module.exports)
   }
 }
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

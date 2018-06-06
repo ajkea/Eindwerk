@@ -2,7 +2,8 @@
 @section('content')
   <div class="container">
     <div class="row">
-      @foreach($players as $player)
+      {{ auth()->user()->id }}
+      @foreach($team->players as $player)
       <div class="col-12 col-md-6">
         @php
           $playerJSON = $player->toJson();
