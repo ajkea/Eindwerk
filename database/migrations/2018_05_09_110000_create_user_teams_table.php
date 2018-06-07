@@ -16,9 +16,9 @@ class CreateUserTeamsTable extends Migration
         Schema::create('user_teams', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('FKuserID');
-            $table->foreign('FKuserID')->references('userID')->on('users')->onDelete('cascade');
+            $table->foreign('FKuserID')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('FKteamID');
-            $table->foreign('FKteamID')->references('teamID')->on('teams')->onDelete('cascade');
+            $table->foreign('FKteamID')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

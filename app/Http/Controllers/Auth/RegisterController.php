@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use App\Media;
+use App\Team;
+use App\UserTeam;
+use File;
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/users';
 
     /**
      * Create a new controller instance.
@@ -37,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -49,9 +55,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users|alpha_dash',
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'media' => 'file|mimes:jpeg,bmp,png,jpg',
         ]);
     }
 
@@ -63,10 +72,61 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $username = $data['username'];
+        if(isset($data->media)) {
+            $FKmediaID = $this->uploadMedia($data['media'], $username);
+
+            $user = User::create([
+                'username' => $data['username'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'FKmediaID' => $FKmediaID,
+            ]);
+        }
+        else {
+            $user = User::create([
+                'username' => $data['username'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+        $this->createDefaultTeam($data['username']);
+        return $user;
+    }
+
+    public function uploadMedia($media, $name)
+    {
+        $FKmediaID = new Media();
+
+        $extension = $media->getClientOriginalExtension();
+        $filename = 'user-'.$name.'-'.time().'.'.$extension;
+        $altDescription = 'profile picture of user '.$name;
+        $media->move('images/upload/', $filename);
+        $media->source = $filename;
+
+        $media = Media::create(['source' => $filename, 'alt' => $altDescription]);
+        $media->save();
+        $FKmediaID = Media::where('source',$filename)->first();
+        return $FKmediaID->id;
+    }
+
+    public function createDefaultTeam($userName)
+    {
+        Team::create([
+            'teamName' => $userName,
+            'teamDescription' => 'team with players created by '.$userName,
+        ]);
+
+        $team = Team::where('teamName', $userName)->first();
+        $user = User::where('userName', $userName)->first();
+        
+        UserTeam::create([
+            'FKteamID' => $team->id,
+            'FKuserID' => $user->id,
         ]);
     }
 }

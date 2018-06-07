@@ -1,0 +1,39 @@
+.navbar {
+  height: 70px;
+  background: $color-green;
+  z-index: 100;
+}
+
+.navbar-content {
+  height: 70px;
+}
+
+%navbar-list {
+  li {
+    display: inline;
+  }
+}
+
+.navbar-list--left {
+  @extend %navbar-list;
+  float: left;
+  padding-left: 0;
+
+  li {
+    margin-right: 1rem;
+  }
+}
+
+.navbar-list--right {
+  @extend %navbar-list;
+  float: right;
+
+  li {
+    margin-left: 1rem;
+    text-align: center;
+  }
+}
+
+.navbar-link {
+  color: $color-white;
+}

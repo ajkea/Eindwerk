@@ -14,12 +14,12 @@ class CreateCoordinatesTable extends Migration
     public function up()
     {
         Schema::create('coordinates', function (Blueprint $table) {
-            $table->increments('coordinateID');
+            $table->increments('id');
             $table->integer('xCoordinate');
             $table->integer('yCoordinate');
             $table->integer('step');
             $table->unsignedInteger('FKplayersInTacticID');
-            $table->foreign('FKplayersInTacticID')->references('playersInTacticID')->on('players_in_tactics')->onDelete('cascade');
+            $table->foreign('FKplayersInTacticID')->references('id')->on('players_in_tactics')->onDelete('cascade');
             $table->timestamps();
         });
     }

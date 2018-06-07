@@ -15,6 +15,8 @@ class CreatePlayerStatsTable extends Migration
     {
         Schema::create('player_stats', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('FKplayerID');
+            $table->foreign('FKplayerID')->references('id')->on('players')->onDelete('cascade');
             $table->integer('goals')
                 ->nullable();
             $table->integer('assists')

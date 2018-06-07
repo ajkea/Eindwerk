@@ -14,13 +14,13 @@ class CreateTacticsTable extends Migration
     public function up()
     {
         Schema::create('tactics', function (Blueprint $table) {
-            $table->increments('tacticID');
+            $table->increments('id');
             $table->string('tacticName');
             $table->string('tacticDescription');
             $table->string('tacticType');
-            $table->unsignedInteger('FKformationID')
+            $table->unsignedInteger('FKteamID')
                 ->nullable;
-            $table->foreign('FKformationID')->references('formationID')->on('formations')->onDelete('cascade');
+            $table->foreign('FKteamID')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }
