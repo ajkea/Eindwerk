@@ -227,9 +227,10 @@ window.Vue = __webpack_require__(4);
  */
 
 Vue.component('example-component', __webpack_require__(8));
+Vue.component('playersbio', __webpack_require__(11));
 
 var app = new Vue({
-  el: '#app'
+  el: '#vue'
 });
 
 /***/ }),
@@ -11771,9 +11772,123 @@ if (false) {
 }
 
 /***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(12)
+/* template */
+var __vue_template__ = __webpack_require__(13)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/PlayersBio.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-044af06d", Component.options)
+  } else {
+    hotAPI.reload("data-v-044af06d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['player', 'position', 'image'],
+    mounted: function mounted() {
+        console.log(JSON.parse(this.player).id);
+    },
+
+    computed: {
+        playerJSON: function playerJSON() {
+            return JSON.parse(this.player);
+        }
+    }
+});
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "player-bio-card" }, [
+    _c("h6", [_vm._v("vue component playerbio")]),
+    _vm._v(" "),
+    _c("img", {
+      staticClass: "img",
+      attrs: {
+        src: "https://noink.abs-cbn.com/HTML/no-profile-pic.png",
+        alt: "stock profile"
+      }
+    }),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(_vm._s(_vm.playerJSON.firstName + " " + _vm.playerJSON.lastName))
+    ]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.playerJSON.shirtNumber))]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.position))]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.playerJSON.description))])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-044af06d", module.exports)
+  }
+}
+
+/***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 

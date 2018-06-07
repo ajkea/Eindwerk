@@ -1,0 +1,12 @@
+.button {
+  background: $color-primary-light;
+  text-align: center;
+  padding: 1rem;
+  color: $color-white;
+  border: none;
+  width: 100%;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

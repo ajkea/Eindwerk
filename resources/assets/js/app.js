@@ -14,7 +14,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('playersbio', require('./components/PlayersBio.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#vue'
 });

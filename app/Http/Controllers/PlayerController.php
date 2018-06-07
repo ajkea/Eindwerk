@@ -7,6 +7,7 @@ use App\Position;
 use App\Media;
 use App\PlayersInTeam;
 use App\UserTeam;
+use App\Team;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -20,8 +21,8 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $players = Player::all();
-        return view('players.index', compact('players', $players));
+        $team = Team::where('teamName',auth()->user()->username)->first();
+        return view('players.index', compact('team', $team));
     }
 
     /**
@@ -73,12 +74,12 @@ class PlayerController extends Controller
                 'FKpositionID' => $request->FKpositionID
             ]);
         }
-        $defaultTeam = UserTeam::where('FKuserID', \Auth::user()->id)->first();
+        $defaultTeam = UserTeam::where('FKuserID', auth()->user()->id)->first();
         $player = DB::table('players')->latest()->first();
 
         PlayersInTeam::create([
             'FKplayerID' => $player->id,
-            'FKteamID' => $defaultTeam->id,
+            'FKteamID' => $defaultTeam->FKteamID,
         ]);
 
         return redirect('/players');
@@ -92,7 +93,8 @@ class PlayerController extends Controller
      */
     public function show(Player $player)
     {
-        return view('players.show', compact('player', $player));
+        $playerJson = $player->toJson();
+        return view('players.show', compact('playerJson', $playerJson));
     }
 
     /**
@@ -147,7 +149,7 @@ class PlayerController extends Controller
             $player->FKpositionID = $request->FKpositionID;
             $player->save();
         }
-        return redirect('/players');
+        return redirect('/players')->with('succes', 'De speler is succesvol bijgewerkt');
     }
 
     /**
