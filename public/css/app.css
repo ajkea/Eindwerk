@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:900|Roboto:300,400,500,900);/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+@import url(https://fonts.googleapis.com/css?family=Raleway:900,700,500,400|Roboto:300,400,500,900);/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
    ========================================================================== */
@@ -375,7 +375,7 @@ template {
 }
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 h1,
@@ -442,10 +442,15 @@ a {
 button,
 .button,
 .btn {
-  font-size: 1.16666rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: .75pt;
   text-transform: uppercase;
+}
+
+.link--small {
+  font-size: .8rem;
+  text-decoration: underline;
 }
 
 /*!
@@ -3040,10 +3045,12 @@ img {
 }
 
 .button {
-  background: #9fffe0;
+  background: #03cea4;
   text-align: center;
   padding: 1rem;
-  margin: 0 .5rem;
+  color: #FFFFFF;
+  border: none;
+  width: 100%;
 }
 
 .button:last-of-type {
@@ -3051,13 +3058,35 @@ img {
 }
 
 form {
-  background: #9fffe0;
-  padding: 2rem 1rem;
+  padding: 1rem 2rem;
 }
 
-input {
+form input {
+  background: none;
   border: none;
-  margin: .2rem 0;
+  border-bottom: 2px solid #247ba0;
+  margin: .8rem;
+  width: 100%;
+  line-height: 1.6rem;
+  padding-left: .8rem;
+  padding-bottom: .5rem;
+}
+
+form input.is-invalid {
+  border: none;
+  border-bottom: 2px solid #247ba0;
+  color: red;
+}
+
+.form--title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  line-height: 0;
+}
+
+.form--button {
+  margin: 1rem 0;
+  width: 80%;
 }
 
 .navbar {
@@ -3129,7 +3158,8 @@ input {
 
 .hero-image .button {
   float: right;
-  margin-right: 0;
+  margin-left: 1rem;
+  width: initial;
 }
 
 @media (max-width: 576px) {
@@ -3216,7 +3246,7 @@ input {
 }
 
 #features {
-  background-color: #9fffe0;
+  background-color: #247ba0;
   color: #FFFFFF;
   margin-top: 90vh;
   width: 110%;
@@ -3224,22 +3254,6 @@ input {
   margin-left: -5%;
   margin-right: -5%;
   z-index: 0;
-}
-
-@media (min-width: 576px) {
-  #features {
-    width: 104%;
-    margin-left: -2%;
-    margin-right: -2%;
-  }
-}
-
-@media (min-width: 768px) {
-  #features {
-    width: 102%;
-    margin-left: -1%;
-    margin-right: -1%;
-  }
 }
 
 .feature-item {
@@ -3279,5 +3293,81 @@ input {
     left: 50%;
     width: 50%;
   }
+}
+
+#register {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0))), url("/images/static/register-background.jpg");
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), url("/images/static/register-background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 102vh;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-height: 500px) {
+  #register {
+    overflow-y: hidden;
+  }
+}
+
+.form--register {
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-width: 400px;
+}
+
+.form--register input {
+  width: 80%;
+}
+
+.box-home {
+  width: 100px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 2rem;
+  left: 0;
+  position: absolute;
+}
+
+.box-home:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.box-home--link {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-width: 400px;
+}
+
+#login {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0))), url("/images/static/login-background.jpg");
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), url("/images/static/login-background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 102vh;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-height: 500px) {
+  #login {
+    overflow-y: hidden;
+  }
+}
+
+.form--remember #remember {
+  width: 20px;
 }
 

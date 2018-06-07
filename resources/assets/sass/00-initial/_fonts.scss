@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:900|Roboto:300,400,500,900');
+@import url('https://fonts.googleapis.com/css?family=Raleway:900,700,500,400|Roboto:300,400,500,900');
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 h1, .h1 {
@@ -59,8 +59,13 @@ a {
 }
 
 button, .button, .btn {
-  font-size: 1.16666rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: .75pt;
   text-transform: uppercase;
+}
+
+.link--small {
+  font-size: .8rem;
+  text-decoration: underline;
 }

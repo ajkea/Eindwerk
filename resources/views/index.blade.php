@@ -12,9 +12,9 @@
             <h6 class="hero-slogan--text">No one man should have all that power</h6>
             <h6 class="hero-slogan--person">Kanye West</h6>
         </div>
-        <div class="col col-sm-4 offset-sm-7 right">
-            <a href="{{ route('login') }}" class="button button__transparant">Login</a>
-            <a href="{{ route('register') }}" class="button button__transparant">Register</a>
+        <div class="col col-sm-7 offset-sm-4 right">
+            <a href="{{ route('register') }}" class="button button--index button__transparant">Register</a>
+            <a href="{{ route('login') }}" class="button button--index button__transparant">Login</a>
         </div>
         
     </div>
