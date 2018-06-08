@@ -14,6 +14,15 @@ class PlayersTableSeeder extends Seeder
     {
         DB::table('players')->insert([
             [
+            'firstName' => 'bal',
+            'lastName' => 'bal',
+            'birthDate' => date("Y-m-d"),
+            'description' => 'bal',
+            'FKpositionID' => '100',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
             'firstName' => 'Liam',
             'lastName' => 'Wyckmans',
             'birthDate' => date("Y-m-d", strtotime("2002-01-07")),

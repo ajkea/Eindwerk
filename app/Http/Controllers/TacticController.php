@@ -64,8 +64,18 @@ class TacticController extends Controller
      */
     public function show(Tactic $tactic)
     {
+        $playersInTactic = PlayersInTactic::where('FKtacticID', $tactic->id)->get();
+        $pitID = array();
+        foreach($playersInTactic as $player){
+            array_push($pitID, $player->id);
+        }
+
+        $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)->get();
+
+        $max = Coordinate::whereIn('FKplayersInTacticID', $pitID)->max('step');
+
         $team = Team::where('id', $tactic->FKteamID)->first();
-        return view('tactics.show', compact('tactic', $tactic, 'team', $team));
+        return view('tactics.show', compact('tactic', $tactic, 'team', $team, 'coordinates', $coordinates, 'max', $max));
     }
 
     /**
@@ -124,6 +134,22 @@ class TacticController extends Controller
             'step' => $request->step,
         ]);
 
-        return back()->with('succe', 'Extra positie toegevoegd');
+        return back()->with('succes', 'Extra positie toegevoegd');
+    }
+
+    public function removeCoordinate(Request $request)
+    {
+        $minX = ($request->x) - 2.5;
+        $maxX = ($request->x) + 2.5;
+        $minY = ($request->y) - 2.5;
+        $maxY = ($request->y) + 2.5;
+        $coordinate = DB::table('coordinates')
+            ->whereBetween('xCoordinate',[$minX,$maxX])
+            ->whereBetween('yCoordinate',[$minY,$maxY])
+            ->where('step', $request->step)
+            ->where('FKtacticID', $request->tacticID)
+            ->first();
+        Coordinate::destroy($coordinate);
+        return back()->with('succesRemove', 'Coördinaat verwijderd');
     }
 }
