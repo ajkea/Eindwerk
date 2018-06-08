@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserTeam;
 use App\Team;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::all();
+        $teams = DB::table('teams')
+            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+            ->where('user_teams.FKuserID', '=', '1')
+            ->get();
 
         return view('teams.index', compact('teams', $teams));
     }

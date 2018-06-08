@@ -3,9 +3,7 @@
 <div class="container">
   <ul>
   @foreach($teams as $team)
-    <li>{{ $team->teamName }}</li>
-    @if($team->players)
-    @endif
+   <p>{{ $team->teamName }}</p>
   @endforeach
   </ul>
 </div>

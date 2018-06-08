@@ -29,6 +29,8 @@ Route::post('tactics/addToTeam', 'TacticController@store')->middleware('auth');
 Route::post('tactics/addPlayer', 'TacticController@addPlayer')->middleware('auth');
 Route::post('tactics/addCoordinates', 'TacticController@addCoordinate')->middleware('auth');
 
+Route::get('/overview', 'OverviewController@index')->middleware('auth');
+
 
 
 // Team toevoegen nodig? anders kans op toevoegen van random teams andere personen
