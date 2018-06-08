@@ -62,6 +62,12 @@ class TeamController extends Controller
             'FKteamID' => $FKteamID->id,
 
         ]);
+        
+        $ball = Players::where('position', '100');
+        $ball = PlayersInTeam::create([
+            'FKplayerID' => $ball->id,
+            'FKteamID' => $FKteamID->id,
+        ]);
 
         return redirect('/users');
     }
