@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\UserTeam;
 use App\Team;
 use App\User;
+use App\Player;
+use App\PlayersInTeam;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,13 +65,13 @@ class TeamController extends Controller
 
         ]);
         
-        $ball = Players::where('position', '100');
-        $ball = PlayersInTeam::create([
+        $ball = Player::where('FKpositionID', '=', '1')->first();
+        PlayersInTeam::create([
             'FKplayerID' => $ball->id,
             'FKteamID' => $FKteamID->id,
         ]);
 
-        return redirect('/users');
+        return back()->with('succes', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
     }
 
     /**
@@ -114,7 +116,11 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        $team->delete();
+
+        return redirect('overview');
+
+        return back()->with('succes', 'Team '.$team->teamName.' is succesvol verwijderd');
     }
 
     public function addUserToTeam(Request $request)

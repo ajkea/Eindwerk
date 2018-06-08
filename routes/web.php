@@ -35,14 +35,11 @@ Route::post('tactics/removeCoordinates', 'TacticController@removeCoordinate')->m
 
 Route::post('tactics/addOnCanvas', array('as' => 'changeStatus', 'uses' => 'TacticController@addCoordinate'));
 
-<<<<<<< HEAD
 Route::get('/overview', 'OverviewController@index')->middleware('auth');
-
-=======
+Route::post('/teams/delete', 'OverviewController@deleteTeam')->middleware('auth');
 Route::get('/canvas', function () {
     return view('test.canvas');
 });
->>>>>>> b4d7bc05d5c60e7d0f31c7a9325b8c219a4e42eb
 
 
 // Team toevoegen nodig? anders kans op toevoegen van random teams andere personen

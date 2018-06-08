@@ -3040,6 +3040,10 @@ html {
   text-align: right;
 }
 
+.content {
+  margin-bottom: 100px;
+}
+
 img {
   width: 100%;
 }
@@ -3064,10 +3068,6 @@ img {
 table {
   width: 100%;
   text-align: left;
-}
-
-table .button {
-  height: 510px !important;
 }
 
 thead th {
@@ -3099,11 +3099,11 @@ td {
   margin-bottom: 1rem;
 }
 
-form {
+.form {
   padding: 1rem 2rem;
 }
 
-form input {
+.form input {
   background: none;
   border: none;
   border-bottom: 2px solid #247ba0;
@@ -3114,7 +3114,7 @@ form input {
   padding-bottom: .5rem;
 }
 
-form input.is-invalid {
+.form input.is-invalid {
   border: none;
   border-bottom: 2px solid #247ba0;
   color: red;
@@ -3169,7 +3169,6 @@ form input.is-invalid {
 }
 
 footer {
-  position: absolute;
   left: 0;
   bottom: 0;
   height: auto;
@@ -3177,7 +3176,19 @@ footer {
   overflow: hidden;
   padding: 2rem 0;
   background: #29335c;
-  color: white;
+}
+
+@media (max-height: 90vh) {
+  footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    background: #29335c;
+  }
 }
 
 .section {

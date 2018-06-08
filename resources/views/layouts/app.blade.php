@@ -15,7 +15,7 @@
     </head>
     <body>
         @include('layouts.header')
-        <div id="vue" class="container">
+        <div id="vue" class="container content">
             @yield('content')
         </div>
         @include('layouts.footer')

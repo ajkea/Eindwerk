@@ -17,7 +17,7 @@
             <a href="/" class="box-home--link"><i class="fas fa-undo-alt"></i> Terug</a>
         </div>
         <div class="form--register center">
-            <form method="POST" action="{{ route('login') }}">
+            <form class="form" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="col-12">
                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="email" required autofocus>

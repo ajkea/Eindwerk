@@ -1,5 +1,6 @@
 footer {
-  position: absolute;
+
+
   left: 0;
   bottom: 0;
   height: auto;
@@ -7,5 +8,16 @@ footer {
   overflow: hidden;
   padding: 2rem 0;
   background: $color-primary-dark;
-  color: white;
+  
+  @media (max-height: 90vh){
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    background: $color-primary-dark;
+}
 }

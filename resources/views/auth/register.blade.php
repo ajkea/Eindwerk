@@ -17,7 +17,7 @@
             <a href="/" class="box-home--link"><i class="fas fa-undo-alt"></i> Terug</a>
         </div>
         <div class="form--register center">
-            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" files="true">
+            <form class="form" method="POST" action="{{ route('register') }}" enctype="multipart/form-data" files="true">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -53,54 +53,3 @@
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
-
-
-                {{-- <div class="row">
-                    <p>Gebruikersnaam:</p>
-                    <input id="username" type="text" class="{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-                    @if ($errors->has('username'))
-                        <strong>{{ $errors->first('username') }}</strong>
-                    @endif
-                </div>
-
-                <div class="row">
-                    <p>Voornaam:</p>
-                    <input id="firstName" type="text" class="{{ $errors->has('firstName') ? ' is-invalid' : '' }}" name="firstName" value="{{ old('firstName') }}" required>
-                    @if ($errors->has('firstName'))
-                        <strong>{{ $errors->first('firstName') }}</strong>
-                    @endif
-                </div>
-
-                <div class="row">
-                    <p>Achternaam:</p>
-                    <input id="lastName" type="text" class="{{ $errors->has('lastName') ? ' is-invalid' : '' }}" name="lastName" value="{{ old('lastName') }}" required>
-                    @if ($errors->has('lastName'))
-                        <strong>{{ $errors->first('lastName') }}</strong>
-                    @endif
-                </div>
-
-                <div class="row">
-                    <p>Email:</p>
-                    <input id="email" type="text" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-                    @if ($errors->has('email'))
-                        <strong>{{ $errors->first('email') }}</strong>
-                    @endif
-                    </div>
-
-                <div class="row">
-                    <p>Wachtwoord:</p>
-                    <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                    @if ($errors->has('password'))
-                        <strong>{{ $errors->first('password') }}</strong>
-                    @endif
-                </div>
-
-                <div class="row">
-                    <p>Bevestig wachtwoord:</p>
-                    <input id="password-confirm" type="password" class="" name="password_confirmation" required>
-                </div>
-
-                <div class="row">
-                    <h5>Profielfoto:</h5>
-                    <input type="file" name="media" id="media">
-                </div> --}}
