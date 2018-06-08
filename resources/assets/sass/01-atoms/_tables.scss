@@ -1,0 +1,46 @@
+table {
+  width: 100%;
+  text-align: left;
+
+  .button {
+    height: 510px !important;
+  }
+}
+
+thead {
+
+  th {
+    line-height: 3rem;
+    text-transform: uppercase;
+    border-top: 1px solid $color-black;
+    border-bottom: 1px solid $color-black;
+    border-collapse: collapse;
+  }
+}
+
+tbody {
+
+  tr {
+    line-height: 2rem;
+  }
+}
+
+tfoot {
+
+  th {
+    font-size: .8rem;
+    color: rgba($color-black, .4);
+    text-transform: uppercase;
+    border-top: 1px solid rgba($color-black, .4);
+    border-bottom: 1px solid rgba($color-black, .4);
+    border-collapse: collapse;
+  }
+}
+
+td {
+  padding: .8rem .2rem;
+}
+
+.table-header {
+  margin-bottom: 1rem;
+}

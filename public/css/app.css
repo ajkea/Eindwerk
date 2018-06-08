@@ -380,28 +380,28 @@ template {
 
 h1,
 .h1 {
-  font-size: 8rem;
+  font-size: 4rem;
   letter-spacing: -1.5pt;
   font-weight: 300;
 }
 
 h2,
 .h2 {
-  font-size: 5rem;
+  font-size: 3rem;
   letter-spacing: -.5pt;
   font-weight: 300;
 }
 
 h3,
 .h3 {
-  font-size: 4rem;
+  font-size: 2.8rem;
   letter-spacing: 0;
   font-weight: 400;
 }
 
 h4,
 .h4 {
-  font-size: 2.8333rem;
+  font-size: 2.4rem;
   letter-spacing: .25pt;
   font-weight: 400;
 }
@@ -3057,6 +3057,48 @@ img {
   margin-right: 0;
 }
 
+.button__delete {
+  background: #cc0000;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+table .button {
+  height: 510px !important;
+}
+
+thead th {
+  line-height: 3rem;
+  text-transform: uppercase;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-collapse: collapse;
+}
+
+tbody tr {
+  line-height: 2rem;
+}
+
+tfoot th {
+  font-size: .8rem;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-collapse: collapse;
+}
+
+td {
+  padding: .8rem .2rem;
+}
+
+.table-header {
+  margin-bottom: 1rem;
+}
+
 form {
   padding: 1rem 2rem;
 }
@@ -3124,6 +3166,18 @@ form input.is-invalid {
 
 .navbar-link {
   color: #FFFFFF;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  background: #29335c;
+  color: white;
 }
 
 .section {
