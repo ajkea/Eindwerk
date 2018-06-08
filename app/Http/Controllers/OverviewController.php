@@ -16,10 +16,12 @@ class OverviewController extends Controller
             ->where('user_teams.FKuserID', '=', '1')
             ->get();
 
-        $players = DB::table('players')
+            $players = DB::table('players')
             ->join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
             ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
-            ->where('');
+            ->where('teams.teamName', '=', auth()->user()->username)
+            ->select('players.*')
+            ->get();
 
         return view('loggedin.overview', compact('teams', $teams));
     }

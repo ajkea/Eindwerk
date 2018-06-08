@@ -19,23 +19,23 @@
         <th>Beschrijving</th>
       </thead>
       <tbody>
-        @foreach ($teams as $team)
-            @foreach ($team->players as $player)
-              <tr class="table-content">
-                <td>{{ $loop->index+1 }}</td>
-                <td>{{ $player->firstName.' '.$player->lastName }}</td>
-                <td>
-                  @if ($player->position)
-                    {{ $player->position->positionName }}
-                  @else
-                    onbekend
-                  @endif
-                </td>
-                <td>{{ $player->birthDate }}</td>
-                <td>{{ $player->description }}</td>
-              </tr>
-            @endforeach
+        @isset($players)
+        @foreach ($players as $player)
+          <tr class="table-content">
+            <td>{{ $loop->index+1 }}</td>
+            <td>{{ $player->firstName.' '.$player->lastName }}</td>
+            <td>
+              @if ($player->position)
+                {{ $player->position->positionName }}
+              @else
+                onbekend
+              @endif
+            </td>
+            <td>{{ $player->birthDate }}</td>
+            <td>{{ $player->description }}</td>
+          </tr>
         @endforeach
+        @endisset
       </tbody>
     </table>
 
