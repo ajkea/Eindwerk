@@ -2,38 +2,20 @@
 @section('content')
   <div class="container">
     <div class="row">
-      @foreach($players as $player)
-      <div class="col-12 col-md-3">
-        <ul>
-          <h6>{{ $player->firstName }}</h6>
-          <li>{{ $player->lastName }}</li>
-          <li>{{ $player->description }}</li>
-          <li>{{ $player->position->positionName }}</li>
-          <h6>Skills:</h6>
-          @if($player->playerskill)
-            <li>Shooting: {{ $player->playerskill->shooting }}</li>
-            <li>Defending: {{ $player->playerskill->defending }}</li>
-          @endif
-          @if($player->teams->isNotEmpty())
-          <h6>Teams:</h6>
-            @foreach($player->teams as $team)
-              <li>{{ $team->teamName }}</li>
-            @endforeach
-          @endif
-          @if($player->media)
-          <div style="max-width:100px;">
-            <img src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
-          </div>
-          @endif
-        </ul>
-        <a href="/players/{{ $player->id }}/edit">Edit</a>
-        <form action="{{ url('players', [$player->id]) }}" method="POST">
-          @csrf
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="submit" value="Delete">
-        </form>
-      </div>
-      @endforeach
+      @isset($team->players)
+        @foreach($team->players as $player)
+        <div class="col-12 col-md-6">
+          @php
+            $playerJSON = $player->toJson();
+          @endphp
+            <playersbio player="{{ $playerJSON }}" position="{{ $player->position->positionName }}"></playersbio>
+          <p></p>
+        </div>
+        @endforeach
+      @endisset
+      @empty($team->players)
+        <p>Voeg enkele spelers toe aub.</p>
+      @endempty
     </div>
   </div>
 @endsection

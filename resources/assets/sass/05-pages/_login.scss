@@ -1,0 +1,19 @@
+#login{
+  background: linear-gradient( rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) ), url('/images/static/login-background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 102vh;
+  width: 100%;
+  position: relative;
+  
+  @media (min-height: 500px){
+    overflow-y: hidden;
+  }
+}
+
+.form--remember{
+  #remember{
+    width: 20px;
+  }
+}

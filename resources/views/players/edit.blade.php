@@ -2,6 +2,11 @@
 @section('content')
 <div class="container">
   <form action="{{ url('players', [$player->id]) }}" method="post" enctype="multipart/form-data" files="true">
+    @if(session()->has('succes'))
+    <div class="notification__succes">
+      <p class="notification-message">{{ session()->get('succes') }}</p>
+    </div>
+    @endif
     <input type="hidden" name="_method" value="PUT">
     @csrf
     <div class="row">

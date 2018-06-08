@@ -15,9 +15,11 @@
     </head>
     <body>
         @include('layouts.header')
-        <div class="container">
+        <div id="vue" class="container">
             @yield('content')
         </div>
         @include('layouts.footer')
+
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
