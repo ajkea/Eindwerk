@@ -34,6 +34,7 @@ window.updateStep = function (){
         }
             if(coordinates[i].step == (step -1)){
                 drawPreviousCoordinate(i);
+                drawLineBetweenCoordinates(i);
                 console.log('draw previous step:' + coordinates[i].step);
             }
         i++;

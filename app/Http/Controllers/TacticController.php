@@ -69,9 +69,10 @@ class TacticController extends Controller
         foreach($playersInTactic as $player){
             array_push($pitID, $player->id);
         }
-
-        $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)->get();
-
+        // return $pitID;
+        $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)
+            ->orderBy('FKplayersInTacticID', 'asc')->get();
+        // return $coordinates;
         $max = Coordinate::whereIn('FKplayersInTacticID', $pitID)->max('step');
 
         $team = Team::where('id', $tactic->FKteamID)->first();

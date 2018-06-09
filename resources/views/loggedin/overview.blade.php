@@ -99,7 +99,7 @@
           <td></td>
           <td></td>
           <td>
-            <button type="submit">Toevoegen</button></td>
+            <button class="button" type="submit">Toevoegen</button></td>
         </tr>
         </form>
       </tbody>

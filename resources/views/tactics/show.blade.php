@@ -12,7 +12,7 @@
       <input type="number" name="step" id="step" value="1" onchange="updateStep()" min="1" max="{{$max+1}}">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
-      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" style="background: #DDDDDD;" onload="onLoad()"></canvas>
+      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" onload="onLoad()"></canvas>
     </div>
     <div class="col-6">
       <div class="row">
