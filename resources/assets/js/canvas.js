@@ -69,7 +69,7 @@ window.drawCurrentCoordinate = function (i) {
     ctx.fill();
     ctx.fillStyle = "#DDDDDD";
     ctx.font="12px Arial";
-    ctx.fillText(coordinates[i].id,coordinates[i].xCoordinate -6, coordinates[i].yCoordinate +5);
+    ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate -6, coordinates[i].yCoordinate +5);
 }
 
 window.drawPreviousCoordinate = function (i) {
@@ -81,8 +81,8 @@ window.drawPreviousCoordinate = function (i) {
     ctx.fillStyle = "#666666";
     ctx.fill();
     ctx.fillStyle = "#FFFFFF";
-    ctx.font="8px Arial";
-    ctx.fillText(coordinates[i].id,coordinates[i].xCoordinate - 3,coordinates[i].yCoordinate + 3.5);
+    ctx.font="10px Arial";
+    ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate - 3, coordinates[i].yCoordinate + 3.5);
 }
 
 window.drawLineBetweenCoordinates = function (i) {
