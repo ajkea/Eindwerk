@@ -29,14 +29,19 @@ window.updateStep = function (){
 
     while(i < coordinates.length){
         console.log(coordinates[i].id + coordinates[i].step);
+
         if(coordinates[i].step == step){
             drawCurrentCoordinate(i);
         }
-            if(coordinates[i].step == (step -1)){
-                drawPreviousCoordinate(i);
+
+        if(coordinates[i].step == (step -1)){
+            drawPreviousCoordinate(i);
+            
+            if(coordinates[i+1].step == step){
                 drawLineBetweenCoordinates(i);
                 console.log('draw previous step:' + coordinates[i].step);
             }
+        }
         i++;
     }
 }
@@ -87,7 +92,7 @@ window.drawLineBetweenCoordinates = function (i) {
     ctx.beginPath();
     ctx.setLineDash([5,5]);
     ctx.moveTo(coordinates[i].xCoordinate,coordinates[i].yCoordinate);
-    ctx.lineTo(coordinates[i-1].xCoordinate,coordinates[i-1].yCoordinate);
+    ctx.lineTo(coordinates[i+1].xCoordinate,coordinates[i+1].yCoordinate);
     ctx.stroke();
 }
 

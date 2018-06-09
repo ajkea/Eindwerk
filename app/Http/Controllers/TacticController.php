@@ -71,8 +71,12 @@ class TacticController extends Controller
         }
         // return $pitID;
         $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)
-            ->orderBy('FKplayersInTacticID', 'asc')->get();
+            ->orderBy('FKplayersInTacticID', 'asc')
+            ->orderBy('step', 'asc')
+            ->get();
+            
         // return $coordinates;
+
         $max = Coordinate::whereIn('FKplayersInTacticID', $pitID)->max('step');
 
         $team = Team::where('id', $tactic->FKteamID)->first();
