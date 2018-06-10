@@ -9,7 +9,7 @@
   <script type="text/javascript" src="{{ asset('js/canvas.js') }}"></script>
   <div class="row">
     <div class="col-6">
-      <input type="number" name="step" id="step" value="1" onchange="updateStep()" min="1" max="{{$max+1}}">
+      <input type="number" name="step" id="step" value="{{ ( ! empty(old('step')) ? old('step') : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
       <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" style="
@@ -43,13 +43,12 @@
               <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
             @endforeach
           </select>
-          <input type="hidden" name="x" id="xCoordinate">
-          <input type="hidden" name="y" id="yCoordinate">
-          <input type="hidden" name="step" id="formStep">
+          <input type="hidden" name="x" id="xCoordinateAdd">
+          <input type="hidden" name="y" id="yCoordinateAdd">
+          <input type="hidden" name="step" id="formStepAdd">
         </form>
       </div>
       <div class="row">
-
         <form id="removeCoordinates" action="{{ url('tactics/removeCoordinates')}}" method="post">
           @if (session('succesRemove'))
             <div class="succes">
@@ -61,8 +60,28 @@
           <input type="hidden" name="x" id="xCoordinateDelete">
           <input type="hidden" name="y" id="yCoordinateDelete">
           <input type="hidden" name="step" id="formStepDelete">
-          <p>verwijderen</p>
       </form>
+
+      <form id="editCoordinates" action="{{ url('tactics/editCoordinates')}}" method="post">
+        @if (session('succes'))
+          <div class="succes">
+            <p>{{ session('succesRemove') }}</p>
+          </div>
+        @endif
+        @if (session('error'))
+          <div class="succes">
+            <p>{{ session('succesRemove') }}</p>
+          </div>
+        @endif
+        
+        @csrf
+        <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
+        <input type="hidden" name="xStart" id="xCoordinateEditStart">
+        <input type="hidden" name="yStart" id="yCoordinateEditStart">
+        <input type="hidden" name="xEnd" id="xCoordinateEditEnd">
+        <input type="hidden" name="yEnd" id="yCoordinateEditEnd">
+        <input type="hidden" name="step" id="formStepEdit">
+    </form>
       </div>
     </div>
   </div>

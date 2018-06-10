@@ -89,20 +89,13 @@ window.onload = function () {
         removeCoordinates(canvas, evt);
     });
 
-    function test() {
-        console.log('met shift 2');
-    };
+    // canvas.addEventListener('mousedown', function(evt){
+    //     getCoordinatesEdit(canvas, evt);
+    // });
 
-    window.addEventListener('drag', function (evt) {
-        console.log('start');
-    });
-
-    canvas.addEventListener('dragstart', function (evt) {
-        var canvas = document.getElementById("soccerfield");
-
-        var mousePos = getMousePos(canvas, evt);
-        console.log(mousePos);
-    });
+    // canvas.addEventListener('mouseup', function(evt){
+    //     setCoordinatesEdit(canvas, evt);
+    // });
 };
 window.test = function () {
     console.log('test');
@@ -209,10 +202,13 @@ window.drawLineBetweenCoordinates = function (i) {
 
 function addCoordinates(canvas, evt) {
     var mousePos = getMousePos(canvas, evt);
-    document.getElementById('xCoordinate').value = mousePos.x;
-    document.getElementById('yCoordinate').value = mousePos.y;
-    document.getElementById('formStep').value = document.getElementById('step').value;
+    document.getElementById('xCoordinateAdd').value = mousePos.x;
+    document.getElementById('yCoordinateAdd').value = mousePos.y;
+    document.getElementById('formStepAdd').value = document.getElementById('step').value;
+
     document.getElementById('addCoordinates').submit();
+
+    $.post('/tactics/addCoordinates', $('#addCoordinates').serialize());
 };
 
 function removeCoordinates(canvas, evt) {
@@ -221,6 +217,29 @@ function removeCoordinates(canvas, evt) {
     document.getElementById('yCoordinateDelete').value = mousePos.y;
     document.getElementById('formStepDelete').value = document.getElementById('step').value;
     document.getElementById('removeCoordinates').submit();
+};
+
+function editCoordinates(canvas, evt) {
+    var mousePos = getMousePos(canvas, evt);
+    document.getElementById('xCoordinateDelete').value = mousePos.x;
+    document.getElementById('yCoordinateDelete').value = mousePos.y;
+    document.getElementById('formStepDelete').value = document.getElementById('step').value;
+    document.getElementById('removeCoordinates').submit();
+};
+
+function getCoordinatesEdit(canvas, evt) {
+    var mousePos = getMousePos(canvas, evt);
+    document.getElementById('xCoordinateEditStart').value = mousePos.x;
+    document.getElementById('yCoordinateEditStart').value = mousePos.y;
+}
+
+function setCoordinatesEdit(canvas, evt) {
+    var mousePos = getMousePos(canvas, evt);
+    document.getElementById('xCoordinateEditEnd').value = mousePos.x;
+    document.getElementById('yCoordinateEditEnd').value = mousePos.y;
+    document.getElementById('formStepEdit').value = document.getElementById('step').value;
+
+    document.getElementById('editCoordinates').submit();
 }
 
 /***/ })

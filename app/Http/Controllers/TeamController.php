@@ -47,7 +47,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'teamName' => 'string|required|unique:teams,teamName',
+            'teamName' => 'string|required',
             'teamDescription' => 'string|required',
         ]);
 
@@ -57,7 +57,7 @@ class TeamController extends Controller
         ]);
 
         $FKuserID = Auth::id();
-        $FKteamID = Team::where('teamName',$request->teamName)->first();
+        $FKteamID = Team::where('teamName',$request->teamName)->latest()->first();
 
         $userTeam = UserTeam::create([
             'FKuserID' => $FKuserID,
