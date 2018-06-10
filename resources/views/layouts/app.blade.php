@@ -8,6 +8,8 @@
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         {{-- <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script> --}}
@@ -22,7 +24,5 @@
         </div>
         @include('layouts.footer')
 
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
     </body>
 </html>

@@ -81,7 +81,7 @@ class PlayerController extends Controller
             'FKplayerID' => $player->id,
             'FKteamID' => $defaultTeam->FKteamID,
         ]);
-        return $player;
+        
         return back()->with('succesPlayer', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol toegevoegd');
     }
 
@@ -170,6 +170,7 @@ class PlayerController extends Controller
             
         }
         $player->delete();
+
         return back()->with('succesPlayer', 'De speler is verwijderd');
     }
 

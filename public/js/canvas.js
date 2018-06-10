@@ -76,8 +76,6 @@ module.exports = __webpack_require__(16);
 /***/ 16:
 /***/ (function(module, exports) {
 
-var _this = this;
-
 window.onLoad = function () {
     var canvas = document.getElementById("soccerfield");
     canvas.width = canvas.width;
@@ -90,27 +88,32 @@ window.resetCanvas = function () {
 
 window.resetSteps = function () {
     updateStep(1);
-    console.log('iets');
     document.getElementById('step').value = '1';
 };
 
-window.runSteps = function () {
-    setInterval(function () {
-        var i = 0;
+window.runSteps = function (max) {
+    var i = 1;
+    var counter = max;
+    var interval = setInterval(function () {
         updateStep(i);
         i++;
-    }, 100);
+        document.getElementById('step').value = i;
+        if (i == counter) {
+            clearInterval(interval);
+            return updateStep(i);
+        }
+    }, 400);
 };
+
 window.updateStep = function () {
     var step = document.getElementById('step').value;
-    _this.resetCanvas();
+    this.resetCanvas();
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
     var coordinate = void 0;
     var i = 0;
 
     while (i < coordinates.length) {
-        console.log(coordinates[i].id + coordinates[i].step);
 
         if (coordinates[i].step === coordinates[i - 1]) {
             drawCurrentCoordinate(i);
@@ -177,8 +180,11 @@ window.drawLineBetweenCoordinates = function (i) {
     ctx.stroke();
 };
 
-canvas.addEventListener('dblclick', function (evt) {
-    console.log('eventlisterner');
+window.addEventListener('dblclick', function (evt) {
+    console.log('eventlistener');
+
+    var canvas = document.getElementById("soccerfield");
+
     var mousePos = getMousePos(canvas, evt);
     document.getElementById('xCoordinate').value = mousePos.x;
     document.getElementById('yCoordinate').value = mousePos.y;

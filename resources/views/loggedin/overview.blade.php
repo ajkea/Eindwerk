@@ -23,22 +23,22 @@
         @isset($players)
         @foreach ($players as $player)
           <tr class="table-content">
-            @isset ($player->media)
-              <td class="table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="zet source"></td>
-            @endisset
-            @empty ($player->media)
-              <td class="table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></td>
-            @endempty
+              @isset ($player->media->source)
+                <td class="table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ $player->media->alt }}"></td>
+              @endisset
+              @empty ($player->media)
+                <td class="table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></td>
+              @endempty
             <td colspan="2">{{ $player->firstName.' '.$player->lastName }}</td>
             <td>
-              @isset ($player->position)
+              @isset ($player->position->positionName)
                 {{ $player->position->positionName }}
               @endisset
               @empty( $player->position)
                 onbekend
               @endempty
             </td>
-            <td>{{ $player->birthDate }}</td>
+            <td>{{ date('d-m-Y', strtotime($player->birthDate)) }}</td>
             <td>{{ $player->description }}</td>
             <td>
                 <form action="/players/delete" method="post">
@@ -46,6 +46,7 @@
                   <input type="hidden" name="playerID" value="{{ $player->id }}">
                   <input type="hidden" name="firstName" value="{{ $player->firstName }}">
                   <input type="hidden" name="lastName" value="{{ $player->lastName }}">
+                  {{-- <input type="hidden" name="FKmediaID" value="{{ $player->media->id }}"> --}}
                   <input type="submit" class="button button__delete" value="Delete">
                 </form>
             </td>
@@ -116,8 +117,10 @@
       </thead>
       <tbody>
       @foreach($teams as $team)
+        @if( $loop->index === 0)
+        @else
         <tr class="table-content">
-          <td>{{ $loop->index+1 }}</td>
+          <td>{{ $loop->index }}</td>
           <td><input type="text" value="{{ $team->teamName }}"></td>
           <td>{{ str_limit($team->teamDescription, 20, '...') }}</td>
           <td>aantal</td>
@@ -131,6 +134,7 @@
             </form>
           </td>
         </tr>
+        @endif
       @endforeach
       </tbody>
     </table>

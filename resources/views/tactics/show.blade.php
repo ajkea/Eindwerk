@@ -20,7 +20,7 @@
     </div>
     <div class="col-6">
       <div class="row">
-        <p>Right click on item to remove</p>
+        <h1>Right click on item to remove</h1>
       </div>
       <div class="row">
         <form id="formCoordinates" action="/tactics/addCoordinates" method="post" style="border: 1px solid black">
