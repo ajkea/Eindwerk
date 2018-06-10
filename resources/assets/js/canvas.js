@@ -1,7 +1,33 @@
-window.onLoad = function() {
+window.onload = function() {
+    // canvas.width = canvas.width;
     var canvas = document.getElementById("soccerfield");
-    canvas.width = canvas.width;
+    updateStep(1);
 
+    canvas.addEventListener('dblclick', function(evt){
+        addCoordinates(canvas,evt);
+    });
+
+    canvas.addEventListener('contextmenu', function(evt){
+        removeCoordinates(canvas,evt);
+    });
+
+    function test(){
+        console.log('met shift 2');
+    };
+
+    window.addEventListener('drag', function(evt){
+        console.log('start');
+    });
+    
+    canvas.addEventListener('dragstart', function(evt){
+    var canvas = document.getElementById("soccerfield");
+    
+    var mousePos = getMousePos(canvas, evt);
+    console.log(mousePos);
+    });
+}
+window.test = function(){
+    console.log('test');
 }
 
 window.resetCanvas = function() {
@@ -105,14 +131,18 @@ window.drawLineBetweenCoordinates = function (i) {
     ctx.stroke();
 }
 
-window.addEventListener('dblclick', function(evt){
-    console.log('eventlistener');
-
-    var canvas = document.getElementById("soccerfield");
-    
+function addCoordinates(canvas, evt){
     var mousePos = getMousePos(canvas, evt);
     document.getElementById('xCoordinate').value = mousePos.x;
     document.getElementById('yCoordinate').value = mousePos.y;
     document.getElementById('formStep').value = document.getElementById('step').value;
-    document.getElementById('formCoordinates').submit();
-  });
+    document.getElementById('addCoordinates').submit();
+};
+
+function removeCoordinates(canvas, evt){
+    var mousePos = getMousePos(canvas, evt);
+    document.getElementById('xCoordinateDelete').value = mousePos.x;
+    document.getElementById('yCoordinateDelete').value = mousePos.y;
+    document.getElementById('formStepDelete').value = document.getElementById('step').value;
+    document.getElementById('removeCoordinates').submit();
+}

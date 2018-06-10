@@ -12,7 +12,7 @@
       <input type="number" name="step" id="step" value="1" onchange="updateStep()" min="1" max="{{$max+1}}">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
-      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" onload="onLoad()" style="
+      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" style="
       background-image: '{{url('images/static/login-background.jpg')}}';
       background-position: center;
       background-repeat: no-repeat;
@@ -23,7 +23,7 @@
         <h1>Right click on item to remove</h1>
       </div>
       <div class="row">
-        <form id="formCoordinates" action="/tactics/addCoordinates" method="post" style="border: 1px solid black">
+        <form id="addCoordinates" action="/tactics/addCoordinates" method="post" style="border: 1px solid black">
           @if (session('error'))
             <div class="error">
               <p>{{ session('error') }}</p>
@@ -57,7 +57,6 @@
             </div>
           @endif
           @csrf
-          <input type="hidden" name="_method" value="DELETE">
           <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
           <input type="hidden" name="x" id="xCoordinateDelete">
           <input type="hidden" name="y" id="yCoordinateDelete">

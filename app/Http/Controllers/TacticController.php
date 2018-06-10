@@ -6,6 +6,7 @@ use App\Tactic;
 use App\Team;
 use App\PlayersInTactic;
 use App\Coordinate;
+use DB;
 use Illuminate\Http\Request;
 
 class TacticController extends Controller
@@ -144,17 +145,18 @@ class TacticController extends Controller
 
     public function removeCoordinate(Request $request)
     {
-        $minX = ($request->x) - 2.5;
-        $maxX = ($request->x) + 2.5;
-        $minY = ($request->y) - 2.5;
-        $maxY = ($request->y) + 2.5;
+        $minX = ($request->x - 20);
+        $maxX = ($request->x + 20);
+        $minY = ($request->y - 20);
+        $maxY = ($request->y + 20);
         $coordinate = DB::table('coordinates')
             ->whereBetween('xCoordinate',[$minX,$maxX])
             ->whereBetween('yCoordinate',[$minY,$maxY])
             ->where('step', $request->step)
-            ->where('FKtacticID', $request->tacticID)
             ->first();
-        Coordinate::destroy($coordinate);
+
+        // return $request->step.'min x: '.$minX.' max x: '.$maxX.' min y: '.$minY.' max y: '.$maxY.'            '.$request;
+        Coordinate::destroy($coordinate->id);
         return back()->with('succesRemove', 'Coördinaat verwijderd');
     }
 }
