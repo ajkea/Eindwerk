@@ -81,8 +81,8 @@ class PlayerController extends Controller
             'FKplayerID' => $player->id,
             'FKteamID' => $defaultTeam->FKteamID,
         ]);
-
-        return redirect('/players');
+        return $player;
+        return back()->with('succesPlayer', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol toegevoegd');
     }
 
     /**
@@ -149,7 +149,7 @@ class PlayerController extends Controller
             $player->FKpositionID = $request->FKpositionID;
             $player->save();
         }
-        return redirect('/players')->with('succes', 'De speler is succesvol bijgewerkt');
+        return back()->with('succesPlayer', 'De speler is succesvol bijgewerkt');
     }
 
     /**
@@ -158,8 +158,9 @@ class PlayerController extends Controller
      * @param  \App\Player  $player
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Player $player)
+    public function destroy(Request $request, Player $player)
     {
+        return $player->id;
         if(isset($player->FKmediaID))
         {
             $playerImage = Media::find($player->FKmediaID);
@@ -169,7 +170,7 @@ class PlayerController extends Controller
             
         }
         $player->delete();
-        return redirect('players');
+        return back()->with('succesPlayer', 'De speler is verwijderd');
     }
 
     public function uploadMedia($media, $firstName, $lastName)
@@ -194,6 +195,6 @@ class PlayerController extends Controller
         File::delete($imagePath);
         $player = Player::where('FKmediaID', $mediaID)->update(['FKmediaID' => null]);
         Media::destroy($mediaID);
-        return redirect('players/');
+        return back()->with('succesPlayer', 'De afbeelding is verwijderd');
     }
 }

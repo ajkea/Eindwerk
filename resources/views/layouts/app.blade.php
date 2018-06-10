@@ -14,12 +14,15 @@
         <script defer src="{{ asset('js/fontawesome/fontawesome-all.js') }}"></script>
     </head>
     <body>
-        @include('layouts.header')
+        @if(Auth::check())
+            @include('layouts.header')
+        @endif
         <div id="vue" class="container content">
             @yield('content')
         </div>
         @include('layouts.footer')
 
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
     </body>
 </html>

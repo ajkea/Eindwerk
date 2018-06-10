@@ -37,6 +37,7 @@ Route::post('tactics/addOnCanvas', array('as' => 'changeStatus', 'uses' => 'Tact
 
 Route::get('/overview', 'OverviewController@index')->middleware('auth');
 Route::post('/teams/delete', 'OverviewController@deleteTeam')->middleware('auth');
+Route::post('/players/delete', 'OverviewController@deletePlayer')->middleware('auth');
 Route::get('/canvas', function () {
     return view('test.canvas');
 });

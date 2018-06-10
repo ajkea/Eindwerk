@@ -71,7 +71,7 @@ class TeamController extends Controller
             'FKteamID' => $FKteamID->id,
         ]);
 
-        return back()->with('succes', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
+        return back()->with('succesTeam', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
     }
 
     /**
@@ -120,7 +120,7 @@ class TeamController extends Controller
 
         return redirect('overview');
 
-        return back()->with('succes', 'Team '.$team->teamName.' is succesvol verwijderd');
+        return back()->with('succesTeam', 'Team '.$team->teamName.' is succesvol verwijderd');
     }
 
     public function addUserToTeam(Request $request)
@@ -129,11 +129,11 @@ class TeamController extends Controller
         if(isset($user)){
             $team = Team::find($request->teamID);
             $team->users()->attach($user);
-            return back()->with('succes', $user->username.' is toegevoegd');
+            return back()->with('succesTeam', $user->username.' is toegevoegd');
         }
         else {
 
-            return back()->with('error', 'Deze gebruiker bestaat niet');
+            return back()->with('errorTeam', 'Deze gebruiker bestaat niet');
         }
     }
 }

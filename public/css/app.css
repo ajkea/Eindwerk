@@ -3075,7 +3075,11 @@ table {
   text-align: left;
 }
 
-thead th {
+.table-header {
+  margin-bottom: 1rem;
+}
+
+.table-header th {
   line-height: 3rem;
   text-transform: uppercase;
   border-top: 1px solid #000000;
@@ -3091,7 +3095,7 @@ tbody tr svg {
   color: rgba(0, 0, 0, 0.4);
 }
 
-tfoot th {
+.table-form th {
   font-size: .8rem;
   color: rgba(0, 0, 0, 0.4);
   text-transform: uppercase;
@@ -3105,8 +3109,8 @@ td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.table-header {
-  margin-bottom: 1rem;
+.table-image--avatar {
+  width: 60px;
 }
 
 .form {
@@ -3223,7 +3227,7 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 101.5vh;
   width: 100%;
   position: absolute;
   left: 0;

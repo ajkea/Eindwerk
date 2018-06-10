@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">      
-  <h1>Overview</h1>
-  <p>Hey {{ auth()->user()->userName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
+  <h1>Overzicht</h1>
+  <p>Hey {{ auth()->user()->username }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
   <div class="col-12">
     <h6>Spelers</h6>
-    @if (session('succes'))
+    @if (session('succesPlayer'))
       <div class="notification notification__delete">
-        <p>{{ session('succes') }}</p>
+        <p>{{ session('succesPlayer') }}</p>
       </div>
     @endif
     <table class="table">
@@ -24,55 +24,70 @@
         @foreach ($players as $player)
           <tr class="table-content">
             @isset ($player->media)
-              <td><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="zet source"></td>
+              <td class="table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="zet source"></td>
             @endisset
             @empty ($player->media)
-              <td><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></td>
+              <td class="table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></td>
             @endempty
-            <td>{{ $player->firstName.' '.$player->lastName }}</td>
+            <td colspan="2">{{ $player->firstName.' '.$player->lastName }}</td>
             <td>
               @isset ($player->position)
                 {{ $player->position->positionName }}
               @endisset
+              @empty( $player->position)
+                onbekend
+              @endempty
             </td>
             <td>{{ $player->birthDate }}</td>
             <td>{{ $player->description }}</td>
+            <td>
+                <form action="/players/delete" method="post">
+                  @csrf
+                  <input type="hidden" name="playerID" value="{{ $player->id }}">
+                  <input type="hidden" name="firstName" value="{{ $player->firstName }}">
+                  <input type="hidden" name="lastName" value="{{ $player->lastName }}">
+                  <input type="submit" class="button button__delete" value="Delete">
+                </form>
+            </td>
           </tr>
         @endforeach
         @endisset
       </tbody>
-      <tfoot>
-        <tr>
-          <th>
-
-          </th>
-          <th colspan="2">Naam</th>
-          <th>Positie</th>
-          <th>Geboortedatum</th>
-          <th>Beschrijving</th>
-          <th></th>
-        </tr>
-      </tfoot>
       </table>
-      <form action="/players" method="post">
+      <form action="/players" enctype="multipart/form-data" method="post" files="true">
       <table>
-      <tbody>
+        <thead class="table-form">
+          <tr>
+            <th></th>
+            <th colspan="2">Naam</th>
+            <th>Positie</th>
+            <th>Geboortedatum</th>
+            <th>Beschrijving</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
           <tr>
               @csrf
-              <td></td>
-              <td>
-                <input type="text" name="firstName" id="playerFirstName"> 
+              <td class="table-image--avatar">
+                <input type="file" name="media" id="media" hidden>
+                <label for="media">
+                  <i class="fal fa-cloud-upload fa-2x"></i>
+                </label>
               </td>
               <td>
-                <input type="text" name="lastName" id="playerLastName"> 
+                <input type="text" name="firstName" id="playerFirstName" placeholder="voornaam"> 
+              </td><td>
+                <input type="text" name="lastName" id="playerLastName" placeholder="achternaam"> 
               </td>
               <td>
-                  <select name="FKpositionID" id="FKpositionID" required>
-                    @foreach($positions as $position)
-                      <option value="{{ $position->id }}">{{ $position->positionName }}</option>
-                    @endforeach
-                  </select></td>
-              <td><input type="date" name="birthDate" id="birthDate"></td>
+                <select name="FKpositionID" id="FKpositionID" required>
+                  @foreach($positions as $position)
+                    <option value="{{ $position->id }}">{{ $position->positionName }}</option>
+                  @endforeach
+                </select>
+              </td>
+              <td><input type="date" name="birthDate" id="birthDate" value="2000-01-01"></td>
               <td><input type="text" name="description" id="playerDescription"></td>
               <td>
                 <input class="button" type="submit" value="submit">
@@ -85,9 +100,9 @@
   </div>
   <div class="col-12">
     <h6>Ploegen:</h6>
-    @if (session('succes'))
+    @if (session('succesTeam'))
       <div class="notification notification__delete">
-        <p>{{ session('succes') }}</p>
+        <p>{{ session('succesTeam') }}</p>
       </div>
     @endif
     <table class="table">
@@ -114,10 +129,15 @@
               <input type="hidden" name="teamname" value="{{ $team->teamName }}">
               <input type="submit" class="button button__delete" value="Delete">
             </form>
+          </td>
         </tr>
       @endforeach
       </tbody>
-      <tfoot>
+    </table>
+      <form action="/teams" method="post">
+      @csrf
+    <table>
+      <thead class="table-form">
         <tr>
           <th>#</th>
           <th>Ploegnaam</th>
@@ -127,10 +147,8 @@
           <th></th>
           <th></th>
         </tr>
-      </tfoot>
+      </thead>
       <tbody>
-        <form action="/teams" method="post">
-        @csrf
         <tr>
           <td></td>
           <td>
