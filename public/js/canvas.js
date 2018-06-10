@@ -76,6 +76,8 @@ module.exports = __webpack_require__(16);
 /***/ 16:
 /***/ (function(module, exports) {
 
+var _this = this;
+
 window.onLoad = function () {
     var canvas = document.getElementById("soccerfield");
     canvas.width = canvas.width;
@@ -92,13 +94,16 @@ window.resetSteps = function () {
     document.getElementById('step').value = '1';
 };
 
-window.iets = function (step) {
-    console.log(step);
-    updateStep(step);
+window.runSteps = function () {
+    setInterval(function () {
+        var i = 0;
+        updateStep(i);
+        i++;
+    }, 100);
 };
 window.updateStep = function () {
     var step = document.getElementById('step').value;
-    this.resetCanvas();
+    _this.resetCanvas();
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
     var coordinate = void 0;
@@ -107,17 +112,16 @@ window.updateStep = function () {
     while (i < coordinates.length) {
         console.log(coordinates[i].id + coordinates[i].step);
 
-        if (coordinates[i].step == step) {
+        if (coordinates[i].step === coordinates[i - 1]) {
             drawCurrentCoordinate(i);
-        }
-
-        if (coordinates[i].step == step - 1) {
-            drawPreviousCoordinate(i);
+        } else if (coordinates[i].step == step) {
+            drawCurrentCoordinate(i);
+        } else if (coordinates[i].step == step - 1) {
 
             if (coordinates[i + 1].step == step) {
                 drawLineBetweenCoordinates(i);
-                console.log('draw previous step:' + coordinates[i].step);
             }
+            drawPreviousCoordinate(i);
         }
         i++;
     }
@@ -141,11 +145,11 @@ window.drawCurrentCoordinate = function (i) {
     var ctx = canvas.getContext("2d");
 
     ctx.beginPath();
-    ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 10, 0, 2 * Math.PI);
+    ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
     ctx.fillStyle = "#000000";
     ctx.fill();
     ctx.fillStyle = "#DDDDDD";
-    ctx.font = "12px Arial";
+    ctx.font = "16px Arial";
     ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate - 6, coordinates[i].yCoordinate + 5);
 };
 
@@ -154,12 +158,12 @@ window.drawPreviousCoordinate = function (i) {
     var ctx = canvas.getContext("2d");
 
     ctx.beginPath();
-    ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 8, 0, 2 * Math.PI);
+    ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 10, 0, 2 * Math.PI);
     ctx.fillStyle = "#666666";
     ctx.fill();
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "10px Arial";
-    ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate - 3, coordinates[i].yCoordinate + 3.5);
+    ctx.font = "12px Arial";
+    ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate - 5, coordinates[i].yCoordinate + 5);
 };
 
 window.drawLineBetweenCoordinates = function (i) {

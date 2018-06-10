@@ -21,6 +21,10 @@ tbody {
 
   tr {
     line-height: 2rem;
+
+    svg {
+      color: rgba($color-black, .4);
+    }
   }
 }
 
@@ -37,7 +41,8 @@ tfoot {
 }
 
 td {
-  padding: .8rem .2rem;
+  padding: .2rem;
+  border-bottom: 1px solid rgba($color-black, .4);
 }
 
 .table-header {

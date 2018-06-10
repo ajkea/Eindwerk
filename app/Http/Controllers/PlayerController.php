@@ -8,6 +8,7 @@ use App\Media;
 use App\PlayersInTeam;
 use App\UserTeam;
 use App\Team;
+use DB;
 use File;
 use Illuminate\Http\Request;
 

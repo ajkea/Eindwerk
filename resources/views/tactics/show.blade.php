@@ -12,7 +12,11 @@
       <input type="number" name="step" id="step" value="1" onchange="updateStep()" min="1" max="{{$max+1}}">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
-      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" onload="onLoad()"></canvas>
+      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" onload="onLoad()" style="
+      background-image: '{{url('images/static/login-background.jpg')}}';
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;"></canvas>
     </div>
     <div class="col-6">
       <div class="row">
@@ -69,14 +73,6 @@
   @if($tactic->players)
     @foreach($tactic->players as $player)
       <li>{{ $player->firstName.' '.$player->lastName }}</li>
-        <h6>Coordinates:</h6>
-        @foreach($tactic->playersInTactic as $playerIT)
-          @if($playerIT->FKplayerID == $player->id)
-            @foreach($playerIT->coordinates as $coordinate)
-              <p>id.{{ $coordinate->step.' '.$coordinate->xCoordinate.' '.$coordinate->yCoordinate }}</p>
-            @endforeach
-          @endif
-        @endforeach
     @endforeach
   @endif
 

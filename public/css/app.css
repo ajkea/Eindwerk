@@ -3040,12 +3040,17 @@ html {
   text-align: right;
 }
 
-.content {
-  margin-bottom: 100px;
-}
-
 img {
   width: 100%;
+}
+
+.img-profile--avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .button {
@@ -3082,6 +3087,10 @@ tbody tr {
   line-height: 2rem;
 }
 
+tbody tr svg {
+  color: rgba(0, 0, 0, 0.4);
+}
+
 tfoot th {
   font-size: .8rem;
   color: rgba(0, 0, 0, 0.4);
@@ -3092,7 +3101,8 @@ tfoot th {
 }
 
 td {
-  padding: .8rem .2rem;
+  padding: .2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .table-header {
@@ -3192,7 +3202,7 @@ footer {
 }
 
 #soccerfield {
-  background-image: 'images/static/login-background.jpg';
+  background-image: url("/images/static/soccerfield.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
