@@ -3,7 +3,6 @@
 <div class="container">
   <col-4>
     <ul>
-      <li>{{ $team->teamName }}</li>
       @if($team->users)
       <p>Users:</p>
         @foreach($team->users as $user)
@@ -13,7 +12,10 @@
       @if($team->players)
       <p>Players:</p>
         @foreach($team->players as $player)
-          <li>{{ $player->firstName.' '.$player->lastName }}</li>
+          @if( $loop->index == 0)
+          @else
+            <li>{{ $player->firstName.' '.$player->lastName }}</li>
+          @endif
         @endforeach
       @endif
       @if($team->tactics)

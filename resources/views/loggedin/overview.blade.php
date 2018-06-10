@@ -17,13 +17,14 @@
         <th>Positie</th>
         <th>Geboortedatum</th>
         <th>Beschrijving</th>
+        <th>Nummer</th>
         <th></th>
       </thead>
       <tbody>
         @isset($players)
         @foreach ($players as $player)
           <tr class="table-content">
-              @isset ($player->media->source)
+              @isset ($player->media)
                 <td class="table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ $player->media->alt }}"></td>
               @endisset
               @empty ($player->media)
@@ -40,6 +41,7 @@
             </td>
             <td>{{ date('d-m-Y', strtotime($player->birthDate)) }}</td>
             <td>{{ $player->description }}</td>
+            <td>{{ $player->shirtNumber }}</td>
             <td>
                 <form action="/players/delete" method="post">
                   @csrf
@@ -64,6 +66,7 @@
             <th>Positie</th>
             <th>Geboortedatum</th>
             <th>Beschrijving</th>
+            <th>Nummer</th>
             <th></th>
           </tr>
         </thead>
@@ -90,6 +93,7 @@
               </td>
               <td><input type="date" name="birthDate" id="birthDate" value="2000-01-01"></td>
               <td><input type="text" name="description" id="playerDescription"></td>
+              <td><input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99"></td>
               <td>
                 <input class="button" type="submit" value="submit">
               </td>

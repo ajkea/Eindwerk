@@ -47,11 +47,16 @@ class TacticController extends Controller
             'FKteamID' => 'integer|required',
         ]);
 
-        Tactic::create([
+        $tactic = Tactic::create([
             'tacticName' => $request->name,
             'tacticDescription' => $request->description,
             'tacticType' => $request->type,
             'FKteamID' => $request->FKteamID,
+        ]);
+
+        PlayersInTactic::create([
+            'FKplayerID' => 1,
+            'FKtacticID' => $tactic->id,
         ]);
 
         return back()->with('succes', 'De tactiek '.$request->name.' is succesvol toegevoegd');

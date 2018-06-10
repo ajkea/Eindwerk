@@ -20,7 +20,8 @@ class CreatePlayersTable extends Migration
             $table->date('birthDate');
             $table->string('description')
                 ->nullable();
-            $table->integer('shirtNumber');
+            $table->unsignedInteger('shirtNumber')
+                ->nullable();
             $table->unsignedInteger('FKpositionID')
                 ->nullable();
             $table->foreign('FKpositionID')->references('id')->on('positions')->onDelete('cascade');

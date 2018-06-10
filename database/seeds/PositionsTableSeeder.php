@@ -14,6 +14,10 @@ class PositionsTableSeeder extends Seeder
         if(DB::table('positions')->get()->count() == 0){
             DB::table('positions')->insert([
                 [
+                    'positionName' => 'ball',
+                    'positionDescription' => 'ball'
+                ],
+                [
                     'positionName' => 'Doelman',
                     'positionDescription' => 'Een doelman is een speler die moet voorkomen dat de bal in het eigen doel terechtkomt. Een voetbalelftal heeft altijd één doelman in het veld staan.',
                 ],

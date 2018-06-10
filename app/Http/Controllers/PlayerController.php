@@ -50,6 +50,7 @@ class PlayerController extends Controller
             'birthDate' => 'date|required|before:-12 Years',
             'FKpositionID' => 'required|integer',
             'media' => 'file|mimes:jpeg,bmp,png,jpg',
+            'shirtNumber' => 'required|integer',
         ]);
 
 
@@ -61,6 +62,7 @@ class PlayerController extends Controller
                 'lastName' => $request->lastName, 
                 'birthDate' => $request->birthDate, 
                 'description' => $request->description, 
+                'shirtNumber' => $request->shirtNumber,
                 'FKpositionID' => $request->FKpositionID,
                 'FKmediaID' => $FKmediaID,
                 ]);
@@ -71,7 +73,8 @@ class PlayerController extends Controller
                 'lastName' => $request->lastName, 
                 'birthDate' => $request->birthDate, 
                 'description' => $request->description, 
-                'FKpositionID' => $request->FKpositionID
+                'shirtNumber' => $request->shirtNumber,
+                'FKpositionID' => $request->FKpositionID,
             ]);
         }
         $defaultTeam = UserTeam::where('FKuserID', auth()->user()->id)->first();

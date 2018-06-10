@@ -11,13 +11,13 @@ window.onload = function() {
         removeCoordinates(canvas,evt);
     });
 
-    // canvas.addEventListener('mousedown', function(evt){
-    //     getCoordinatesEdit(canvas, evt);
-    // });
+    canvas.addEventListener('mousedown', function(evt){
+        getCoordinatesEdit(canvas, evt);
+    });
 
-    // canvas.addEventListener('mouseup', function(evt){
-    //     setCoordinatesEdit(canvas, evt);
-    // });
+    canvas.addEventListener('mouseup', function(evt){
+        setCoordinatesEdit(canvas, evt);
+    });
 }
 window.test = function(){
     console.log('test');
@@ -131,7 +131,7 @@ function addCoordinates(canvas, evt){
     document.getElementById('formStepAdd').value = document.getElementById('step').value;
     
     document.getElementById('addCoordinates').submit();
-
+    evt.preventDefault();
     $.post('/tactics/addCoordinates', $('#addCoordinates').serialize())
 };
 
