@@ -3,13 +3,13 @@
 <div class="container">
   <col-4>
     <ul>
-      @if($team->users)
+      @isset($team->users)
       <p>Users:</p>
         @foreach($team->users as $user)
           <li>{{ $user->username }}</li>
         @endforeach
-      @endif
-      @if($team->players)
+      @endisset
+      @isset($team->players)
       <p>Players:</p>
         @foreach($team->players as $player)
           @if( $loop->index == 0)
@@ -17,13 +17,13 @@
             <li>{{ $player->firstName.' '.$player->lastName }}</li>
           @endif
         @endforeach
-      @endif
-      @if($team->tactics)
+      @endisset
+      @isset($team->tactics)
       <p>Tactieken:</p>
         @foreach($team->tactics as $tactic)
         <li>{{ $tactic->tacticName }}</li>
         @endforeach
-      @endif
+      @endisset
     </ul>
   </col-4>
   <col-4>

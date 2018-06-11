@@ -82,7 +82,18 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        return view('teams.show', compact('team', $team));
+        $team = Team::find($team->id)
+            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+            ->where('user_teams.FKuserID', '=', auth()->user()->id)
+            ->where('teams.id', '=', $team->id)
+            ->first();
+            
+        if(!empty($team->id)){
+            return view('teams.show', compact('team', $team));
+        }
+        else {
+            return redirect()->route('overview')->with('error', 'Je hebt geen toegang tot dit team');
+        }
     }
 
     /**

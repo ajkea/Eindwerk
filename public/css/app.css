@@ -3059,19 +3059,38 @@ img {
   padding: 1rem;
   color: #FFFFFF;
   border: none;
-  width: 100%;
+  min-width: 120px;
 }
 
 .button:last-of-type {
   margin-right: 0;
 }
 
+.button svg {
+  color: #FFFFFF;
+}
+
+.button__succes {
+  background: #03cea4;
+}
+
+.button__succes svg {
+  color: #FFFFFF;
+}
+
 .button__delete {
-  background: #cc0000;
+  background: #ff3939;
+}
+
+.button__info {
+  background: #344be2;
+}
+
+.button__info svg {
+  color: #FFFFFF;
 }
 
 table {
-  width: 100%;
   text-align: left;
 }
 

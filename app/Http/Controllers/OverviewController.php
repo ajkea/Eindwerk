@@ -13,18 +13,15 @@ class OverviewController extends Controller
 {
     public function index()
     {
-        $teams = DB::table('teams')
-            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+        $teams = Team::join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
             ->where('user_teams.FKuserID', '=', auth()->user()->id)
             ->get();
 
-            // $players = Player::all();
-        $players = DB::table('players')
-        ->join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
-        ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
-        ->where('teams.teamName', '=', auth()->user()->username)
-        ->select('players.*')
-        ->get();
+        $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
+            ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
+            ->where('teams.teamName', '=', auth()->user()->username)
+            ->select('players.*')
+            ->get();
 
         $positions = Position::Where('positionName', '<>', 'ball' )->get();
 

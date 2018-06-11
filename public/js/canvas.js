@@ -181,6 +181,7 @@ window.drawPreviousCoordinate = function (i) {
     var ctx = canvas.getContext("2d");
 
     ctx.beginPath();
+
     ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 10, 0, 2 * Math.PI);
     ctx.fillStyle = "#666666";
     ctx.fill();

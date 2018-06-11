@@ -96,8 +96,24 @@ class PlayerController extends Controller
      */
     public function show(Player $player)
     {
-        $playerJson = $player->toJson();
-        return view('players.show', compact('playerJson', $playerJson));
+
+        $player = DB::table('players')
+            ->join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
+            ->join('teams', 'players_in_teams.FKteamID', '=', 'teams.id')
+            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+            ->where('user_teams.FKuserID', '=', auth()->user()->id)
+            ->where('players.id', '=', $player->id)
+            ->first();
+
+        if (!empty($player->id)){
+            return view('players.show', compact('player', $player));
+        }
+        else {
+            return redirect()->route('overview')->with('error', 'Je hebt geen toegang tot deze speler');
+        }
+        // $playerJson = $player->toJson();
+        // return $playerJson;
+        // return view('players.show', compact('playerJson', $playerJson));
     }
 
     /**

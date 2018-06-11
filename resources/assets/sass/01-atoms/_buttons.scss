@@ -4,13 +4,33 @@
   padding: 1rem;
   color: $color-white;
   border: none;
-  width: 100%;
+  min-width: 120px;
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  svg {
+    color: $color-white;
+  }
+}
+
+.button__succes {
+  background: $color-succes;
+
+  svg {
+    color: $color-white;
   }
 }
 
 .button__delete {
   background: $color-error;
+}
+
+.button__info {
+  background: $color-info;
+  
+  svg {
+    color: $color-white;
+  }
 }

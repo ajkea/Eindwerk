@@ -1,8 +1,15 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">      
+<div class="row">
+  @if (session('error'))
+    <div class="notification notification__error">
+      <p>{{ session('error') }}</p>
+    </div>
+  @endif
   <h1>Overzicht</h1>
-  <p>Hey {{ auth()->user()->username }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
+  <div class="col-6">
+    <p>Hey {{ auth()->user()->username }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
+  </div>
   <div class="col-12">
     <h6>Spelers</h6>
     @if (session('succesPlayer'))
@@ -18,6 +25,7 @@
         <th>Geboortedatum</th>
         <th>Beschrijving</th>
         <th>Nummer</th>
+        <th></th>
         <th></th>
       </thead>
       <tbody>
@@ -42,14 +50,14 @@
             <td>{{ date('d-m-Y', strtotime($player->birthDate)) }}</td>
             <td>{{ $player->description }}</td>
             <td>{{ $player->shirtNumber }}</td>
+            <td><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
             <td>
                 <form action="/players/delete" method="post">
                   @csrf
                   <input type="hidden" name="playerID" value="{{ $player->id }}">
                   <input type="hidden" name="firstName" value="{{ $player->firstName }}">
                   <input type="hidden" name="lastName" value="{{ $player->lastName }}">
-                  {{-- <input type="hidden" name="FKmediaID" value="{{ $player->media->id }}"> --}}
-                  <input type="submit" class="button button__delete" value="Delete">
+                  <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i> Delete</button>
                 </form>
             </td>
           </tr>
@@ -118,6 +126,7 @@
         <th># spelers</th>
         <th># tactieken</th>
         <th></th>
+        <th></th>
       </thead>
       <tbody>
       @foreach($teams as $team)
@@ -129,6 +138,7 @@
           <td>{{ str_limit($team->teamDescription, 20, '...') }}</td>
           <td>aantal</td>
           <td>aantal</td>
+          <td><a class="button button__info" href="/teams/{{ $team->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
           <td>
             <form action="/teams/delete" method="post">
               @csrf

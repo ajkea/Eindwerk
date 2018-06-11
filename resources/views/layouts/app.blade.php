@@ -19,7 +19,7 @@
         @if(Auth::check())
             @include('layouts.header')
         @endif
-        <div id="vue" class="container content">
+        <div id="vue" class="container-fluid content">
             @yield('content')
         </div>
         @include('layouts.footer')
