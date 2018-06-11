@@ -1,7 +1,18 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+  @if (session('error'))
+  <div class="error">
+    <p>{{ session('error') }}</p>
+  </div>
+  @endif
+  @if (session('succes'))
+    <div class="notification notification__succes">
+      <p>{{ session('succes') }}</p>
+    </div>
+  @endif
   <col-4>
+    <h6>{{ $team->teamName }}</h6>
     <ul>
       @isset($team->users)
       <p>Users:</p>
@@ -21,37 +32,37 @@
       @isset($team->tactics)
       <p>Tactieken:</p>
         @foreach($team->tactics as $tactic)
-        <li>{{ $tactic->tacticName }}</li>
+        <a href="/tactics/{{ $tactic->id }}">{{ $tactic->tacticName }}</a>
         @endforeach
       @endisset
     </ul>
   </col-4>
   <col-4>
+    <form action="/userteams/addPlayer" method="post">
+      @csrf
+      <input type="hidden" name="teamID" value="{{ $team->id }}">
+      <select name="playerID" id="playerID">
+        @foreach($players as $player)
+          @if( $loop->index == 0)
+          @else
+            <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+          @endif
+        @endforeach
+      </select>
+      <button class="button">Toevoegen</button>
+    </form>
+  </col-4>
+  <col-4>
     <form action="/userteams/addUser" method="post" style="border: 1px solid black">
-      @if (session('error'))
-        <div class="error">
-          <p>{{ session('error') }}</p>
-        </div>
-      @endif
-      @if (session('succes'))
-        <div class="succes">
-          <p>{{ session('succes') }}</p>
-        </div>
-      @endif
       @csrf
       <input type="hidden" name="teamID" value="{{ $team->id }}">
       <p>User toevoegen aan team: {{ $team->teamName }}</p>
       <p>User die je wilt toevoegen:</p>
       <input type="text" name="username">
-      <button type="submit">Toevoegen</button>
+      <button class="button" type="submit">Toevoegen</button>
     </form>
 
     <form action="/tactics/addToTeam" method="post" style="border: 1px solid black">
-      @if (session('succes'))
-        <div class="succes">
-          <p>{{ session('succes') }}</p>
-        </div>
-      @endif
       @csrf
       <input type="hidden" name="FKteamID" value="{{ $team->id }}">
       <p>Tactiek toevoegen aan team: {{ $team->teamName }}</p>
@@ -60,11 +71,12 @@
       <p>Tactiek beschrijving:</p>
       <input type="text" name="description">
       <select name="type" id="type">
+        <option value="open">Open spel</option>
         <option value="free kick">Vrije trap</option>
         <option value="corner">Corner</option>
         <option value="penalty">Penalty</option>
       </select>
-      <button type="submit">Toevoegen</button>
+      <button class="button" type="submit">Toevoegen</button>
     </form>
   </col-4>
 </div>

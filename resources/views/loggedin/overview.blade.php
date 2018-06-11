@@ -1,19 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-  @if (session('error'))
-    <div class="notification notification__error">
-      <p>{{ session('error') }}</p>
-    </div>
-  @endif
-  <h1>Overzicht</h1>
   <div class="col-6">
+    <h1>Overzicht</h1>
     <p>Hey {{ auth()->user()->username }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
+  </div>
+  <div class="col-12">
+    @if (session('error'))
+      <div class="notification notification__error">
+        <p>{{ session('error') }}</p>
+      </div>
+    @endif
   </div>
   <div class="col-12">
     <h6>Spelers</h6>
     @if (session('succesPlayer'))
-      <div class="notification notification__delete">
+      <div class="notification notification__succes">
         <p>{{ session('succesPlayer') }}</p>
       </div>
     @endif
@@ -48,7 +50,7 @@
               @endempty
             </td>
             <td>{{ date('d-m-Y', strtotime($player->birthDate)) }}</td>
-            <td>{{ $player->description }}</td>
+            <td>{{ substr($player->description,0,40).'...' }}</td>
             <td>{{ $player->shirtNumber }}</td>
             <td><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
             <td>
@@ -114,7 +116,7 @@
   <div class="col-12">
     <h6>Ploegen:</h6>
     @if (session('succesTeam'))
-      <div class="notification notification__delete">
+      <div class="notification notification__succes">
         <p>{{ session('succesTeam') }}</p>
       </div>
     @endif
@@ -136,8 +138,8 @@
           <td>{{ $loop->index }}</td>
           <td><input type="text" value="{{ $team->teamName }}"></td>
           <td>{{ str_limit($team->teamDescription, 20, '...') }}</td>
-          <td>aantal</td>
-          <td>aantal</td>
+          <td>{{ count($team->players) }}</td>
+          <td>{{ count($team->tactics) }}</td>
           <td><a class="button button__info" href="/teams/{{ $team->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
           <td>
             <form action="/teams/delete" method="post">

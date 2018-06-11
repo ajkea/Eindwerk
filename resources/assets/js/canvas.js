@@ -58,7 +58,8 @@ window.updateStep = function() {
     while(i < coordinates.length){
 
         if (coordinates[i].step === coordinates[i-1]) {
-            drawCurrentCoordinate(i);
+            drawCurrentCoordinate(i,'red');
+            drawCurrentCoordinate(i,'black');
         }
         else if (coordinates[i].step == step) {
             drawCurrentCoordinate(i);
@@ -91,27 +92,48 @@ window.drawCurrentCoordinate = function(i) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
     
-    ctx.beginPath();
-    ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
-    ctx.fillStyle = "#000000";
-    ctx.fill();
-    ctx.fillStyle = "#DDDDDD";
-    ctx.font="16px Arial";
-    ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate -6, coordinates[i].yCoordinate +5);
+    if(coordinates[i].shirtNumber == 100){
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 6, 0, 2 * Math.PI);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 7, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
+    else{
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+        ctx.fillStyle = "#DDDDDD";
+        ctx.font="16px Arial";
+        ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate -6, coordinates[i].yCoordinate +5);
+    }
 }
 
 window.drawPreviousCoordinate = function(i) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    
-    ctx.arc(coordinates[i].xCoordinate,coordinates[i].yCoordinate, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = "#666666";
-    ctx.fill();
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font="12px Arial";
-    ctx.fillText(coordinates[i].FKplayersInTacticID, coordinates[i].xCoordinate - 5, coordinates[i].yCoordinate + 5);
+    if(coordinates[i].shirtNumber == 100){
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#BBBBBB";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 5, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
+    else{
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate,coordinates[i].yCoordinate, 10, 0, 2 * Math.PI);
+        ctx.fillStyle = "#666666";
+        ctx.fill();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font="12px Arial";
+        ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate - 5, coordinates[i].yCoordinate + 5);
+    }
 }
 
 window.drawLineBetweenCoordinates = function (i) {

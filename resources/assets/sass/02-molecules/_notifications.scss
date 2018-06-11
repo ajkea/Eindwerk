@@ -1,0 +1,15 @@
+.notification {
+  width: 500px;
+  padding: .5rem 1rem;
+  color: $color-white;
+  border-radius: .5rem;
+  margin: 1rem;
+}
+
+.notification__error {
+  background: $color-error;
+}
+
+.notification__succes {
+  background: $color-succes;
+}

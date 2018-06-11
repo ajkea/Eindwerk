@@ -12,11 +12,7 @@
       <input type="number" name="step" id="step" value="{{ ( ! empty(old('step')) ? old('step') : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
-      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false" style="
-      background-image: '{{url('images/static/login-background.jpg')}}';
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;"></canvas>
+      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false"></canvas>
     </div>
     <div class="col-6">
       <div class="row">

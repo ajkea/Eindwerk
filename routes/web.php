@@ -28,6 +28,7 @@ Route::resource('/pit', 'PlayersInTacticController')->middleware('auth');
 Route::resource('/coor', 'CoordinateController')->middleware('auth');
 
 Route::post('/userteams/addUser', 'TeamController@addUserToTeam')->middleware('auth');
+Route::post('/userteams/addPlayer', 'TeamController@addPlayerToTeam')->middleware('auth');
 Route::post('tactics/addToTeam', 'TacticController@store')->middleware('auth');
 Route::post('tactics/addPlayer', 'TacticController@addPlayer')->middleware('auth');
 Route::post('tactics/addCoordinates', 'TacticController@addCoordinate')->middleware('auth');
@@ -42,10 +43,5 @@ Route::post('/players/delete', 'OverviewController@deletePlayer')->middleware('a
 Route::get('/canvas', function () {
     return view('test.canvas');
 });
-
-
-// Team toevoegen nodig? anders kans op toevoegen van random teams andere personen
-// Route::post('/userteams/addTeam', 'TeamController@addTeamToUser')->middleware('auth');
-
 
 Route::get('/players/{id}/deleteImage', 'PlayerController@deleteImage');

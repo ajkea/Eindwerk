@@ -19,6 +19,7 @@ class PlayersTableSeeder extends Seeder
             'birthDate' => date("Y-m-d"),
             'description' => 'bal',
             'FKpositionID' => '1',
+            'shirtNumber' => '100',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             ],

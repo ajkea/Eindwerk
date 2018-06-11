@@ -86,10 +86,18 @@ class TeamController extends Controller
             ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
             ->where('user_teams.FKuserID', '=', auth()->user()->id)
             ->where('teams.id', '=', $team->id)
+            ->where('teams.teamName', '<>', auth()->user()->username)
             ->first();
+
+        $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
+        ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
+        ->where('teams.teamName', '=', auth()->user()->username)
+        ->orderBy('players.id', 'asc')
+        ->select('players.*')
+        ->get();
             
         if(!empty($team->id)){
-            return view('teams.show', compact('team', $team));
+            return view('teams.show', compact('team', $team, 'players', $players));
         }
         else {
             return redirect()->route('overview')->with('error', 'Je hebt geen toegang tot dit team');
@@ -146,5 +154,14 @@ class TeamController extends Controller
 
             return back()->with('errorTeam', 'Deze gebruiker bestaat niet');
         }
+    }
+
+    public function addPlayerToTeam(Request $request)
+    {
+        $player = Player::find($request->playerID);
+        $team = Team::find($request->teamID);
+        $team->players()->attach($player);
+
+        return back()->with('succes', $player->firstName.' is toegevoegd');
     }
 }

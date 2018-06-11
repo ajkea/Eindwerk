@@ -77,8 +77,11 @@ class TacticController extends Controller
         }
         // return $pitID;
         $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)
+            ->join('players_in_tactics', 'coordinates.FKplayersInTacticID', '=', 'players_in_tactics.id')
+            ->join('players', 'players_in_tactics.FKplayerID', '=', 'players.ID')
             ->orderBy('FKplayersInTacticID', 'asc')
             ->orderBy('step', 'asc')
+            ->select('coordinates.*', 'players.shirtNumber')
             ->get();
             
         // return $coordinates;

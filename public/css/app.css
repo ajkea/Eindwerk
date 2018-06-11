@@ -3141,7 +3141,6 @@ td {
   border: none;
   border-bottom: 2px solid #247ba0;
   margin: .8rem;
-  width: 100%;
   line-height: 1.6rem;
   padding-left: .8rem;
   padding-bottom: .5rem;
@@ -3153,6 +3152,10 @@ td {
   color: red;
 }
 
+select {
+  width: 200px;
+}
+
 .form--title {
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
@@ -3162,6 +3165,22 @@ td {
 .form--button {
   margin: 1rem 0;
   width: 80%;
+}
+
+.notification {
+  width: 500px;
+  padding: .5rem 1rem;
+  color: #FFFFFF;
+  border-radius: .5rem;
+  margin: 1rem;
+}
+
+.notification__error {
+  background: #ff3939;
+}
+
+.notification__succes {
+  background: #03cea4;
 }
 
 .navbar {
