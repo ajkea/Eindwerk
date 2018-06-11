@@ -8,43 +8,35 @@
   </script>
   <script type="text/javascript" src="{{ asset('js/canvas.js') }}"></script>
   <div class="row">
-    <div class="col-6">
-      <input type="number" name="step" id="step" value="{{ ( ! empty(old('step')) ? old('step') : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}">
+    <div class="col-12">
+      <input type="number" name="step" id="step" value="{{ ( !empty(old('step')) ? (old('step') + 1) : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}" autofocus="true">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
-      <canvas id="soccerfield" height="410" width="272" oncontextmenu="return false"></canvas>
+      <form id="addCoordinates" action="/tactics/addCoordinates" method="post"">
+        @if (session('error'))
+          <div class="error">
+            <p>{{ session('error') }}</p>
+          </div>
+        @endif
+        @if (session('succes'))
+          <div class="succes">
+            <p>{{ session('succes') }}</p>
+          </div>
+        @endif
+        @csrf
+        <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
+        <select name="playerID" id="playerIDForm">
+          @foreach($tactic->players as $player)
+            <option {{ old('playerID') == $player->id ? "selected" : "" }} value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+          @endforeach
+        </select>
+        <input type="hidden" name="x" id="xCoordinateAdd">
+        <input type="hidden" name="y" id="yCoordinateAdd">
+        <input type="hidden" name="step" id="formStepAdd">
+      </form>
     </div>
-    <div class="col-6">
-      <div class="row">
-        <h1>Right click on item to remove</h1>
-      </div>
-      <div class="row">
-        <form id="addCoordinates" action="/tactics/addCoordinates" method="post" style="border: 1px solid black">
-          @if (session('error'))
-            <div class="error">
-              <p>{{ session('error') }}</p>
-            </div>
-          @endif
-          @if (session('succes'))
-            <div class="succes">
-              <p>{{ session('succes') }}</p>
-            </div>
-          @endif
-          @csrf
-          <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
-          <p>Coördinaten toevoegen aan tactiek: {{ $tactic->tacticName }}</p>
-          <p>Speler die je een coördinaat wil geven:</p>
-          <select name="playerID" id="playerIDForm">
-            @foreach($tactic->players as $player)
-              <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
-            @endforeach
-          </select>
-          <input type="hidden" name="x" id="xCoordinateAdd">
-          <input type="hidden" name="y" id="yCoordinateAdd">
-          <input type="hidden" name="step" id="formStepAdd">
-        </form>
-      </div>
-      <div class="row">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-8">
         <form id="removeCoordinates" action="{{ url('tactics/removeCoordinates')}}" method="post">
           @if (session('succesRemove'))
             <div class="succes">
@@ -57,6 +49,19 @@
           <input type="hidden" name="y" id="yCoordinateDelete">
           <input type="hidden" name="step" id="formStepDelete">
       </form>
+        <canvas id="soccerfield" height="820" width="544" oncontextmenu="return false"></canvas>
+      </div>
+
+      <div class="col-12 col-sm-12 col-lg-4">
+        <h1>naast soms ni</h1>
+      </div>
+    </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <h1>Right click on item to remove</h1>
+      </div>
+      <div class="row">
 
       <form id="editCoordinates" action="{{ url('tactics/editCoordinates')}}" method="post">
         @if (session('succes'))

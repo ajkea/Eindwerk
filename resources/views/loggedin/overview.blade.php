@@ -138,7 +138,7 @@
           <td>{{ $loop->index }}</td>
           <td><input type="text" value="{{ $team->teamName }}"></td>
           <td>{{ str_limit($team->teamDescription, 20, '...') }}</td>
-          <td>{{ count($team->players) }}</td>
+          <td>{{ count($team->players) - 1 }}</td>
           <td>{{ count($team->tactics) }}</td>
           <td><a class="button button__info" href="/teams/{{ $team->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
           <td>
