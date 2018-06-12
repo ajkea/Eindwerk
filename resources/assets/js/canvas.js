@@ -71,12 +71,6 @@ window.updateStep = function() {
             }
             drawPreviousCoordinate(i);
         }
-        else if (coordinates[i].step == (step -2)) {
-            if(coordinates[i].step == step){
-            }
-            drawLineBetweenCoordinates(i);
-            drawPreviousCoordinate(i);   
-        }
         i++;
     }
 }

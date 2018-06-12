@@ -49,3 +49,39 @@ td {
   width: 60px;
 }
 
+.div-table {
+  display: table;         
+  width: 100%;       
+}
+
+.div-table-row {
+  display: table-row;
+  width: auto;
+  clear: both;
+}
+
+.div-table-head {
+  font-weight: 700;
+  padding: .5rem .1rem;
+  text-transform: uppercase;
+}
+
+.div-table-col {
+  display: table-cell;
+  padding-right: 1rem;
+}
+
+.div-table-cell {
+  display: table-cell;
+  padding: .5rem .1rem;
+  border-bottom: 1px solid rgba($color-black, .4);
+}
+
+.div-table-cell--buttons {
+  display: flex;
+  border-bottom: none;
+
+  .button {
+    margin: 0 .2rem;
+  }
+}

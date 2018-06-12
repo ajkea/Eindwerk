@@ -1,15 +1,15 @@
 .form {
   padding: 1rem 2rem;
 
-  input {
+  input, textarea {
     background: none;
     border: none;
     border-bottom: 2px solid $color-primary;
     margin: .8rem;
-    // width: 100%;
     line-height: 1.6rem;
     padding-left: .8rem;
     padding-bottom: .5rem;
+    resize: vertical;
 
     &.is-invalid {
       border: none;
@@ -17,6 +17,20 @@
       color:red;
     }
   }
+
+  .button {
+    margin: .8rem;
+  }
+}
+
+select {
+  background: none;
+  border: none;
+  border-bottom: 2px solid $color-primary;
+  margin: .8rem;
+  line-height: 1.6rem;
+  padding-left: .8rem;
+  padding-bottom: .5rem;
 }
 
 select {
@@ -29,8 +43,20 @@ select {
   line-height: 0;
 }
 
-.form--button{
-  margin: 1rem 0;
-  width: 80%;
+.form--crud {
+  padding: 0;
 
+  input, textarea, select {
+    width: 90%;
+  }
+}
+
+fieldset {
+
+}
+legend {
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  padding: .2rem;
 }

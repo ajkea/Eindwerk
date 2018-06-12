@@ -71,7 +71,7 @@ class TeamController extends Controller
             'FKteamID' => $FKteamID->id,
         ]);
 
-        return back()->with('succesTeam', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
+        return back()->with('succes', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
     }
 
     /**
@@ -144,7 +144,8 @@ class TeamController extends Controller
 
     public function addUserToTeam(Request $request)
     {
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('username', $request->username)
+        ->where('role', '!=', 'user')->first();
         if(isset($user)){
             $team = Team::find($request->teamID);
             $team->users()->attach($user);
@@ -152,7 +153,7 @@ class TeamController extends Controller
         }
         else {
 
-            return back()->with('errorTeam', 'Deze gebruiker bestaat niet');
+            return back()->with('error', 'Deze gebruiker is geen premium user, of bestaat niet.');
         }
     }
 

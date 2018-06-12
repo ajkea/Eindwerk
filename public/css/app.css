@@ -3040,6 +3040,10 @@ html {
   text-align: right;
 }
 
+.row {
+  width: 100%;
+}
+
 img {
   width: 100%;
 }
@@ -3051,6 +3055,7 @@ img {
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .button {
@@ -3059,7 +3064,6 @@ img {
   padding: 1rem;
   color: #FFFFFF;
   border: none;
-  min-width: 120px;
 }
 
 .button:last-of-type {
@@ -3088,6 +3092,15 @@ img {
 
 .button__info svg {
   color: #FFFFFF;
+}
+
+.button__wide {
+  width: 100%;
+}
+
+.button--form {
+  margin: .8rem;
+  width: 90%;
 }
 
 table {
@@ -3132,11 +3145,51 @@ td {
   width: 60px;
 }
 
+.div-table {
+  display: table;
+  width: 100%;
+}
+
+.div-table-row {
+  display: table-row;
+  width: auto;
+  clear: both;
+}
+
+.div-table-head {
+  font-weight: 700;
+  padding: .5rem .1rem;
+  text-transform: uppercase;
+}
+
+.div-table-col {
+  display: table-cell;
+  padding-right: 1rem;
+}
+
+.div-table-cell {
+  display: table-cell;
+  padding: .5rem .1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.div-table-cell--buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: none;
+}
+
+.div-table-cell--buttons .button {
+  margin: 0 .2rem;
+}
+
 .form {
   padding: 1rem 2rem;
 }
 
-.form input {
+.form input,
+.form textarea {
   background: none;
   border: none;
   border-bottom: 2px solid #247ba0;
@@ -3144,12 +3197,28 @@ td {
   line-height: 1.6rem;
   padding-left: .8rem;
   padding-bottom: .5rem;
+  resize: vertical;
 }
 
-.form input.is-invalid {
+.form input.is-invalid,
+.form textarea.is-invalid {
   border: none;
   border-bottom: 2px solid #247ba0;
   color: red;
+}
+
+.form .button {
+  margin: .8rem;
+}
+
+select {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #247ba0;
+  margin: .8rem;
+  line-height: 1.6rem;
+  padding-left: .8rem;
+  padding-bottom: .5rem;
 }
 
 select {
@@ -3162,9 +3231,21 @@ select {
   line-height: 0;
 }
 
-.form--button {
-  margin: 1rem 0;
-  width: 80%;
+.form--crud {
+  padding: 0;
+}
+
+.form--crud input,
+.form--crud textarea,
+.form--crud select {
+  width: 90%;
+}
+
+legend {
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  padding: .2rem;
 }
 
 .notification {
@@ -3187,7 +3268,6 @@ select {
   height: 70px;
   background: #03DAC6;
   z-index: 100;
-  margin-bottom: 2rem;
 }
 
 .navbar-content {
@@ -3254,6 +3334,16 @@ footer {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.playerbio--card {
+  width: 100%;
+}
+
+.playerbio-header--position {
+  margin-top: 0;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .section {

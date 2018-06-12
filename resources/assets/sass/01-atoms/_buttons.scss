@@ -4,7 +4,7 @@
   padding: 1rem;
   color: $color-white;
   border: none;
-  min-width: 120px;
+  // min-width: 120px;
 
   &:last-of-type {
     margin-right: 0;
@@ -33,4 +33,13 @@
   svg {
     color: $color-white;
   }
+}
+
+.button__wide {
+  width: 100%;
+}
+
+.button--form {
+  margin: .8rem;
+  width: 90%;
 }

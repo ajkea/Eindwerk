@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-  <div class="col-6">
+  <div class="col-12">
     <h1>Overzicht</h1>
     <p>Hey {{ auth()->user()->username }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
   </div>
@@ -12,179 +12,172 @@
       </div>
     @endif
   </div>
-  <div class="col-12">
+  <div class="col-12 div-table-container">
     <h6>Spelers</h6>
     @if (session('succesPlayer'))
       <div class="notification notification__succes">
         <p>{{ session('succesPlayer') }}</p>
       </div>
     @endif
-    <table class="table">
-      <thead class="table-header">
-        <th></th>
-        <th colspan="2">Naam</th>
-        <th>Positie</th>
-        <th>Geboortedatum</th>
-        <th>Beschrijving</th>
-        <th>Nummer</th>
-        <th></th>
-        <th></th>
-      </thead>
-      <tbody>
-        @isset($players)
-        @foreach ($players as $player)
-          <tr class="table-content">
-              @isset ($player->media)
-                <td class="table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ $player->media->alt }}"></td>
-              @endisset
-              @empty ($player->media)
-                <td class="table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></td>
-              @endempty
-            <td colspan="2">{{ $player->firstName.' '.$player->lastName }}</td>
-            <td>
-              @isset ($player->position->positionName)
-                {{ $player->position->positionName }}
-              @endisset
-              @empty( $player->position)
-                onbekend
-              @endempty
-            </td>
-            <td>{{ date('d-m-Y', strtotime($player->birthDate)) }}</td>
-            <td>{{ substr($player->description,0,40).'...' }}</td>
-            <td>{{ $player->shirtNumber }}</td>
-            <td><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
-            <td>
-                <form action="/players/delete" method="post">
-                  @csrf
-                  <input type="hidden" name="playerID" value="{{ $player->id }}">
-                  <input type="hidden" name="firstName" value="{{ $player->firstName }}">
-                  <input type="hidden" name="lastName" value="{{ $player->lastName }}">
-                  <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i> Delete</button>
-                </form>
-            </td>
-          </tr>
-        @endforeach
-        @endisset
-      </tbody>
-      </table>
-      <form action="/players" enctype="multipart/form-data" method="post" files="true">
-      <table>
-        <thead class="table-form">
-          <tr>
-            <th></th>
-            <th colspan="2">Naam</th>
-            <th>Positie</th>
-            <th>Geboortedatum</th>
-            <th>Beschrijving</th>
-            <th>Nummer</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
+  </div>
+  <div class="col-12 col-md-8">
+    <div class="div-table">
+      <div class="div-table-row div-table-head">
+        <div class="div-table-col"></div>
+        <div class="div-table-col">Naam</div>
+        <div class="div-table-col">Geboortedatum</div>
+        <div class="div-table-col"># shirt</div>
+        <div class="div-table-col"></div>
+      </div>
+      @isset($players)
+      @foreach ($players as $player)
+      <div class="div-table-row">
+          @isset ($player->media)
+            <div class="div-table-cell table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ $player->media->alt }}"></div>
+          @endisset
+          @empty ($player->media)
+            <div class="div-table-cell table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></div>
+          @endempty
+        <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
+        <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
+        <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
+        <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i></a>
+            <form action="/players/delete" method="post">
               @csrf
-              <td class="table-image--avatar">
-                <input type="file" name="media" id="media" hidden>
-                <label for="media">
-                  <i class="fal fa-cloud-upload fa-2x"></i>
-                </label>
-              </td>
-              <td>
-                <input type="text" name="firstName" id="playerFirstName" placeholder="voornaam"> 
-              </td><td>
-                <input type="text" name="lastName" id="playerLastName" placeholder="achternaam"> 
-              </td>
-              <td>
-                <select name="FKpositionID" id="FKpositionID" required>
-                  @foreach($positions as $position)
-                    <option value="{{ $position->id }}">{{ $position->positionName }}</option>
-                  @endforeach
-                </select>
-              </td>
-              <td><input type="date" name="birthDate" id="birthDate" value="2000-01-01"></td>
-              <td><input type="text" name="description" id="playerDescription"></td>
-              <td><input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99"></td>
-              <td>
-                <input class="button" type="submit" value="submit">
-              </td>
-          </tr>
-      </tbody>
-    </table>
+              <input type="hidden" name="playerID" value="{{ $player->id }}">
+              <input type="hidden" name="firstName" value="{{ $player->firstName }}">
+              <input type="hidden" name="lastName" value="{{ $player->lastName }}">
+              <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
+            </form>
+        </div>
+      </div>
+      @endforeach
+      @endisset
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <form class="form form--crud" action="/players" enctype="multipart/form-data" method="post" files="true">
+      @csrf
+      <fieldset>
+        <legend> Speler toevoegen </legend>
+        <div class="form--crud-section">
+          <input type="text" name="firstName" id="playerFirstName" placeholder="voornaam"> 
+          <input type="text" name="lastName" id="playerLastName" placeholder="achternaam"> 
+          <select name="FKpositionID" id="FKpositionID" required>
+            @foreach($positions as $position)
+              <option value="{{ $position->id }}">{{ $position->positionName }}</option>
+            @endforeach
+          </select>
+          <input type="date" name="birthDate" id="birthDate" value="2000-01-01">
+          <textarea rows="2" name="description" id="playerDescription" placeholder="korte beschrijving"></textarea>
+          <input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99" placeholder="shirtnummer">
+          <label for="media" class="center">
+            <input type="file" name="media" id="media" hidden>
+            <div class="button"><i class="fal fa-camera-retro"></i> Foto</div>
+          </label>
+        </div>
+        @if(Auth::check() && Auth::user()->role !== "user")
+        <div class="form--crud-section">
+          <div class="input-range">
+            <label for="shooting">
+              <input type="range" name="shooting" id="shooting" min="0" max="100" value="0">
+              <input type="number" name="shooting" id="shooting" min="0" max="100" placeholder="shooting">
+            </label>
+            <output for="shooting" class="output"></output>
+          </div>
+          <div class="input-range">
+            <label for="defending">
+              <input type="range" name="defending" id="defending" min="0" max="100" value="0">
+              <input type="number" name="defending" id="defending" min="0" max="100" placeholder="defending">
+            </label>
+            <output for="defending" class="output"></output>
+          </div>
+          <div class="input-range">
+            <label for="speed">
+              <input type="range" name="speed" id="speed" min="0" max="100" value="0">
+              <input type="number" name="speed" id="speed" min="0" max="100">
+            </label>
+            <output for="speed" class="output"></output>
+          </div>
+          <div class="input-range">
+            <label for="stamina">
+              <input type="range" name="stamina" id="stamina" min="0" max="100" value="0">
+              <input type="number" name="stamina" id="stamina" min="0" max="100">
+            </label>
+            <output for="stamina" class="output"></output>
+          </div>
+          <div class="input-range">
+            <label for="dribbling">
+              <input type="range" name="dribbling" id="dribbling" min="0" max="100" value="0">
+              <input type="number" name="dribbling" id="dribbling" min="0" max="100">
+            </label>
+            <output for="dribbling" class="output"></output>
+          </div>
+          <div class="input-range">
+            <label for="height">
+              <input type="range" name="height" id="height" min="0" max="100" value="0">
+              <input type="number" name="height" id="height" min="0" max="100">
+            </label>
+            <output for="height" class="output"></output>
+          </div>
+          <div class="input-range">
+            <label for="weight">
+              <input type="range" name="weight" id="weight" min="0" max="100" value="0">
+              <input type="number" name="weight" id="weight" min="0" max="100">
+            </label>
+            <output for="weight" class="output"></output>
+          </div>
+          <input type="text" name="preferredFoot" id="preferredFoot" placeholder="Link/rechts voetig">
+        </div>
+        @endif
+        <button class="button button--form" type="submit" value="submit"><i class="fal fa-user-plus"></i> Toevoegen<button
+      </fieldset>
     </form>
-
   </div>
   <div class="col-12">
     <h6>Ploegen:</h6>
-    @if (session('succesTeam'))
-      <div class="notification notification__succes">
-        <p>{{ session('succesTeam') }}</p>
+  </div>
+  <div class="col-12 col-md-8">
+    <div class="div-table">
+      <div class="div-table-row div-table-head">
+        <div class="div-table-col">#</div>
+        <div class="div-table-col">ploegnaam</div>
+        <div class="div-table-col"># spelers</div>
+        <div class="div-table-col"># tactieken</div>
+        <div class="div-table-col"></div>
       </div>
-    @endif
-    <table class="table">
-      <thead class="table-header">
-        <th>#</th>
-        <th>Ploegnaam</th>
-        <th>Beschrijving</th>
-        <th># spelers</th>
-        <th># tactieken</th>
-        <th></th>
-        <th></th>
-      </thead>
-      <tbody>
       @foreach($teams as $team)
         @if( $loop->index === 0)
         @else
-        <tr class="table-content">
-          <td>{{ $loop->index }}</td>
-          <td><input type="text" value="{{ $team->teamName }}"></td>
-          <td>{{ str_limit($team->teamDescription, 20, '...') }}</td>
-          <td>{{ count($team->players) - 1 }}</td>
-          <td>{{ count($team->tactics) }}</td>
-          <td><a class="button button__info" href="/teams/{{ $team->id }}"><i class="fas fa-info-circle"></i> Info</a></td>
-          <td>
+        <div class="div-table-row">
+          <div class="div-table-cell">{{ $loop->index }}</div>
+          <div class="div-table-cell">{{ $team->teamName }}</div>
+          <div class="div-table-cell">{{ count($team->players) -1 }}</div>
+          <div class="div-table-cell">{{ count($team->tactics) }}</div>
+          <div class="div-table-cell div-table-cell--buttons">
+            <a class="button button__info" href="/teams/{{ $team->id }}"><i class="fas fa-info-circle"></i></a>
             <form action="/teams/delete" method="post">
               @csrf
               <input type="hidden" name="teamID" value="{{ $team->id }}">
               <input type="hidden" name="teamname" value="{{ $team->teamName }}">
-              <input type="submit" class="button button__delete" value="Delete">
+              <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
             </form>
-          </td>
-        </tr>
+          </div>
+        </div>
         @endif
       @endforeach
-      </tbody>
-    </table>
-      <form action="/teams" method="post">
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <form class="form form--crud" action="/teams" method="post">
       @csrf
-    <table>
-      <thead class="table-form">
-        <tr>
-          <th>#</th>
-          <th>Ploegnaam</th>
-          <th>Beschrijving</th>
-          <th># spelers</th>
-          <th># tactieken</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td></td>
-          <td>
-            <input type="text" name="teamName" id="teamName"> 
-          </td>
-          <td>
-            <input type="text" name="teamDescription" id="teamDescription"> 
-          </td>
-          <td></td>
-          <td></td>
-          <td>
-            <input type="submit" class="button" value="toevoegen"></td>
-        </tr>
-        </form>
-      </tbody>
-    </table>
+      <fieldset>
+        <legend> Ploeg toevoegen</legend>
+        <input type="text" name="teamName" id="teamName" placeholder="ploegnaam"> 
+        <textarea  rows="2" type="text" name="teamDescription" id="teamDescription" placeholder="extra infomatie"></textarea>
+        <button type="submit" class="button button--form" value="toevoegen"><i class="fal fa-users"></i> toevoegen</button>
+      </fieldset>
+    </form>
   </div>
 </div>
 @endsection

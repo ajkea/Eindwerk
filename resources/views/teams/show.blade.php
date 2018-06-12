@@ -52,6 +52,7 @@
       <button class="button">Toevoegen</button>
     </form>
   </col-4>
+  @if(Auth::check() && Auth::user()->role !== "user")
   <col-4>
     <form action="/userteams/addUser" method="post" style="border: 1px solid black">
       @csrf
@@ -61,7 +62,9 @@
       <input type="text" name="username">
       <button class="button" type="submit">Toevoegen</button>
     </form>
-
+  </div>
+  @endif
+  <div class="col-4">
     <form action="/tactics/addToTeam" method="post" style="border: 1px solid black">
       @csrf
       <input type="hidden" name="FKteamID" value="{{ $team->id }}">

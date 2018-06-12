@@ -8,6 +8,7 @@ use App\Media;
 use App\PlayersInTeam;
 use App\UserTeam;
 use App\Team;
+use App\PlayerSkill;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -84,6 +85,20 @@ class PlayerController extends Controller
             'FKplayerID' => $player->id,
             'FKteamID' => $defaultTeam->FKteamID,
         ]);
+
+        if (auth()->user()->role !== 'user'){
+            PlayerSkill::create([
+                'shooting' => $request->shooting,
+                'defending' => $request->defending,
+                'speed' => $request->speed,
+                'stamina' => $request->stamina,
+                'preferredFoot' => $request->preferredFoot,
+                'dribbling' => $request->dribbling,
+                'height' => $request->height,
+                'weight' => $request->weight,
+                'FKplayerID' => $player->id
+            ]);
+        }
         
         return back()->with('succesPlayer', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol toegevoegd');
     }

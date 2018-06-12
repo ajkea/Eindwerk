@@ -22,6 +22,10 @@ class Player extends Model
         return $this->hasOne('App\PlayerSkill', 'FKplayerID');
     }
 
+    public function playerstat() {
+        return $this->hasOne('App\PlayerStat', 'FKplayerID');
+    }
+
     public function teams() {
         return $this->belongsToMany('App\Team', 'players_in_teams', 'FKteamID', 'FKplayerID');
     }
