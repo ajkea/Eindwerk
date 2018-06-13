@@ -3499,12 +3499,17 @@ fieldset {
 }
 
 #features {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), to(#247ba0)), url("/images/static/nVgBW8l.jpg");
-  background: linear-gradient(rgba(36, 123, 160, 0.8), #247ba0), url("/images/static/nVgBW8l.jpg");
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), color-stop(rgba(36, 123, 160, 0.8)), to(#247ba0)), url("/images/static/nVgBW8l.jpg");
+  background: linear-gradient(rgba(36, 123, 160, 0.8), rgba(36, 123, 160, 0.8), #247ba0), url("/images/static/nVgBW8l.jpg");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
   color: #FFFFFF;
+}
+
+#features legend {
+  font-size: 2.6rem;
+  letter-spacing: .1rem;
 }
 
 .feature-item {

@@ -31,6 +31,7 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-12 col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
                 <fieldset disabled="disabled">
                     <legend align="center">Gratis</legend>
                     <div class="row">
@@ -52,24 +53,28 @@
                     </div>
                 </fieldset>
             </div>
+            </div>
             <div class="row">
-                <div class="col-12 col-sm-10  col-lg-8 offset-sm-1 offset-lg-2">
                 <fieldset disabled="disabled">
                     <legend align="center">premium</legend>
                     <div class="row">
-                        <div class="col-6 center">
-                            <i class="fal fa-play-circle fa-5x"></i>
-                            <h6 class="head-feature">Ongelimiteerd</h6>
-                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegd. Er is hier geen beperking op het aantal.</p>        
+                        <div class="col-12 col-sm-4 center feature-item">
+                            <i class="fal fa-link fa-5x"></i>
+                            <h6 class="head-feature">Delen met vrienden</h6>
+                            <p class="text-feature">Deel je tactieken en ploegen met andere premium gebruikers. Zo kan je samenwerken aan 1 of meerder ploegen.</p>        
                         </div>
-                        <div class="col-6 center">
-                            <i class="fal fa-play-circle fa-5x"></i>
-                            <h6 class="head-feature">Verschillende spelsituaties</h6>
-                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegd. Er is hier geen beperking op het aantal.</p>
+                        <div class="col-12 col-sm-4 center feature-item">
+                            <i class="fal fa-male fa-5x"></i>
+                            <i class="fal fa-female fa-5x"></i>
+                            <h6 class="head-feature">Tegenstanders toevoegen</h6>
+                            <p class="text-feature">Voeg tegenstanders toe in je tactieken. Zo kan je situaties naspelen of met je glazen bol situaties voorspellen.</p>
                         </div>
-                    </div>
+                        <div class="col-12 col-sm-4 center feature-item">
+                            <i class="far fa-chart-bar fa-5x"></i>
+                            <h6 class="head-feature">Uitgebreidde statistieken</h6>
+                            <p class="text-feature">Houd statistieken bij van je spelers zoals goals, assists, gele kaarten, ... Verder kan je informatie bijhouden zoals voorkeursvoet, grootte en gewicht.</p>
+                        </div>
                 </fieldset>
-                </div>
             </div>
         </div>
     </div>
@@ -83,7 +88,6 @@
                     <div class="pricing--card">
                         <fieldset disabled="disabled">
                             <legend align="center">Gratis</legend>
-                            <p class="text--slogan">Creëer zelf je tactieken</p>
                             <div class="pricing--card-price">
                                 <h6 class="pricing--card-euro">&euro; 0,00 </h6>
                                 <p class="pricing--card-time">/jaar</p>
@@ -104,7 +108,6 @@
                     <div class="pricing--card">
                         <fieldset disabled="disabled">
                             <legend align="center">Premium</legend>
-                            <p class="text--slogan">Deel je tactieken en werk samen</p>
                             <div class="pricing--card-price">
                                 <h6 class="pricing--card-euro">&euro; 3,50 </h6>
                                 <p class="pricing--card-time">/maand</p>

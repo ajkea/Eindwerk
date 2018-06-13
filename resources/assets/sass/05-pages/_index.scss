@@ -135,12 +135,17 @@ fieldset {
 }
 
 #features {
-  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-primary, 1) ), url('/images/static/nVgBW8l.jpg');
+  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-primary, 0.8), rgba($color-primary, 1) ), url('/images/static/nVgBW8l.jpg');
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
   
   color: $color-white;
+
+  legend {
+    font-size: 2.6rem;
+    letter-spacing: .1rem;
+  }
 }
 
 .feature-item {

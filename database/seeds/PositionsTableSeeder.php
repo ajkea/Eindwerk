@@ -14,8 +14,12 @@ class PositionsTableSeeder extends Seeder
         if(DB::table('positions')->get()->count() == 0){
             DB::table('positions')->insert([
                 [
-                    'positionName' => 'ball',
-                    'positionDescription' => 'ball'
+                    'positionName' => 'bal',
+                    'positionDescription' => 'bal'
+                ],
+                [
+                    'positionName' => 'tegenstander',
+                    'positionDescription' => 'tegenstander'
                 ],
                 [
                     'positionName' => 'Doelman',
