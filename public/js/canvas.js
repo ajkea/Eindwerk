@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 15:
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(19);
 
 
 /***/ }),
 
-/***/ 16:
+/***/ 19:
 /***/ (function(module, exports) {
 
 window.onload = function () {
@@ -132,6 +132,7 @@ window.updateStep = function () {
     var ctx = canvas.getContext("2d");
     var coordinate = void 0;
     var i = 0;
+    var lastCoordinates = [[,]];
 
     while (i < coordinates.length) {
 
@@ -141,10 +142,10 @@ window.updateStep = function () {
         } else if (coordinates[i].step == step) {
             drawCurrentCoordinate(i);
         } else if (coordinates[i].step == step - 1) {
-
             if (coordinates[i + 1].step == step) {
                 drawLineBetweenCoordinates(i);
             }
+
             drawPreviousCoordinate(i);
         }
         i++;

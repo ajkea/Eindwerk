@@ -51,4 +51,15 @@ class OverviewController extends Controller
         return back()->with('succesPlayer', 'Speler '.$request->firstName.' '.$request->lastName.' is succesvol verwijderd');
     
     }
+
+    public function search(Request $request){
+        if($request->ajax()){
+            $output = "";
+            $players = Player::where('firstName', '=', $request->search)->get();
+
+            $output.='iets';
+
+            return Response($output);
+        }
+    }
 }

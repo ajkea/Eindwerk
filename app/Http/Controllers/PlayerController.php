@@ -86,7 +86,7 @@ class PlayerController extends Controller
             'FKteamID' => $defaultTeam->FKteamID,
         ]);
 
-        if (auth()->user()->role !== 'user'){
+        if (auth()->user()->role !== 'user' && isset($request->shooting)){
             PlayerSkill::create([
                 'shooting' => $request->shooting,
                 'defending' => $request->defending,
@@ -100,7 +100,7 @@ class PlayerController extends Controller
             ]);
         }
         
-        return back()->with('succesPlayer', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol toegevoegd');
+        return back()->with('succes', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol toegevoegd');
     }
 
     /**

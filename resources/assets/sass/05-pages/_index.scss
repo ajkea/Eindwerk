@@ -1,6 +1,22 @@
 .section {
-  min-height: 25rem;
-  padding: 2rem 0;
+  min-height: 100vh;
+  padding: 4rem 0;
+  width: 110%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -5px;
+
+  @media (min-width: $break-md){
+    left: -5%;
+  }
+}
+
+.section-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 #index-page {
@@ -15,12 +31,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 101.5vh;
-  width: 100%;
-  position: absolute;
+  width: 110%;
+  // position: absolute;
   left: 0;
   padding-right: 2rem;
-  z-index: 1;
   margin-top: -1rem;
+  margin-left: -5%;
+  margin-right: -5%;
 
   @media (min-width: $break-sm){
     background-image: url('/images/static/hero-image.jpg');
@@ -109,14 +126,12 @@
 }
 
 #features {
-  background-color: $color-primary;
+  background: linear-gradient( rgba($color-primary, 0.9), rgba($color-primary, 0.9) ), url('/images/static/features-bg.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
   color: $color-white;
-  margin-top: 90vh;
-  width: 110%;
-  padding-top: 10vh;
-  margin-left: -5%;
-  margin-right: -5%;
-  z-index: 0;
 }
 
 .feature-item {
@@ -152,4 +167,65 @@
       width: 50%;
     }
   }
+}
+
+#pricing {
+  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-secondary, 0.8) ), url('/images/static/pricing-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.pricing--card {
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  li {
+    line-height: 2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  fieldset {
+    min-height: 460px;
+  }
+
+  legend {
+    font-size: 2.6rem;
+    letter-spacing: .1rem;
+  }
+}
+
+.pricing--card-price {
+  display: ruby;
+
+}
+
+.pricing--card-euro {
+  font-weight: 700;
+}
+
+.pricing--card-time {
+  font-size: 1rem;
+}
+
+.text--slogan {
+  margin-bottom: -1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+#goal {
+  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-primary, 0.8) ), url('/images/static/goal-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.index-slogan--text {
+  font-size: 4rem;
+  color: $color-yellow;
+  font-weight: 900;
+  line-height: 5rem;
 }

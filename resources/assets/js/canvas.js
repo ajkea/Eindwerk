@@ -54,6 +54,7 @@ window.updateStep = function() {
     var ctx = canvas.getContext("2d");
     let coordinate;
     let i = 0;
+    let lastCoordinates = [[,]];
 
     while(i < coordinates.length){
 
@@ -65,10 +66,10 @@ window.updateStep = function() {
             drawCurrentCoordinate(i);
         }
         else if (coordinates[i].step == (step -1)) {
-
             if(coordinates[i+1].step == step){
                 drawLineBetweenCoordinates(i);
             }
+            
             drawPreviousCoordinate(i);
         }
         i++;

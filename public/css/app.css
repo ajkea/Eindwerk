@@ -453,6 +453,12 @@ button,
   text-decoration: underline;
 }
 
+.title--medium {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 /*!
  * Bootstrap Grid v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -3347,8 +3353,27 @@ footer {
 }
 
 .section {
-  min-height: 25rem;
-  padding: 2rem 0;
+  min-height: 100vh;
+  padding: 4rem 0;
+  width: 110%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -5px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    left: -5%;
+  }
+}
+
+.section-content {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 #index-page {
@@ -3362,12 +3387,12 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
   height: 101.5vh;
-  width: 100%;
-  position: absolute;
+  width: 110%;
   left: 0;
   padding-right: 2rem;
-  z-index: 1;
   margin-top: -1rem;
+  margin-left: -5%;
+  margin-right: -5%;
 }
 
 @media (min-width: 576px) {
@@ -3466,14 +3491,12 @@ footer {
 }
 
 #features {
-  background-color: #247ba0;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.9)), to(rgba(36, 123, 160, 0.9))), url("/images/static/features-bg.jpg");
+  background: linear-gradient(rgba(36, 123, 160, 0.9), rgba(36, 123, 160, 0.9)), url("/images/static/features-bg.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #FFFFFF;
-  margin-top: 90vh;
-  width: 110%;
-  padding-top: 10vh;
-  margin-left: -5%;
-  margin-right: -5%;
-  z-index: 0;
 }
 
 .feature-item {
@@ -3513,6 +3536,66 @@ footer {
     left: 50%;
     width: 50%;
   }
+}
+
+#pricing {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), to(rgba(255, 22, 84, 0.8))), url("/images/static/pricing-bg.jpg");
+  background: linear-gradient(rgba(36, 123, 160, 0.8), rgba(255, 22, 84, 0.8)), url("/images/static/pricing-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.pricing--card ul {
+  padding-left: 1rem;
+}
+
+.pricing--card li {
+  line-height: 2rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.pricing--card fieldset {
+  min-height: 460px;
+}
+
+.pricing--card legend {
+  font-size: 2.6rem;
+  letter-spacing: .1rem;
+}
+
+.pricing--card-price {
+  display: ruby;
+}
+
+.pricing--card-euro {
+  font-weight: 700;
+}
+
+.pricing--card-time {
+  font-size: 1rem;
+}
+
+.text--slogan {
+  margin-bottom: -1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+#goal {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), to(rgba(36, 123, 160, 0.8))), url("/images/static/goal-bg.jpg");
+  background: linear-gradient(rgba(36, 123, 160, 0.8), rgba(36, 123, 160, 0.8)), url("/images/static/goal-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.index-slogan--text {
+  font-size: 4rem;
+  color: #FFDE03;
+  font-weight: 900;
+  line-height: 5rem;
 }
 
 #register {

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<meta name="_token" content="{{ csrf_token() }}">
 <div class="row">
   <div class="col-12">
     <h1>Overzicht</h1>
@@ -14,13 +15,17 @@
   </div>
   <div class="col-12 div-table-container">
     <h6>Spelers</h6>
-    @if (session('succesPlayer'))
+    @if (session('succes'))
       <div class="notification notification__succes">
         <p>{{ session('succesPlayer') }}</p>
       </div>
     @endif
   </div>
   <div class="col-12 col-md-8">
+    <input type="text" name="search" id="search">
+    <table>
+      <tbody></tbody>
+    </table>
     <div class="div-table">
       <div class="div-table-row div-table-head">
         <div class="div-table-col"></div>
@@ -152,10 +157,10 @@
         <div class="div-table-row">
           <div class="div-table-cell">{{ $loop->index }}</div>
           <div class="div-table-cell">{{ $team->teamName }}</div>
-          <div class="div-table-cell">{{ count($team->players) -1 }}</div>
+          <div class="div-table-cell">{{ count($team->players) }}</div>
           <div class="div-table-cell">{{ count($team->tactics) }}</div>
           <div class="div-table-cell div-table-cell--buttons">
-            <a class="button button__info" href="/teams/{{ $team->id }}"><i class="fas fa-info-circle"></i></a>
+            <a class="button button__info" href="/teams/{{ $team->FKteamID }}"><i class="fas fa-info-circle"></i></a>
             <form action="/teams/delete" method="post">
               @csrf
               <input type="hidden" name="teamID" value="{{ $team->id }}">

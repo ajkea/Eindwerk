@@ -38,6 +38,7 @@ Route::post('tactics/editCoordinates', 'TacticController@EditCoordinate')->middl
 Route::post('tactics/addOnCanvas', array('as' => 'changeStatus', 'uses' => 'TacticController@addCoordinate'));
 
 Route::get('/overview', 'OverviewController@index')->middleware('auth')->name('overview');
+Route::get('/overview/search', 'OverviewController@search')->middleware('auth');
 Route::post('/teams/delete', 'OverviewController@deleteTeam')->middleware('auth');
 Route::post('/players/delete', 'OverviewController@deletePlayer')->middleware('auth');
 Route::get('/canvas', function () {
