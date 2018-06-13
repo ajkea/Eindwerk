@@ -31,20 +31,44 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-sm-4 center feature-item">
-                    <i class="fal fa-clipboard fa-5x"></i>
-                    <h6 class="head-feature">Tactics</h6>
-                    <p class="text-feature">Stel je eigen tactieken op en deel ze met je vrienden.</p>
-                </div>
-                <div class="col-12 col-sm-4 center feature-item">
-                    <i class="fal fa-users fa-5x"></i>
-                    <h6 class="head-feature">Duidelijk overzicht</h6>
-                    <p class="text-feature">Geef zelf je spelers in en verdeel ze onder je ploegen.</p>
-                </div>
-                <div class="col-12 col-sm-4 center feature-item">
-                    <i class="fal fa-play-circle fa-5x"></i>
-                    <h6 class="head-feature">Speel af</h6>
-                    <p class="text-feature">Animeer je tactieken en maak ze zo makkelijk duidelijk aan iedereen.</p>
+                <fieldset disabled="disabled">
+                    <legend align="center">Gratis</legend>
+                    <div class="row">
+                        <div class="col-12 col-sm-4 center feature-item">
+                            <i class="fal fa-users fa-5x"></i>
+                            <h6 class="head-feature">Overzicht bewaren</h6>
+                            <p class="text-feature">Behoud een overzicht over al de spelers en ploegen die je coacht. Zo weet je direct wie beschikbaar is en wat zijn/haar kwaliteiten zijn.</p>
+                        </div>
+                        <div class="col-12 col-sm-4 center feature-item">
+                            <i class="fal fa-clipboard fa-5x"></i>
+                            <h6 class="head-feature">Tactieken opstellen</h6>
+                            <p class="text-feature">Zet per ploeg een tactiek op voor verschillende spelsituaties. Zo kan je deze makkelijk tonen en animeren voor je spelers.</p>
+                        </div>
+                        <div class="col-12 col-sm-4 center feature-item">
+                            <i class="fal fa-play-circle fa-5x"></i>
+                            <h6 class="head-feature">Ongelimiteerd</h6>
+                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegd. Er is hier geen beperking op het aantal.</p>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-10  col-lg-8 offset-sm-1 offset-lg-2">
+                <fieldset disabled="disabled">
+                    <legend align="center">premium</legend>
+                    <div class="row">
+                        <div class="col-6 center">
+                            <i class="fal fa-play-circle fa-5x"></i>
+                            <h6 class="head-feature">Ongelimiteerd</h6>
+                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegd. Er is hier geen beperking op het aantal.</p>        
+                        </div>
+                        <div class="col-6 center">
+                            <i class="fal fa-play-circle fa-5x"></i>
+                            <h6 class="head-feature">Verschillende spelsituaties</h6>
+                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegd. Er is hier geen beperking op het aantal.</p>
+                        </div>
+                    </div>
+                </fieldset>
                 </div>
             </div>
         </div>
@@ -95,7 +119,7 @@
                                     <li>Veel liefde van ons</li>
                                 </ul>
                             </div>
-                            <button href="{{ route('register') }}" class="button button__wide">Register</button>
+                            <button href="{{ route('register') }}" class="button button__wide pricing--card-button">Neem premium</button>
                         </fieldset>
                     </div>
                 </div>
@@ -103,10 +127,11 @@
         </div>
     </div>
     <div class="section row" id="goal">
-        <div class="container section-content">
+        <div class="container section-content__center">
             <div class="row">
-                <div class="col-8 offset-2">
-                    <h1 class="index-slogan--text center">Test managineer gratis uit en neem de beker mee naar huis!</h1>
+                <div class="col-8 offset-2 right">
+                    <h6 class="section-slogan--text">Voetballen is heel simpel, maar het moeilijkste wat er is, is simpel voetballen.</h6>
+                    <h6 class="section-slogan--person">Johan Cruijff</h6>
                 </div>
             </div>
         </div>

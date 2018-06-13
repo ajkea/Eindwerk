@@ -27,7 +27,7 @@
         <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
         <select name="playerID" id="playerIDForm">
           @foreach($tactic->players as $player)
-            <option {{ old('playerID') == $player->id ? "selected" : "" }} value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+            <option {{ old('playerID') == $player->id ? "selected" : "" }} value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
           @endforeach
         </select>
         <input type="hidden" name="x" id="xCoordinateAdd">

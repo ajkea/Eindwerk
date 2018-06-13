@@ -1,5 +1,5 @@
 .section {
-  min-height: 100vh;
+  min-height: 102vh;
   padding: 4rem 0;
   width: 110%;
   position: relative;
@@ -13,14 +13,23 @@
 }
 
 .section-content {
+  height: 100%;
+}
+
+.section-content__center {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  position: absolute;
 }
 
 #index-page {
   overflow-x: hidden;
+}
+
+
+fieldset {
+  margin: 2rem 0;
 }
 
 // SECTIONS
@@ -126,8 +135,8 @@
 }
 
 #features {
-  background: linear-gradient( rgba($color-primary, 0.9), rgba($color-primary, 0.9) ), url('/images/static/features-bg.jpg');
-  background-position: center top;
+  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-primary, 1) ), url('/images/static/nVgBW8l.jpg');
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
   
@@ -170,7 +179,7 @@
 }
 
 #pricing {
-  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-secondary, 0.8) ), url('/images/static/pricing-bg.jpg');
+  background: linear-gradient( rgba($color-primary, 1), rgba($color-secondary, 0.8) ), url('/images/static/pricing-bg.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -187,9 +196,6 @@
     line-height: 2rem;
     font-size: 1.2rem;
     font-weight: 300;
-  }
-  fieldset {
-    min-height: 460px;
   }
 
   legend {
@@ -211,13 +217,19 @@
   font-size: 1rem;
 }
 
+.pricing--card-button {
+  // position: absolute;
+  // bottom: 1rem;
+  // width: 80%;
+}
+
 .text--slogan {
   margin-bottom: -1.5rem;
   padding-bottom: 1.5rem;
 }
 
 #goal {
-  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-primary, 0.8) ), url('/images/static/goal-bg.jpg');
+  background: linear-gradient( rgba($color-primary, 0.6), rgba($color-primary, 0.6) ), url('https://media.giphy.com/media/l2JeeTC37ZfK1wWDm/giphy.gif');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -228,4 +240,31 @@
   color: $color-yellow;
   font-weight: 900;
   line-height: 5rem;
+}
+
+.section-slogan--text {
+  color: $color-yellow;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  margin-bottom: .5rem;
+}
+
+.section-slogan--person {
+  color: $color-white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  
+  &:after {
+    content: "";
+    position: absolute;
+    width: 4rem;
+    bottom: -1rem;
+    right: 1rem;
+    border-bottom: 1rem solid $color-yellow;
+  }
 }

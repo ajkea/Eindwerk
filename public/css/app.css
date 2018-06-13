@@ -3353,7 +3353,7 @@ footer {
 }
 
 .section {
-  min-height: 100vh;
+  min-height: 102vh;
   padding: 4rem 0;
   width: 110%;
   position: relative;
@@ -3369,15 +3369,23 @@ footer {
 }
 
 .section-content {
+  height: 100%;
+}
+
+.section-content__center {
+  position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  position: absolute;
 }
 
 #index-page {
   overflow-x: hidden;
+}
+
+fieldset {
+  margin: 2rem 0;
 }
 
 .hero-image {
@@ -3491,9 +3499,9 @@ footer {
 }
 
 #features {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.9)), to(rgba(36, 123, 160, 0.9))), url("/images/static/features-bg.jpg");
-  background: linear-gradient(rgba(36, 123, 160, 0.9), rgba(36, 123, 160, 0.9)), url("/images/static/features-bg.jpg");
-  background-position: center top;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), to(#247ba0)), url("/images/static/nVgBW8l.jpg");
+  background: linear-gradient(rgba(36, 123, 160, 0.8), #247ba0), url("/images/static/nVgBW8l.jpg");
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
   color: #FFFFFF;
@@ -3539,8 +3547,8 @@ footer {
 }
 
 #pricing {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), to(rgba(255, 22, 84, 0.8))), url("/images/static/pricing-bg.jpg");
-  background: linear-gradient(rgba(36, 123, 160, 0.8), rgba(255, 22, 84, 0.8)), url("/images/static/pricing-bg.jpg");
+  background: -webkit-gradient(linear, left top, left bottom, from(#247ba0), to(rgba(255, 22, 84, 0.8))), url("/images/static/pricing-bg.jpg");
+  background: linear-gradient(#247ba0, rgba(255, 22, 84, 0.8)), url("/images/static/pricing-bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -3555,10 +3563,6 @@ footer {
   line-height: 2rem;
   font-size: 1.2rem;
   font-weight: 300;
-}
-
-.pricing--card fieldset {
-  min-height: 460px;
 }
 
 .pricing--card legend {
@@ -3584,8 +3588,8 @@ footer {
 }
 
 #goal {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.8)), to(rgba(36, 123, 160, 0.8))), url("/images/static/goal-bg.jpg");
-  background: linear-gradient(rgba(36, 123, 160, 0.8), rgba(36, 123, 160, 0.8)), url("/images/static/goal-bg.jpg");
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(36, 123, 160, 0.6)), to(rgba(36, 123, 160, 0.6))), url("https://media.giphy.com/media/l2JeeTC37ZfK1wWDm/giphy.gif");
+  background: linear-gradient(rgba(36, 123, 160, 0.6), rgba(36, 123, 160, 0.6)), url("https://media.giphy.com/media/l2JeeTC37ZfK1wWDm/giphy.gif");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -3596,6 +3600,33 @@ footer {
   color: #FFDE03;
   font-weight: 900;
   line-height: 5rem;
+}
+
+.section-slogan--text {
+  color: #FFDE03;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  margin-bottom: .5rem;
+}
+
+.section-slogan--person {
+  color: #FFFFFF;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.section-slogan--person:after {
+  content: "";
+  position: absolute;
+  width: 4rem;
+  bottom: -1rem;
+  right: 1rem;
+  border-bottom: 1rem solid #FFDE03;
 }
 
 #register {
@@ -3672,5 +3703,35 @@ footer {
 
 .form--remember #remember {
   width: 20px;
+}
+
+#error-not-found {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.4))), url("https://media.giphy.com/media/12Vujj7Zh7dTPy/giphy.gif");
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://media.giphy.com/media/12Vujj7Zh7dTPy/giphy.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #000000;
+}
+
+.form--404 {
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-width: 400px;
+  padding-bottom: 2rem;
+}
+
+.form--404-text {
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 

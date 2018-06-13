@@ -1,0 +1,27 @@
+#error-not-found {
+  background: linear-gradient( rgba($color-black, 0.4), rgba($color-black, 0.4) ), url('https://media.giphy.com/media/12Vujj7Zh7dTPy/giphy.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $color-black;
+}
+
+.form--404 {
+  background: rgba($color-white, 1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  padding-bottom: 2rem;
+}
+
+.form--404-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
