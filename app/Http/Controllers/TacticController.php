@@ -59,6 +59,11 @@ class TacticController extends Controller
             'FKtacticID' => $tactic->id,
         ]);
 
+        PlayersInTactic::create([
+            'FKplayerID' => 1,
+            'FKtacticID' => $tactic->id,
+        ]);
+
         return back()->with('succes', 'De tactiek '.$request->name.' is succesvol toegevoegd');
     }
 
@@ -81,7 +86,7 @@ class TacticController extends Controller
             ->join('players', 'players_in_tactics.FKplayerID', '=', 'players.ID')
             ->orderBy('FKplayersInTacticID', 'asc')
             ->orderBy('step', 'asc')
-            ->select('coordinates.*', 'players.shirtNumber')
+            ->select('coordinates.*', 'players.shirtNumber', 'players.firstName', 'players.lastName')
             ->get();
             
         // return $coordinates;
@@ -146,12 +151,11 @@ class TacticController extends Controller
             ->where('FKplayersInTacticID', $player->id)
             ->count();
             
-        // return $playerCoordinateExistTest;
         if ($playerCoordinateExistTest == 0){
             $coordinate = Coordinate::create([
                 'FKplayersInTacticID' => $player->id,
-                'xCoordinate' => $request->x,
-                'yCoordinate' => $request->y,
+                'xCoordinate' => 50,
+                'yCoordinate' => 40,
                 'step' => $request->step,
             ]);
         }
@@ -159,58 +163,56 @@ class TacticController extends Controller
             return back()->with('error', 'Deze speler heeft al een positie in deze stap.')->withInput();
         }
 
-        return back()->with('succes', 'Extra positie toegevoegd')->withInput();
+        return back()->withInput();
     }
 
     public function removeCoordinate(Request $request)
     {
-        $minX = ($request->x - 12);
-        $maxX = ($request->x + 12);
-        $minY = ($request->y - 10);
-        $maxY = ($request->y + 10);
-        $coordinate = DB::table('coordinates')
-            ->whereBetween('xCoordinate',[$minX,$maxX])
+        $minX = ($request->x - 20);
+        $maxX = ($request->x + 20);
+        $minY = ($request->y - 20);
+        $maxY = ($request->y + 20);
+        $coordinate = Coordinate::whereBetween('xCoordinate',[$minX,$maxX])
             ->whereBetween('yCoordinate',[$minY,$maxY])
             ->where('step', $request->step)
             ->first();
 
         if (!empty($coordinate->id)){
             Coordinate::destroy($coordinate->id);
-            return back()->with('succes', 'Coördinaat verwijderd')->withInput();
+            return back()->withInput();
         }
         else {
-            return back()->with('error', 'Coördinaat bestaat niet')->withInput();
+            
+            return back()->with('succes', 'lukt niet')->withInput();
         }
     }
 
     public function EditCoordinate(Request $request)
     {
-        $minStartX = ($request->xStart - 12);
-        $maxStartX = ($request->xStart + 12);
-        $minStartY = ($request->yStart - 10);
-        $maxStartY = ($request->yStart + 10);
+        $minStartX = ($request->xStart - 20);
+        $maxStartX = ($request->xStart + 20);
+        $minStartY = ($request->yStart - 20);
+        $maxStartY = ($request->yStart + 20);
 
         $endX = ($request->xEnd);
         $endY = ($request->yEnd);
 
-        $coordinate = DB::table('coordinates')
-            ->whereBetween('xCoordinate',[$minStartX,$maxStartX])
+        $coordinate = Coordinate::whereBetween('xCoordinate',[$minStartX,$maxStartX])
             ->whereBetween('yCoordinate',[$minStartY,$maxStartY])
             ->where('step', $request->step)
             ->first();
 
         if (!empty($coordinate->id)){
-            $newCoordinate = Coordinate::find($coordinate->id);
 
-            $newCoordinate->xCoordinate = $endX;
-            $newCoordinate->yCoordinate = $endY;
+            $coordinate->xCoordinate = $endX;
+            $coordinate->yCoordinate = $endY;
 
-            $newCoordinate->save();
+            $coordinate->save();
 
-            return back()->with('succes', 'Coördinaat bijgewerkt')->withInput();
+            return back()->withInput();
         }
         else {
-            return back()->with('error', 'Coördinaat bestaat niet')->withInput();
+            return back()->withInput();
         }
     }
 }

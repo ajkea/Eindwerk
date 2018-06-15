@@ -133,8 +133,8 @@
         <div class="container section-content__center">
             <div class="row">
                 <div class="col-8 offset-2 right">
-                    <h6 class="section-slogan--text">Voetballen is heel simpel, maar het moeilijkste wat er is, is simpel voetballen.</h6>
-                    <h6 class="section-slogan--person">Johan Cruijff</h6>
+                    <h6 class="section-slogan--text">What matters is getting the best out of the squad you have.</h6>
+                    <h6 class="section-slogan--person">Claudio Ranieri</h6>
                 </div>
             </div>
         </div>

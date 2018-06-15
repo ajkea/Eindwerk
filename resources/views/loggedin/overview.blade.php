@@ -22,10 +22,6 @@
     @endif
   </div>
   <div class="col-12 col-md-8">
-    <input type="text" name="search" id="search">
-    <table>
-      <tbody></tbody>
-    </table>
     <div class="div-table">
       <div class="div-table-row div-table-head">
         <div class="div-table-col"></div>

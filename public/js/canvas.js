@@ -80,9 +80,10 @@ window.onload = function () {
     // canvas.width = canvas.width;
     var canvas = document.getElementById("soccerfield");
     updateStep(1);
+    var playerinput = document.getElementById("playerIDForm");
 
-    canvas.addEventListener('dblclick', function (evt) {
-        addCoordinates(canvas, evt);
+    playerinput.addEventListener("change", function () {
+        addCoordinates(canvas);
     });
 
     canvas.addEventListener('contextmenu', function (evt) {
@@ -96,9 +97,6 @@ window.onload = function () {
     canvas.addEventListener('mouseup', function (evt) {
         setCoordinatesEdit(canvas, evt);
     });
-};
-window.test = function () {
-    console.log('test');
 };
 
 window.resetCanvas = function () {
@@ -131,25 +129,36 @@ window.updateStep = function () {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
     var coordinate = void 0;
-    var i = 0;
-    var lastCoordinates = [[,]];
 
-    while (i < coordinates.length) {
+    ctx.fillStyle = "#DDDDDD";
+    ctx.font = "24px Arial";
+    ctx.fillText('Versleep de spelers', 70, 50);
 
-        if (coordinates[i].step === coordinates[i - 1]) {
-            drawCurrentCoordinate(i, 'red');
-            drawCurrentCoordinate(i, 'black');
-        } else if (coordinates[i].step == step) {
-            drawCurrentCoordinate(i);
-        } else if (coordinates[i].step == step - 1) {
-            if (coordinates[i + 1].step == step) {
-                drawLineBetweenCoordinates(i);
-            }
+    var coordinatesFiltered = coordinates.filter(function (element) {
+        return element.step == step;
+    });
+    var coordinatesFilteredLower = coordinates.filter(function (element) {
+        return element.step < step;
+    });
 
-            drawPreviousCoordinate(i);
-        }
-        i++;
+    for (var _i = 0; _i < coordinatesFiltered.length; _i++) {
+        drawCurrentCoordinate(_i, coordinatesFiltered);
     }
+
+    var flags = [],
+        lastStep = [],
+        l = coordinatesFilteredLower.length,
+        i;
+    coordinatesFilteredLower.reverse();
+    for (i = 0; i < l; i++) {
+        if (flags[coordinatesFilteredLower[i].shirtNumber]) continue;
+        flags[coordinatesFilteredLower[i].shirtNumber] = true;
+        lastStep.push(coordinatesFilteredLower[i]);
+    }
+
+    lastStep.forEach(function (element) {
+        drawPreviousCoordinate(element);
+    });
 };
 
 window.resetSteps = function () {
@@ -165,49 +174,61 @@ window.getMousePos = function (canvas, evt) {
     };
 };
 
-window.drawCurrentCoordinate = function (i) {
+window.drawCurrentCoordinate = function (i, coordinates) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
     if (coordinates[i].shirtNumber == 100) {
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 6, 0, 2 * Math.PI);
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
         ctx.fillStyle = "#FFFFFF";
         ctx.fill();
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 7, 0, 2 * Math.PI);
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
+        ctx.stroke();
+    } else if (coordinates[i].shirtNumber == 101) {
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
         ctx.stroke();
     } else {
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 20, 0, 2 * Math.PI);
         ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.fillStyle = "#DDDDDD";
-        ctx.font = "16px Arial";
-        ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate - 6, coordinates[i].yCoordinate + 5);
+        ctx.font = "24px Arial";
+        ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate, coordinates[i].yCoordinate + 10);
+        ctx.fillText(coordinates[i].firstName, coordinates[i].xCoordinate, coordinates[i].yCoordinate + 40);
+        ctx.textAlign = "center";
     }
 };
 
-window.drawPreviousCoordinate = function (i) {
+window.drawPreviousCoordinate = function (coordinates) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
-    if (coordinates[i].shirtNumber == 100) {
+    if (coordinates.shirtNumber == 100) {
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 4, 0, 2 * Math.PI);
+        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 10, 0, 2 * Math.PI);
         ctx.fillStyle = "#BBBBBB";
         ctx.fill();
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 5, 0, 2 * Math.PI);
+        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 10, 0, 2 * Math.PI);
         ctx.stroke();
     } else {
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 10, 0, 2 * Math.PI);
+        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 16, 0, 2 * Math.PI);
         ctx.fillStyle = "#666666";
         ctx.fill();
         ctx.fillStyle = "#FFFFFF";
-        ctx.font = "12px Arial";
-        ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate - 5, coordinates[i].yCoordinate + 5);
+        ctx.font = "15px Arial";
+        ctx.fillText(coordinates.shirtNumber, coordinates.xCoordinate, coordinates.yCoordinate + 6);
+        ctx.fillText(coordinates.firstName, coordinates.xCoordinate, coordinates.yCoordinate + 30);
+        ctx.textAlign = "center";
     }
 };
 
@@ -222,16 +243,13 @@ window.drawLineBetweenCoordinates = function (i) {
     ctx.stroke();
 };
 
-function addCoordinates(canvas, evt) {
-    var mousePos = getMousePos(canvas, evt);
-    document.getElementById('xCoordinateAdd').value = mousePos.x;
-    document.getElementById('yCoordinateAdd').value = mousePos.y;
+function addCoordinates(canvas) {
+    document.getElementById('xCoordinateAdd').value = 50;
+    document.getElementById('yCoordinateAdd').value = 50;
     document.getElementById('formStepAdd').value = document.getElementById('step').value;
 
     document.getElementById('addCoordinates').submit();
-    evt.preventDefault();
-    $.post('/tactics/addCoordinates', $('#addCoordinates').serialize());
-};
+}
 
 function removeCoordinates(canvas, evt) {
     var mousePos = getMousePos(canvas, evt);
@@ -239,7 +257,7 @@ function removeCoordinates(canvas, evt) {
     document.getElementById('yCoordinateDelete').value = mousePos.y;
     document.getElementById('formStepDelete').value = document.getElementById('step').value;
     document.getElementById('removeCoordinates').submit();
-};
+}
 
 function editCoordinates(canvas, evt) {
     var mousePos = getMousePos(canvas, evt);
@@ -247,7 +265,7 @@ function editCoordinates(canvas, evt) {
     document.getElementById('yCoordinateDelete').value = mousePos.y;
     document.getElementById('formStepDelete').value = document.getElementById('step').value;
     document.getElementById('removeCoordinates').submit();
-};
+}
 
 function getCoordinatesEdit(canvas, evt) {
     var mousePos = getMousePos(canvas, evt);

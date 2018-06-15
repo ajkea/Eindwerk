@@ -8,26 +8,22 @@
   </script>
   <script type="text/javascript" src="{{ asset('js/canvas.js') }}"></script>
   <div class="row">
-    <div class="col-12">
-      <input type="number" name="step" id="step" value="{{ ( !empty(old('step')) ? (old('step') + 1) : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}" autofocus="true">
+    @if(session('succes'))
+    <div class="notification notification__succes">
+      <p>{{ session('succes') }}sf</p>
+    </div>
+    @endif
+    <div class="col-12 col-xl-7 center">
+      <input type="number" name="step" id="step" value="{{ ( !empty(old('step')) ? old('step') : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}" autofocus="true">
       <button onclick="runSteps('{{$max}}')">Play!</button>
       <button onclick="resetSteps()">Reset steps</button>
       <form id="addCoordinates" action="/tactics/addCoordinates" method="post">
-        @if (session('error'))
-          <div class="error">
-            <p>{{ session('error') }}</p>
-          </div>
-        @endif
-        @if (session('succes'))
-          <div class="succes">
-            <p>{{ session('succes') }}</p>
-          </div>
-        @endif
         @csrf
         <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
         <select name="playerID" id="playerIDForm">
+            <option disabled selected value>kies een speler</option>
           @foreach($tactic->players as $player)
-            <option {{ old('playerID') == $player->id ? "selected" : "" }} value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
+            <option value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
           @endforeach
         </select>
         <input type="hidden" name="x" id="xCoordinateAdd">
@@ -36,14 +32,14 @@
       </form>
     </div>
       <div class="col-12 col-xl-7">
-      <form id="removeCoordinates" action="{{ url('tactics/removeCoordinates')}}" method="post">
-        @csrf
-        <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
-        <input type="hidden" name="x" id="xCoordinateDelete">
-        <input type="hidden" name="y" id="yCoordinateDelete">
-        <input type="hidden" name="step" id="formStepDelete">
-      </form>
-      <canvas id="soccerfield" height="820" width="544" oncontextmenu="return false"></canvas>
+        <form id="removeCoordinates" action="{{ url('tactics/removeCoordinates')}}" method="post">
+          @csrf
+          <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
+          <input type="hidden" name="x" id="xCoordinateDelete">
+          <input type="hidden" name="y" id="yCoordinateDelete">
+          <input type="hidden" name="step" id="formStepDelete">
+        </form>
+        <canvas id="soccerfield" height="1056" width="550" oncontextmenu="return false"></canvas>
     </div>
     <div class="col-12 col-xl-4">
       <div class="div-table">
@@ -55,24 +51,7 @@
           <div class="div-table-col"></div>
         </div>
         @foreach ($tactic->players as $player)
-        @if($loop->index === 2)
-      </div>
-          <div class="playerbio--card">
-            <fieldset disabled="disabled">
-              <legend>{{ $player->firstName.' '.$player->lastName }}</legend>
-              <div class="row">
-                <div class="col-3">
-                  <img class="img-profile--avatar"src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ url('images/upload/'.$player->media->alt)}}" srcset="">              
-                </div>
-                <div class="col-9">
-                  <h6 class="playerbio-header--position">{{ $player->position->positionName }}</h6>
-                </div>
-
-                <p>{{ $player->description }}</p>
-              </div>
-            </fieldset>
-          </div>
-        <div class="div-table">
+        @if($loop->first)
         @else
           <div class="div-table-row">
             @isset ($player->media)

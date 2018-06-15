@@ -3191,7 +3191,7 @@ td {
 }
 
 .form {
-  padding: 1rem 2rem;
+  padding: 3rem 2rem;
 }
 
 .form input,
@@ -3344,12 +3344,6 @@ footer {
 
 .playerbio--card {
   width: 100%;
-}
-
-.playerbio-header--position {
-  margin-top: 0;
-  font-weight: 400;
-  font-size: 1rem;
 }
 
 .section {

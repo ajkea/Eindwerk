@@ -11948,8 +11948,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['player'],
     mounted: function mounted() {},
 
     computed: {}
@@ -11964,9 +11980,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "player-bio-card" }, [
-    _c("h6", [_vm._v("vue component playerbio")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.firstName) + "test")])
+    _c("fieldset", { attrs: { disabled: "disabled" } }, [
+      _c("legend", { attrs: { align: "center" } }, [
+        _vm._v(_vm._s(_vm.player.firstName + " " + _vm.player.lastName))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-8" }, [
+          _c("p", [
+            _vm._v(_vm._s(_vm.player.firstName + " " + _vm.player.lastName))
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.player.position.positionName))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4" }, [
+          _c("h5", { staticClass: "player-bio-card--nr" }, [
+            _vm._v(_vm._s(_vm.player.shirtNumber))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12" }, [
+          _c("p", { staticClass: "player-bio-card--description" }, [
+            _vm._v(_vm._s(_vm.player.description))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.player.position.positionName))])
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

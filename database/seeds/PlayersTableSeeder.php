@@ -23,6 +23,16 @@ class PlayersTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+            'firstName' => 'tegenstander',
+            'lastName' => 'tegenstander',
+            'birthDate' => date("Y-m-d"),
+            'description' => 'tegenstander',
+            'FKpositionID' => '100',
+            'shirtNumber' => '101',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+            ],
             // [
             // 'firstName' => 'Liam',
             // 'lastName' => 'Wyckmans',

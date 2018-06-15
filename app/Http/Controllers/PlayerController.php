@@ -112,12 +112,12 @@ class PlayerController extends Controller
     public function show(Player $player)
     {
 
-        $player = DB::table('players')
-            ->join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
+        $player = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
             ->join('teams', 'players_in_teams.FKteamID', '=', 'teams.id')
             ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
             ->where('user_teams.FKuserID', '=', auth()->user()->id)
             ->where('players.id', '=', $player->id)
+            ->select('players.*')
             ->first();
 
         if (!empty($player->id)){
