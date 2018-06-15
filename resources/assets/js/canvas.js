@@ -59,10 +59,6 @@ window.updateStep = function() {
     var coordinatesFiltered = coordinates.filter( element => element.step == step);
     var coordinatesFilteredLower = coordinates.filter( element => element.step < step);
 
-    for(let i=0; i < coordinatesFiltered.length; i++){
-        drawCurrentCoordinate(i, coordinatesFiltered);
-    }
-
     var flags = [], lastStep = [], l = coordinatesFilteredLower.length, i;
     coordinatesFilteredLower.reverse();
     for( i=0; i<l; i++) {
@@ -74,6 +70,10 @@ window.updateStep = function() {
     lastStep.forEach(function(element) {
         drawPreviousCoordinate(element);
     })
+    
+    for(let i=0; i < coordinatesFiltered.length; i++){
+        drawCurrentCoordinate(i, coordinatesFiltered);
+    }
 }
 
 window.resetSteps = function() {

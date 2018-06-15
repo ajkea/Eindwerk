@@ -141,10 +141,6 @@ window.updateStep = function () {
         return element.step < step;
     });
 
-    for (var _i = 0; _i < coordinatesFiltered.length; _i++) {
-        drawCurrentCoordinate(_i, coordinatesFiltered);
-    }
-
     var flags = [],
         lastStep = [],
         l = coordinatesFilteredLower.length,
@@ -159,6 +155,10 @@ window.updateStep = function () {
     lastStep.forEach(function (element) {
         drawPreviousCoordinate(element);
     });
+
+    for (var _i = 0; _i < coordinatesFiltered.length; _i++) {
+        drawCurrentCoordinate(_i, coordinatesFiltered);
+    }
 };
 
 window.resetSteps = function () {
