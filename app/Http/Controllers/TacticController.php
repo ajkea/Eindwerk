@@ -60,7 +60,7 @@ class TacticController extends Controller
         ]);
 
         PlayersInTactic::create([
-            'FKplayerID' => 1,
+            'FKplayerID' => 2,
             'FKtacticID' => $tactic->id,
         ]);
 
@@ -146,8 +146,7 @@ class TacticController extends Controller
         $player = PlayersInTactic::where('FKtacticID', $request->tacticID)
             ->where('FKplayerID', $request->playerID)->first();
 
-        $playerCoordinateExistTest = DB::table('coordinates')
-            ->where('step', $request->step)
+        $playerCoordinateExistTest = Coordinate::where('step', $request->step)
             ->where('FKplayersInTacticID', $player->id)
             ->count();
             

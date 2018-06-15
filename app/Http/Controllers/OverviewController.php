@@ -19,7 +19,7 @@ class OverviewController extends Controller
 
         $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
             ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
-            ->where('teams.teamName', '=', auth()->user()->username)
+            ->where('teams.teamName', '=', auth()->user()->firstName)
             ->select('players.*')
             ->get();
 

@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-12">
     <h1>Overzicht</h1>
-    <p>Hey {{ auth()->user()->username }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
+    <p>Hey {{ auth()->user()->firstName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
   </div>
   <div class="col-12">
     @if (session('error'))
@@ -66,10 +66,13 @@
           <input type="text" name="lastName" id="playerLastName" placeholder="achternaam"> 
           <select name="FKpositionID" id="FKpositionID" required>
             @foreach($positions as $position)
+              @if($loop->index < 3)
+              @else
               <option value="{{ $position->id }}">{{ $position->positionName }}</option>
+              @endif
             @endforeach
           </select>
-          <input type="date" name="birthDate" id="birthDate" value="2000-01-01">
+          <input type="date" name="birthDate" id="birthDate">
           <textarea rows="2" name="description" id="playerDescription" placeholder="korte beschrijving"></textarea>
           <input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99" placeholder="shirtnummer">
           <label for="media" class="center">
@@ -131,7 +134,7 @@
           <input type="text" name="preferredFoot" id="preferredFoot" placeholder="Link/rechts voetig">
         </div>
         @endif
-        <button class="button button--form" type="submit" value="submit"><i class="fal fa-user-plus"></i> Toevoegen<button
+        <button class="button button--form" type="submit" value="submit"><i class="fal fa-user-plus"></i> Toevoegen</button
       </fieldset>
     </form>
   </div>
@@ -153,7 +156,7 @@
         <div class="div-table-row">
           <div class="div-table-cell">{{ $loop->index }}</div>
           <div class="div-table-cell">{{ $team->teamName }}</div>
-          <div class="div-table-cell">{{ count($team->players) }}</div>
+          <div class="div-table-cell">{{ count($team->players) -2 }}</div>
           <div class="div-table-cell">{{ count($team->tactics) }}</div>
           <div class="div-table-cell div-table-cell--buttons">
             <a class="button button__info" href="/teams/{{ $team->FKteamID }}"><i class="fas fa-info-circle"></i></a>

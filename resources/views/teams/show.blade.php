@@ -15,18 +15,18 @@
     <h6>{{ $team->teamName }}</h6>
     <ul>
       @isset($team->users)
-      <p>Users:</p>
+      <p>Gebruikers die deze ploeg beheren:</p>
         @foreach($team->users as $user)
-          <li>{{ $user->username }}</li>
+          <li>{{ $user->firstName }}</li>
         @endforeach
       @endisset
       @isset($team->players)
       <p>Players:</p>
         @foreach($team->players as $player)
-          @if( $loop->index == 0)
+          @if($loop->index < 2)
           @else
             <li>{{ $player->firstName.' '.$player->lastName }}</li>
-          @endif
+          @endif  
         @endforeach
       @endisset
       @isset($team->tactics)
@@ -43,10 +43,7 @@
       <input type="hidden" name="teamID" value="{{ $team->id }}">
       <select name="playerID" id="playerID">
         @foreach($players as $player)
-          @if( $loop->index == 0)
-          @else
             <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
-          @endif
         @endforeach
       </select>
       <button class="button">Toevoegen</button>
@@ -59,7 +56,7 @@
       <input type="hidden" name="teamID" value="{{ $team->id }}">
       <p>User toevoegen aan team: {{ $team->teamName }}</p>
       <p>User die je wilt toevoegen:</p>
-      <input type="text" name="username">
+      <input type="text" name="firstName">
       <button class="button" type="submit">Toevoegen</button>
     </form>
   </div>
@@ -73,12 +70,7 @@
       <input type="text" name="name">
       <p>Tactiek beschrijving:</p>
       <input type="text" name="description">
-      <select name="type" id="type">
-        <option value="open">Open spel</option>
-        <option value="free kick">Vrije trap</option>
-        <option value="corner">Corner</option>
-        <option value="penalty">Penalty</option>
-      </select>
+      <input type="hidden" name="type" value="vrij spel">
       <button class="button" type="submit">Toevoegen</button>
     </form>
   </col-4>

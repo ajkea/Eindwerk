@@ -23,7 +23,17 @@
         <select name="playerID" id="playerIDForm">
             <option disabled selected value>kies een speler</option>
           @foreach($tactic->players as $player)
-            <option value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
+            @if($loop->first)
+              <option value="{{ $player->id }}">{{ $player->firstName }}</option>
+            @elseif($loop->index == 1)
+              @if(Auth::check() && Auth::user()->role !== "user")
+                <option value="{{ $player->id }}">{{ $player->firstName }}</option>)
+              @else
+                <option disabled>PREMIUM - {{ $player->firstName }}</option>)
+              @endif
+            @else
+              <option value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
+            @endif
           @endforeach
         </select>
         <input type="hidden" name="x" id="xCoordinateAdd">
@@ -51,7 +61,7 @@
           <div class="div-table-col"></div>
         </div>
         @foreach ($tactic->players as $player)
-        @if($loop->first)
+        @if($loop->index < 2)
         @else
           <div class="div-table-row">
             @isset ($player->media)

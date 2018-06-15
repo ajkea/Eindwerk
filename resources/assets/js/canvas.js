@@ -68,8 +68,8 @@ window.updateStep = function() {
     }
     
     lastStep.forEach(function(element) {
-        drawPreviousCoordinate(element);
         drawLineBetweenCoordinates(element, coordinatesFiltered);
+        drawPreviousCoordinate(element);
     })
     
     for(let i=0; i < coordinatesFiltered.length; i++){
@@ -105,11 +105,11 @@ window.drawCurrentCoordinate = function(i, coordinates) {
     }
     else if(coordinates[i].shirtNumber == 101) {
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
-        ctx.fillStyle = "red";
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 12, 0, 2 * Math.PI);
+        ctx.fillStyle = "#FF0000";
         ctx.fill();
         ctx.beginPath();
-        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 14, 0, 2 * Math.PI);
+        ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 12, 0, 2 * Math.PI);
         ctx.stroke();
     }
     else {
@@ -117,12 +117,12 @@ window.drawCurrentCoordinate = function(i, coordinates) {
         ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 20, 0, 2 * Math.PI);
         ctx.fillStyle = "#000000";
         ctx.fill();
-        ctx.fillStyle = "#CCCCCC";
+        ctx.fillStyle = "#FFFFFF";
         ctx.font="24px Arial";
         ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate, coordinates[i].yCoordinate +10);
         ctx.fillText(coordinates[i].firstName, coordinates[i].xCoordinate, coordinates[i].yCoordinate +40);
-        ctx.textAlign="center"; 
     }
+    ctx.textAlign="center"; 
 }
 
 window.drawPreviousCoordinate = function(coordinates) {
@@ -138,6 +138,15 @@ window.drawPreviousCoordinate = function(coordinates) {
         ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 10, 0, 2 * Math.PI);
         ctx.stroke();
     }
+    else if(coordinates.shirtNumber == 101){
+        ctx.beginPath();
+        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = "#BB0000";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 8, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
     else{
         ctx.beginPath();
         ctx.arc(coordinates.xCoordinate,coordinates.yCoordinate, 16, 0, 2 * Math.PI);
@@ -147,8 +156,8 @@ window.drawPreviousCoordinate = function(coordinates) {
         ctx.font="15px Arial";
         ctx.fillText(coordinates.shirtNumber, coordinates.xCoordinate, coordinates.yCoordinate + 6);
         ctx.fillText(coordinates.firstName, coordinates.xCoordinate, coordinates.yCoordinate +30);
-        ctx.textAlign="center"; 
     }
+    ctx.textAlign="center"; 
 }
 
 window.drawLineBetweenCoordinates = function (coordinatesLow, coordinatesCurrent) {

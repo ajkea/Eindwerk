@@ -24,9 +24,6 @@
                         <h4 class="form--title">Registreer</h4>
                     </div>
                     <div class="col-12">
-                        <input id="username" type="text" class="{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="Gebruikersnaam" required autofocus>  
-                    </div>
-                    <div class="col-12">
                         <input id="firstName" type="text" class="{{ $errors->has('firstName') ? ' is-invalid' : '' }}" name="firstName" value="{{ old('firstName') }}" placeholder="Voornaam" required>    
                     </div>
                     <div class="col-12">

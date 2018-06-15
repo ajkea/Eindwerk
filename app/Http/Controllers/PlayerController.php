@@ -22,7 +22,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $team = Team::where('teamName',auth()->user()->username)->first();
+        $team = Team::where('teamName',auth()->user()->firstName)->first();
         return view('players.index', compact('team', $team));
     }
 

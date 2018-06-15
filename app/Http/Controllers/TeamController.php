@@ -71,6 +71,12 @@ class TeamController extends Controller
             'FKteamID' => $FKteamID->id,
         ]);
 
+        $enemy = Player::where('FKpositionID', '=', '2')->first();
+        PlayersInTeam::create([
+            'FKplayerID' => $enemy->id,
+            'FKteamID' => $FKteamID->id,
+        ]);
+
         return back()->with('succes', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
     }
 
@@ -86,12 +92,12 @@ class TeamController extends Controller
             ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
             ->where('user_teams.FKuserID', '=', auth()->user()->id)
             ->where('teams.id', '=', $team->id)
-            ->where('teams.teamName', '<>', auth()->user()->username)
+            ->where('teams.teamName', '<>', auth()->user()->firstName)
             ->first();
 
         $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
         ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
-        ->where('teams.teamName', '=', auth()->user()->username)
+        ->where('teams.teamName', '=', auth()->user()->firstName)
         ->orderBy('players.id', 'asc')
         ->select('players.*')
         ->get();
@@ -144,12 +150,12 @@ class TeamController extends Controller
 
     public function addUserToTeam(Request $request)
     {
-        $user = User::where('username', $request->username)
+        $user = User::where('firstName', $request->firstName)
         ->where('role', '!=', 'user')->first();
         if(isset($user)){
             $team = Team::find($request->teamID);
             $team->users()->attach($user);
-            return back()->with('succesTeam', $user->username.' is toegevoegd');
+            return back()->with('succesTeam', $user->firstName.' is toegevoegd');
         }
         else {
 

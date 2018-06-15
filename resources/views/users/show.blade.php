@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <ul>
-    <li>{{ $user->username }}</li>
+    <li>{{ $user->firstName }}</li>
     @if($user->teams)
       @foreach($user->teams as $team)
       <li>{{ $team->teamName }}</li>
