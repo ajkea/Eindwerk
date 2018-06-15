@@ -69,6 +69,7 @@ window.updateStep = function() {
     
     lastStep.forEach(function(element) {
         drawPreviousCoordinate(element);
+        drawLineBetweenCoordinates(element, coordinatesFiltered);
     })
     
     for(let i=0; i < coordinatesFiltered.length; i++){
@@ -116,7 +117,7 @@ window.drawCurrentCoordinate = function(i, coordinates) {
         ctx.arc(coordinates[i].xCoordinate, coordinates[i].yCoordinate, 20, 0, 2 * Math.PI);
         ctx.fillStyle = "#000000";
         ctx.fill();
-        ctx.fillStyle = "#DDDDDD";
+        ctx.fillStyle = "#CCCCCC";
         ctx.font="24px Arial";
         ctx.fillText(coordinates[i].shirtNumber, coordinates[i].xCoordinate, coordinates[i].yCoordinate +10);
         ctx.fillText(coordinates[i].firstName, coordinates[i].xCoordinate, coordinates[i].yCoordinate +40);
@@ -150,15 +151,25 @@ window.drawPreviousCoordinate = function(coordinates) {
     }
 }
 
-window.drawLineBetweenCoordinates = function (i) {
+window.drawLineBetweenCoordinates = function (coordinatesLow, coordinatesCurrent) {
     var canvas = document.getElementById("soccerfield");
     var ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.setLineDash([5,5]);
-    ctx.moveTo(coordinates[i].xCoordinate,coordinates[i].yCoordinate);
-    ctx.lineTo(coordinates[i+1].xCoordinate,coordinates[i+1].yCoordinate);
-    ctx.stroke();
+    for(i=0;i<coordinatesCurrent.length;i++){
+        if(coordinatesLow.FKplayersInTacticID == coordinatesCurrent[i].FKplayersInTacticID){
+            ctx.beginPath();
+            ctx.setLineDash([5,5]);
+            ctx.moveTo(coordinatesLow.xCoordinate,coordinatesLow.yCoordinate);
+            ctx.lineTo(coordinatesCurrent[i].xCoordinate,coordinatesCurrent[i].yCoordinate);
+            ctx.stroke();
+        }
+    }
+
+    // ctx.beginPath();
+    // ctx.setLineDash([5,5]);
+    // ctx.moveTo(coordinatesLow[i].xCoordinate,coordinatesLow[i].yCoordinate);
+    // ctx.lineTo(coordinatesCurrent[i].xCoordinate,coordinatesCurrent[i].yCoordinate);
+    // ctx.stroke();
 }
 
 function addCoordinates(canvas){
