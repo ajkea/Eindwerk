@@ -62,8 +62,8 @@ window.updateStep = function() {
     var flags = [], lastStep = [], l = coordinatesFilteredLower.length, i;
     coordinatesFilteredLower.reverse();
     for( i=0; i<l; i++) {
-        if( flags[coordinatesFilteredLower[i].shirtNumber]) continue;
-        flags[coordinatesFilteredLower[i].shirtNumber] = true;
+        if( flags[coordinatesFilteredLower[i].FKplayersInTacticID]) continue;
+        flags[coordinatesFilteredLower[i].FKplayersInTacticID] = true;
         lastStep.push(coordinatesFilteredLower[i]);
     }
     
