@@ -104,7 +104,9 @@
       <p>Speler die je wilt toevoegen:</p>
       <select name="playerID" id="playerID">
         @foreach($team->players as $player)
+          @if($loop->index > 1)
           <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+          @endif
         @endforeach
       </select>
       <button type="submit">Toevoegen</button>

@@ -1,21 +1,8 @@
-@extends('layouts.app')
-@section('content')
-<meta name="_token" content="{{ csrf_token() }}">
-<div class="row">
-  <div class="col-12">
-    <h1>Overzicht</h1>
-    <p>Hey {{ auth()->user()->firstName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
-    @if(session('succes'))
-    <div class="notification notification__succes alert right" role="alert">{{ session('succes') }}
-      <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
-    </div>
-    @endif
 
-  </div>
-  <a href="#players-form-add" data-toggle="collapse" class="button"><i class="fas fa-user-plus"></i> Toevoegen</a>
-  <div id="players" class="tab-pane row tab-content" role="tabpanel">
+  @section('tab-player')
+  <div id="tab-players" class="row tab-content">
     <div class="col-12">
-      <form id="players-form-add" class="form form--crud collapse" action="/players" enctype="multipart/form-data" method="post" files="true">
+      <form class="form form--crud" action="/players" enctype="multipart/form-data" method="post" files="true">
         @csrf
         <fieldset>
           <legend> Speler toevoegen </legend>
@@ -124,7 +111,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons"><a class="button button__info" href="/players/{{ $player->id }}"><i class="fal fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -132,30 +119,6 @@
                     <input type="hidden" name="lastName" value="{{ $player->lastName }}">
                     <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
                   </form>
-              </div>
-            </div>
-          </div>
-        </div>
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <h6>{{ $player->firstName.' '.$player->lastName }}</h6>
-                <p>{{ $player->birthDate }}</p>
-                <p>{{ $player->description }}</p>
-                <p>{{ $player->position->positionName }}</p>
-              </div>
-              <div class="col-12 col-md-4">
-                <h6>Statistieken:</h6>
-                <p class="player-bio-stat--description">Goals:</p>
-                <p>{{ $player->playerstat->goals }}</p>
-                <p class="player-bio-stat--description">Assists:</p>
-                <p>{{ $player->playerstat->assists }}</p>
-                <p class="player-bio-stat--description">Gespeelde matchen:</p>
-                <p>{{ $player->playerstat->playedGames }}</p>
-                <p class="player-bio-stat--description">Kaarten:</p>
-                <p>gele: {{ $player->playerstat->yellowCards }} rode: {{ $player->playerstat->redCards }}</p>
-              </div>
-              <div class="col-12 col-md-4">
-                
               </div>
             </div>
             @endif
@@ -186,7 +149,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -224,7 +187,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -262,7 +225,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -279,56 +242,4 @@
       </div>
     </div>
   </div>
-  <div id="teams" class="tab-pane row tab-content" role="tabpanel">
-    <div class="col-12">
-      <h6>Ploegen:</h6>
-      <a href="#team-form-add" data-toggle="collapse" class="button"><i class="fas fa-users"></i> Toevoegen</a>
-    </div>
-    <div class="col-12">
-      <form id="team-form-add" class="form form--crud" action="/teams" method="post">
-        @csrf
-        <fieldset>
-          <legend> Ploeg toevoegen</legend>
-          <input type="text" name="teamName" id="teamName" placeholder="ploegnaam"> 
-          <textarea  rows="2" type="text" name="teamDescription" id="teamDescription" placeholder="extra infomatie"></textarea>
-          <button type="submit" class="button button--form" value="toevoegen"><i class="fal fa-users"></i> toevoegen</button>
-        </fieldset>
-      </form>
-    </div>
-    <div class="col-12">
-      <div class="div-table">
-        <div class="div-table-row div-table-head">
-          <div class="div-table-col">#</div>
-          <div class="div-table-col">ploegnaam</div>
-          <div class="div-table-col"># spelers</div>
-          <div class="div-table-col"># tactieken</div>
-          <div class="div-table-col"></div>
-        </div>
-        @foreach($teams as $team)
-          @if( $loop->index === 0)
-          @else
-          <div class="div-table-row">
-            <div class="div-table-cell">{{ $loop->index }}</div>
-            <div class="div-table-cell">{{ $team->teamName }}</div>
-            <div class="div-table-cell">{{ count($team->players) -2 }}</div>
-            <div class="div-table-cell">{{ count($team->tactics) }}</div>
-            <div class="div-table-cell div-table-cell--buttons">
-              <a class="button button__info" href="/teams/{{ $team->FKteamID }}"><i class="fas fa-edit"></i></a>
-              <form action="/teams/delete" method="post">
-                @csrf
-                <input type="hidden" name="teamID" value="{{ $team->id }}">
-                <input type="hidden" name="teamname" value="{{ $team->teamName }}">
-                <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
-              </form>
-            </div>
-          </div>
-          @endif
-        @endforeach
-      </div>
-    </div>
-  </div>
-  <div class="tactics" class="tab-pane row tab-content" role="tabpanel">
-    <h1>hihi</h1>
-  </div>
-</div>
-@endsection
+  @endsection

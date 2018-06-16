@@ -24,11 +24,19 @@
 }
 
 .button__delete {
-  background: $color-error;
+  background: rgba($color-black, .6);
+
+  &:hover {
+    background: $color-error;
+  }
 }
 
 .button__info {
-  background: $color-info;
+  background: rgba($color-black, .6);
+
+  &:hover {
+    background: $color-info;
+  }
   
   svg {
     color: $color-white;

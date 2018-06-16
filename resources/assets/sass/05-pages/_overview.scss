@@ -1,0 +1,19 @@
+.tab {
+  overflow: hidden;
+
+  &.active {
+    background-color: #ccc;
+    color: red;
+  }
+}
+
+.tab-content {
+  display: none;
+
+  .collapse {
+    display: none;
+  }
+}
+.collapse.show {
+  display: block;
+}

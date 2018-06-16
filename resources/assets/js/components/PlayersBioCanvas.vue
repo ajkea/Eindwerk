@@ -13,8 +13,9 @@
             <div class="col-12">
                 <p class="player-bio-card--description">{{ player.description }}</p>
             </div>
-
-            <p>{{ player.position.positionName }}</p>
+            <div class="col-12">
+                <p>{{ player.position.positionName }}</p>
+            </div>
         </div>
         </fieldset>
     </div>

@@ -3050,6 +3050,10 @@ html {
   width: 100%;
 }
 
+.hidden {
+  display: none;
+}
+
 img {
   width: 100%;
 }
@@ -3089,10 +3093,18 @@ img {
 }
 
 .button__delete {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.button__delete:hover {
   background: #ff3939;
 }
 
 .button__info {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.button__info:hover {
   background: #344be2;
 }
 
@@ -3254,8 +3266,11 @@ legend {
   padding: .2rem;
 }
 
+input[type=range] {
+  border-bottom: 0;
+}
+
 .notification {
-  width: 500px;
   padding: .5rem 1rem;
   color: #FFFFFF;
   border-radius: .5rem;
@@ -3344,6 +3359,30 @@ footer {
 
 .playerbio--card {
   width: 100%;
+}
+
+.player-bio-stat--description {
+  font-size: .8rem;
+  margin-left: 1rem;
+  line-height: 0;
+  font-weight: 700;
+}
+
+.player-bio-image {
+  margin: 1rem;
+  max-height: 300px;
+  vertical-align: middle;
+  -o-object-fit: cover;
+     object-fit: cover;
+  padding-bottom: 1rem;
+}
+
+.player-bio-image--button {
+  margin-bottom: 2rem;
+}
+
+.player-bio-stat__first {
+  margin-top: 2rem;
 }
 
 .section {
@@ -3732,5 +3771,26 @@ fieldset {
 .form--404-text {
   font-size: 1.8rem;
   font-weight: 700;
+}
+
+.tab {
+  overflow: hidden;
+}
+
+.tab.active {
+  background-color: #ccc;
+  color: red;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content .collapse {
+  display: none;
+}
+
+.collapse.show {
+  display: block;
 }
 

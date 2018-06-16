@@ -18,10 +18,6 @@ class PositionsTableSeeder extends Seeder
                     'positionDescription' => 'bal'
                 ],
                 [
-                    'positionName' => 'enemy',
-                    'positionDescription' => 'enemy',
-                ],
-                [
                     'positionName' => 'tegenstander',
                     'positionDescription' => 'tegenstander'
                 ],

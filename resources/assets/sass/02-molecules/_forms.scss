@@ -60,3 +60,7 @@ legend {
   text-transform: uppercase;
   padding: .2rem;
 }
+
+input[type=range] {
+  border-bottom: 0;
+}

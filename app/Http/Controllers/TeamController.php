@@ -20,11 +20,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = DB::table('teams')
-            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
-            ->where('user_teams.FKuserID', '=', '1')
+        $teams = Team::join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+            ->where('user_teams.FKuserID', '=', auth()->user()->id)
             ->get();
-
         return view('teams.index', compact('teams', $teams));
     }
 

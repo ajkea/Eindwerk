@@ -100,7 +100,7 @@
                                     <li>Geen beperking op aantal spelers, teams of tactieken</li>
                                 </ul>
                             </div>
-                            <button href="{{ route('register') }}" class="button button__wide">Register</button>
+                            <button href="{{ route('register') }}" class="button button__wide">Gratis account</button>
                         </fieldset>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use App\PlayersInTeam;
 use App\UserTeam;
 use App\Team;
 use App\PlayerSkill;
+use App\PlayerStat;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -86,19 +87,13 @@ class PlayerController extends Controller
             'FKteamID' => $defaultTeam->FKteamID,
         ]);
 
-        if (auth()->user()->role !== 'user' && isset($request->shooting)){
-            PlayerSkill::create([
-                'shooting' => $request->shooting,
-                'defending' => $request->defending,
-                'speed' => $request->speed,
-                'stamina' => $request->stamina,
-                'preferredFoot' => $request->preferredFoot,
-                'dribbling' => $request->dribbling,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'FKplayerID' => $player->id
-            ]);
-        }
+        PlayerSkill::create([
+            'FKplayerID' => $player->id,
+        ]);
+
+        PlayerStat::create([
+            'FKplayerID' => $player->id,
+        ]);
         
         return back()->with('succes', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol toegevoegd');
     }
@@ -120,8 +115,10 @@ class PlayerController extends Controller
             ->select('players.*')
             ->first();
 
+        $positions = Position::all();
+
         if (!empty($player->id)){
-            return view('players.show', compact('player', $player));
+            return view('players.show', compact('player', $player, 'positions', $positions));
         }
         else {
             return redirect()->route('overview')->with('error', 'Je hebt geen toegang tot deze speler');
@@ -162,17 +159,19 @@ class PlayerController extends Controller
         ]);
 
 
+        $player = Player::find($request->id);
+        
         if(isset($request->media)) {
             $FKmediaID = $this->uploadMedia($request->media, $request->firstName, $request->lastName);
-
             $player = Player::find($player->id);
+            $player->FKmediaID = $FKmediaID;
             $player->firstName = $request->firstName;
             $player->lastName = $request->lastName;
             $player->birthDate = $request->birthDate;
             $player->description = $request->description;
             $player->FKpositionID = $request->FKpositionID;
-            $player->FKmediaID = $FKmediaID;
             $player->save();
+
         }
         else {
             $player = Player::find($player->id);
@@ -181,8 +180,9 @@ class PlayerController extends Controller
             $player->birthDate = $request->birthDate;
             $player->description = $request->description;
             $player->FKpositionID = $request->FKpositionID;
-            $player->save();
+            $player->save();    
         }
+        
         return back()->with('succesPlayer', 'De speler is succesvol bijgewerkt');
     }
 
@@ -231,5 +231,62 @@ class PlayerController extends Controller
         $player = Player::where('FKmediaID', $mediaID)->update(['FKmediaID' => null]);
         Media::destroy($mediaID);
         return back()->with('succesPlayer', 'De afbeelding is verwijderd');
+    }
+
+    public function editPlayer(Request $request)
+    {
+        $request->validate([
+            'firstName' => 'string|required|min:3',
+            'lastName' => 'string|required|min:2',
+            'birthDate' => 'date|required|before:-12 Years',
+            'FKpositionID' => 'required|integer',
+            'media' => 'file|mimes:jpeg,bmp,png,jpg',
+            'shirtNumber' => 'required|integer',
+        ]);
+
+        $player = Player::find($request->PlayerID);
+        
+        if(isset($request->media)) {
+            $FKmediaID = $this->uploadMedia($request->media, $request->firstName, $request->lastName);
+            $player = Player::find($request->playerID);
+            $player->FKmediaID = $FKmediaID;
+            $player->firstName = $request->firstName;
+            $player->lastName = $request->lastName;
+            $player->birthDate = $request->birthDate;
+            $player->description = $request->description;
+            $player->FKpositionID = $request->FKpositionID;
+            $player->shirtNumber = $request->shirtNumber;
+            $player->save();
+
+        }
+        else {
+            $player = Player::find($request->playerID);
+            $player->firstName = $request->firstName;
+            $player->lastName = $request->lastName;
+            $player->birthDate = $request->birthDate;
+            $player->description = $request->description;
+            $player->FKpositionID = $request->FKpositionID;
+            $player->shirtNumber = $request->shirtNumber;
+            $player->save();    
+        }
+
+        $player->playerstat->goals = $request->goals;
+        $player->playerstat->assists = $request->assists;
+        $player->playerstat->yellowCards = $request->yellow;
+        $player->playerstat->redCards = $request->red;
+        $player->playerstat->playedGames = $request->played;
+        $player->playerstat->save();
+
+        $player->playerskill->shooting = $request->shooting;
+        $player->playerskill->defending = $request->defending;
+        $player->playerskill->speed = $request->speed;
+        $player->playerskill->dribbling = $request->dribbling;
+        $player->playerskill->stamina = $request->stamina;
+        $player->playerskill->weight = $request->weight;
+        $player->playerskill->height = $request->height;
+        $player->playerskill->preferredFoot = $request->preferredFoot;
+        $player->playerskill->save();
+
+        return back()->with('succes', 'Je hebt '.$request->firstName.' '.$request->lastName.' succesvol bijgewerkt');
     }
 }
