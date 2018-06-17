@@ -1,0 +1,275 @@
+.section {
+  min-height: 102vh;
+  padding: 4rem 0;
+  width: 110%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -5px;
+
+  @media (min-width: $break-md){
+    left: -5%;
+  }
+}
+
+.section-content {
+  height: 100%;
+}
+
+.section-content__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#index-page {
+  overflow-x: hidden;
+}
+
+
+fieldset {
+  margin: 2rem 0;
+}
+
+// SECTIONS
+
+.hero-image {
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('/images/static/hero-image.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 101.5vh;
+  width: 110%;
+  // position: absolute;
+  left: 0;
+  padding-right: 2rem;
+  margin-top: -1rem;
+  margin-left: -5%;
+  margin-right: -5%;
+
+  @media (min-width: $break-sm){
+    background-image: url('/images/static/hero-image.jpg');
+  }
+
+  .button {
+
+    float: right;
+    margin-left: 1rem;
+    width: initial;
+
+    @media (max-width: $break-sm){
+      display: block;
+      width: 80%;
+      margin: .5rem;
+    }
+  }
+}
+
+.head-feature {
+  min-height: 3rem;
+}
+
+.hero-logo {
+  font-size: 3rem;
+  color: $color-white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  letter-spacing: .1rem;
+  margin-bottom: 1rem;
+
+  @media (min-width: $break-md){
+    font-size: 4rem;
+  }
+  @media (min-width: $break-lg){
+    font-size: 6rem;
+  }
+}
+
+.hero-logo--description {
+  color: $color-white;
+  margin-top: 0;
+  padding-top: 0;
+  font-family: 'Raleway', sans-serif;
+  margin-top: 0;
+  margin-bottom: 10rem;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 90%;
+    bottom: -1rem;
+    right: 1rem;
+    border-bottom: .5rem solid $color-yellow;
+
+    @media (min-width: $break-sm){
+      width: 26.5rem;
+    }
+  }
+}
+
+.hero-slogan--text {
+  color: $color-yellow;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+.hero-slogan--person {
+  color: $color-white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  margin-top: .5rem;
+  margin-bottom: 4rem;
+  
+  &:after {
+    content: "";
+    position: absolute;
+    width: 4rem;
+    bottom: -1rem;
+    right: 1rem;
+    border-bottom: 1rem solid $color-yellow;
+  }
+}
+
+#features {
+  background: linear-gradient( rgba($color-primary, 0.8), rgba($color-primary, 0.8), rgba($color-primary, 1) ), url('/images/static/nVgBW8l.jpg');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  color: $color-white;
+
+  legend {
+    font-size: 2.6rem;
+    letter-spacing: .1rem;
+  }
+}
+
+.feature-item {
+  padding: 2rem 1rem;
+}
+
+#image-manager{
+  padding-top: 0;
+  width: 100%;
+
+  #col-1 {
+    background-image: url('/images/static/index-col-1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 450px;
+
+    @media (min-width: $break-sm){
+      width: 50%;
+    }
+  }
+  
+  #col-2 {
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+
+    @media (min-width: $break-sm){
+      left: 50%;
+      width: 50%;
+    }
+  }
+}
+
+#pricing {
+  background: linear-gradient( rgba($color-primary, 1), rgba($color-secondary, 0.8) ), url('/images/static/pricing-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.pricing--card {
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  li {
+    line-height: 2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  legend {
+    font-size: 2.6rem;
+    letter-spacing: .1rem;
+  }
+}
+
+.pricing--card-price {
+  display: ruby;
+
+}
+
+.pricing--card-euro {
+  font-weight: 700;
+}
+
+.pricing--card-time {
+  font-size: 1rem;
+}
+
+.pricing--card-button {
+  // position: absolute;
+  // bottom: 1rem;
+  // width: 80%;
+}
+
+.text--slogan {
+  margin-bottom: -1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+#goal {
+  background: linear-gradient( rgba($color-primary, 0.6), rgba($color-primary, 0.6) ), url('https://media.giphy.com/media/l2JeeTC37ZfK1wWDm/giphy.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.index-slogan--text {
+  font-size: 4rem;
+  color: $color-yellow;
+  font-weight: 900;
+  line-height: 5rem;
+}
+
+.section-slogan--text {
+  color: $color-yellow;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  margin-bottom: .5rem;
+}
+
+.section-slogan--person {
+  color: $color-white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  
+  &:after {
+    content: "";
+    position: absolute;
+    width: 4rem;
+    bottom: -1rem;
+    right: 1rem;
+    border-bottom: 1rem solid $color-yellow;
+  }
+}

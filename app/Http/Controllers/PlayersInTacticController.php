@@ -35,7 +35,10 @@ class PlayersInTacticController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team = Team::find($request->teamID);
+        $team->players()->attach($request->playerID);
+
+        return back()->with('succes', 'Je hebt de speler succesvol toegevoegd aan deze ploeg!');
     }
 
     /**

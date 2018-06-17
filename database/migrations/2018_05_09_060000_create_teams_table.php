@@ -14,13 +14,13 @@ class CreateTeamsTable extends Migration
     public function up()
     {
         Schema::create('teams', function (Blueprint $table) {
-            $table->increments('teamID');
+            $table->increments('id');
             $table->string('teamName');
             $table->string('teamDescription')
                 ->nullable();
             $table->unsignedInteger('FKmediaID')
-                ->nullable;
-            $table->foreign('FKmediaID')->references('mediaID')->on('media')->onDelete('cascade');
+                ->nullable();
+            $table->foreign('FKmediaID')->references('id')->on('media')->onDelete('cascade');
             $table->timestamps();
         });
     }

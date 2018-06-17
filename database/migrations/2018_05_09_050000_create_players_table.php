@@ -14,18 +14,19 @@ class CreatePlayersTable extends Migration
     public function up()
     {
         Schema::create('players', function (Blueprint $table) {
-            $table->increments('playerID');
+            $table->increments('id');
             $table->string('firstName');
             $table->string('lastName');
             $table->date('birthDate');
             $table->string('description')
                 ->nullable();
+            $table->unsignedInteger('shirtNumber');
             $table->unsignedInteger('FKpositionID')
-                ->nullable;
-            $table->foreign('FKpositionID')->references('positionID')->on('positions')->onDelete('cascade');
+                ->nullable();
+            $table->foreign('FKpositionID')->references('id')->on('positions')->onDelete('cascade');
             $table->unsignedInteger('FKmediaID')
-                ->nullable;
-            $table->foreign('FKmediaID')->references('mediaID')->on('media')->onDelete('cascade');
+                ->nullable();
+            $table->foreign('FKmediaID')->references('id')->on('media')->onDelete('cascade');
             $table->timestamps();
         });
     }

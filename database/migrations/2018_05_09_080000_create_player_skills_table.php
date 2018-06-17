@@ -14,15 +14,25 @@ class CreatePlayerSkillsTable extends Migration
     public function up()
     {
         Schema::create('player_skills', function (Blueprint $table) {
-            $table->increments('playerSkillsID');
-            $table->integer('shooting');
-            $table->integer('defending');
-            $table->integer('speed');
-            $table->integer('dribbling');
-            $table->integer('stamina');
-            $table->integer('weight');
-            $table->integer('height');
-            $table->string('preferredFoot');
+            $table->increments('id');
+            $table->unsignedInteger('FKplayerID');
+            $table->foreign('FKplayerID')->references('id')->on('players')->onDelete('cascade');
+            $table->integer('shooting')
+                ->nullable();
+            $table->integer('defending')
+                ->nullable();
+            $table->integer('speed')
+                ->nullable();
+            $table->integer('dribbling')
+                ->nullable();
+            $table->integer('stamina')
+                ->nullable();
+            $table->integer('weight')
+                ->nullable();
+            $table->integer('height')
+                ->nullable();
+            $table->string('preferredFoot')
+                ->nullable();
             $table->timestamps();
         });
     }

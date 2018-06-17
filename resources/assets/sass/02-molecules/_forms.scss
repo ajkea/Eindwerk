@@ -1,0 +1,66 @@
+.form {
+  padding: 3rem 2rem;
+
+  input, textarea {
+    background: none;
+    border: none;
+    border-bottom: 2px solid $color-primary;
+    margin: .8rem;
+    line-height: 1.6rem;
+    padding-left: .8rem;
+    padding-bottom: .5rem;
+    resize: vertical;
+
+    &.is-invalid {
+      border: none;
+      border-bottom: 2px solid $color-primary;
+      color:red;
+    }
+  }
+
+  .button {
+    margin: .8rem;
+  }
+}
+
+select {
+  background: none;
+  border: none;
+  border-bottom: 2px solid $color-primary;
+  margin: .8rem;
+  line-height: 1.6rem;
+  padding-left: .8rem;
+  padding-bottom: .5rem;
+}
+
+select {
+  width: 200px;
+}
+
+.form--title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  line-height: 0;
+}
+
+.form--crud {
+  padding: 0;
+
+  input, textarea, select {
+    width: 90%;
+  }
+}
+
+fieldset {
+
+}
+legend {
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  padding: .2rem;
+}
+
+input[type=range] {
+  border-bottom: 0;
+}

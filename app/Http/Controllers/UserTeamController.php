@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\UserTeam;
+use App\User;
+use App\Team;
 use Illuminate\Http\Request;
 
 class UserTeamController extends Controller
@@ -35,7 +37,6 @@ class UserTeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
