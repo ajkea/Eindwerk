@@ -3074,6 +3074,7 @@ img {
   padding: 1rem;
   color: #FFFFFF;
   border: none;
+  min-width: 50px;
 }
 
 .button:last-of-type {
@@ -3771,10 +3772,6 @@ fieldset {
 .form--404-text {
   font-size: 1.8rem;
   font-weight: 700;
-}
-
-.tab {
-  overflow: hidden;
 }
 
 .tab.active {

@@ -16,7 +16,7 @@
           <div class="form--crud-section">
               @if($player->media)
                 <img class="player-bio-image" src="{{ url('/images/upload/').'/'.$player->media->source }}" alt="{{ $player->media->alt }}">
-                <a class="button button__delete player-bio-image--button" href={{ url('/players/').'/'.$player->media->id.'/deleteImage' }}>Verwijder afbeelding</a>
+                <a class="button button__delete player-bio-image--button" href={{ url('/players/').'/'.$player->media->id.'/deleteImage' }}>Verwijder</a>
               @else
                 <label for="media" class="center">
                   <input type="file" name="media" id="media" hidden>
@@ -45,6 +45,9 @@
             <p class="player-bio-stat--description">Shirtnummer:</p>
             <input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99" placeholder="shirtnummer" value="{{ $player->shirtNumber }}">
           </div>
+        </div>
+        <div class="col-12 col-md">
+          Neem premium om toegang te krijgen tot statistieken en eigenschappen van je spelers.
         </div>
         <div class="col-12 col-md player-bio--stats">
 

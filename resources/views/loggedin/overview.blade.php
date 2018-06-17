@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-12">
     <h1>Overzicht</h1>
-    <p>Hey {{ auth()->user()->firstName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen en spelers die je beheert.</p>
+    <p>Hey {{ auth()->user()->firstName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je spelers die je beheert.</p>
     @if(session('succes'))
     <div class="notification notification__succes alert right" role="alert">{{ session('succes') }}
       <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
@@ -70,7 +70,8 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons"><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fal fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons">
+                <a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info"></i></a>
                 <form action="/players/delete" method="post">
                   @csrf
                   <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -80,7 +81,7 @@
                 </form>
               </div>
             </div>
-            <div class="div-table-row" style="display: table-caption">
+            <div class="div-table-row" style="display: none">
               <div id="player-info-{{ $player->id }}"class="col-12 form form--crud overview-player-bio collapse">
                 <div class="col">
                   <h6>{{ $player->firstName.' '.$player->lastName }}</h6>
@@ -182,7 +183,8 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" >
+                <a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -220,7 +222,8 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" >
+                <a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -258,7 +261,8 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" >
+                <a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
