@@ -4,9 +4,50 @@
   padding: 1rem;
   color: $color-white;
   border: none;
-  width: 100%;
+  // min-width: 120px;
 
   &:last-of-type {
     margin-right: 0;
   }
+
+  svg {
+    color: $color-white;
+  }
+}
+
+.button__succes {
+  background: $color-succes;
+
+  svg {
+    color: $color-white;
+  }
+}
+
+.button__delete {
+  background: rgba($color-black, .6);
+
+  &:hover {
+    background: $color-error;
+  }
+}
+
+.button__info {
+  background: rgba($color-black, .6);
+
+  &:hover {
+    background: $color-info;
+  }
+  
+  svg {
+    color: $color-white;
+  }
+}
+
+.button__wide {
+  width: 100%;
+}
+
+.button--form {
+  margin: .8rem;
+  width: 90%;
 }

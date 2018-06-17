@@ -26,7 +26,7 @@ class CreatePlayerStatsTable extends Migration
             $table->integer('redCards')
                 ->nullable();
             $table->integer('playedGames')
-            ->nullable();
+                ->nullable();
             $table->timestamps();
         });
     }

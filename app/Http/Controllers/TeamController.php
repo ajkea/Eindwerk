@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\UserTeam;
 use App\Team;
 use App\User;
+use App\Player;
 use App\PlayersInTeam;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +20,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::all();
-
+        $teams = Team::join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+            ->where('user_teams.FKuserID', '=', auth()->user()->id)
+            ->get();
         return view('teams.index', compact('teams', $teams));
     }
 
@@ -42,7 +45,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'teamName' => 'string|required|unique:teams,teamName',
+            'teamName' => 'string|required',
             'teamDescription' => 'string|required',
         ]);
 
@@ -52,7 +55,7 @@ class TeamController extends Controller
         ]);
 
         $FKuserID = Auth::id();
-        $FKteamID = Team::where('teamName',$request->teamName)->first();
+        $FKteamID = Team::where('teamName',$request->teamName)->latest()->first();
 
         $userTeam = UserTeam::create([
             'FKuserID' => $FKuserID,
@@ -60,13 +63,19 @@ class TeamController extends Controller
 
         ]);
         
-        $ball = Players::where('position', '100');
-        $ball = PlayersInTeam::create([
+        $ball = Player::where('FKpositionID', '=', '1')->first();
+        PlayersInTeam::create([
             'FKplayerID' => $ball->id,
             'FKteamID' => $FKteamID->id,
         ]);
 
-        return redirect('/users');
+        $enemy = Player::where('FKpositionID', '=', '2')->first();
+        PlayersInTeam::create([
+            'FKplayerID' => $enemy->id,
+            'FKteamID' => $FKteamID->id,
+        ]);
+
+        return back()->with('succes', 'Je hebt '.$request->teamName.' succesvol toegevoegd');
     }
 
     /**
@@ -77,7 +86,26 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        return view('teams.show', compact('team', $team));
+        $team = Team::find($team->id)
+            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
+            ->where('user_teams.FKuserID', '=', auth()->user()->id)
+            ->where('teams.id', '=', $team->id)
+            ->where('teams.teamName', '<>', auth()->user()->firstName)
+            ->first();
+
+        $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
+        ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
+        ->where('teams.teamName', '=', auth()->user()->firstName)
+        ->orderBy('players.id', 'asc')
+        ->select('players.*')
+        ->get();
+            
+        if(!empty($team->id)){
+            return view('teams.show', compact('team', $team, 'players', $players));
+        }
+        else {
+            return redirect()->route('overview')->with('error', 'Je hebt geen toegang tot dit team');
+        }
     }
 
     /**
@@ -111,20 +139,34 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        $team->delete();
+
+        return redirect('overview');
+
+        return back()->with('succesTeam', 'Team '.$team->teamName.' is succesvol verwijderd');
     }
 
     public function addUserToTeam(Request $request)
     {
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('firstName', $request->firstName)
+        ->where('role', '!=', 'user')->first();
         if(isset($user)){
             $team = Team::find($request->teamID);
             $team->users()->attach($user);
-            return back()->with('succes', $user->username.' is toegevoegd');
+            return back()->with('succesTeam', $user->firstName.' is toegevoegd');
         }
         else {
 
-            return back()->with('error', 'Deze gebruiker bestaat niet');
+            return back()->with('error', 'Deze gebruiker is geen premium user, of bestaat niet.');
         }
+    }
+
+    public function addPlayerToTeam(Request $request)
+    {
+        $player = Player::find($request->playerID);
+        $team = Team::find($request->teamID);
+        $team->players()->attach($player);
+
+        return back()->with('succes', $player->firstName.' is toegevoegd');
     }
 }

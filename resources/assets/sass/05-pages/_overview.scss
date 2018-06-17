@@ -1,0 +1,26 @@
+.tab {
+  overflow: hidden;
+
+  &.active {
+    background-color: #ccc;
+    color: red;
+  }
+}
+
+// .tab-content {
+//   display: none;
+// }
+
+
+.collapse {
+  display: none !important;
+}
+
+.collapse.show {
+  display: initial !important;
+}
+
+.overview-player-bio.collapse.show {
+  display: inline-flex !important;
+}
+

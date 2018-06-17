@@ -34,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/users';
+    protected $redirectTo = '/overview';
 
     /**
      * Create a new controller instance.
@@ -55,7 +55,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|string|max:255|unique:users|alpha_dash',
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -72,12 +71,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $username = $data['username'];
+        $firstName = $data['firstName'];
         if(isset($data->media)) {
-            $FKmediaID = $this->uploadMedia($data['media'], $username);
+            $FKmediaID = $this->uploadMedia($data['media'], $firstName);
 
             $user = User::create([
-                'username' => $data['username'],
                 'firstName' => $data['firstName'],
                 'lastName' => $data['lastName'],
                 'email' => $data['email'],
@@ -87,14 +85,13 @@ class RegisterController extends Controller
         }
         else {
             $user = User::create([
-                'username' => $data['username'],
                 'firstName' => $data['firstName'],
                 'lastName' => $data['lastName'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
         }
-        $this->createDefaultTeam($data['username']);
+        $this->createDefaultTeam($data['firstName']);
         return $user;
     }
 
@@ -114,15 +111,15 @@ class RegisterController extends Controller
         return $FKmediaID->id;
     }
 
-    public function createDefaultTeam($userName)
+    public function createDefaultTeam($firstName)
     {
         Team::create([
-            'teamName' => $userName,
-            'teamDescription' => 'team with players created by '.$userName,
+            'teamName' => $firstName,
+            'teamDescription' => 'team with players created by '.$firstName,
         ]);
 
-        $team = Team::where('teamName', $userName)->first();
-        $user = User::where('userName', $userName)->first();
+        $team = Team::where('teamName', $firstName)->first();
+        $user = User::where('firstName', $firstName)->first();
         
         UserTeam::create([
             'FKteamID' => $team->id,

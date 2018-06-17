@@ -37,12 +37,6 @@ class UserTeamController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::where('username',$request->FKuserID)->get();
-        $team = Team::find($request->teamID);
-
-        $team->users()->attach($user->id);
-
-        return view('index');
     }
 
     /**

@@ -6,20 +6,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Managineer - @yield('title')</title>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">
+        <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
+
 
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-        {{-- <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script> --}}
+        <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
         <script defer src="{{ asset('js/fontawesome/fontawesome-all.js') }}"></script>
     </head>
     <body>
-        @include('layouts.header')
-        <div id="vue" class="container">
+        @if(Auth::check())
+            @include('layouts.header')
+        @endif
+        <div id="vue" class="container content">
             @yield('content')
         </div>
-        @include('layouts.footer')
-
+        {{-- @include('layouts.footer') --}}
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

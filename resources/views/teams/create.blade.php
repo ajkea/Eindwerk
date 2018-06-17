@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <form action="/teams" method="post" enctype="multipart/form-data" files="true">
+  <form action="/teams" method="post">
     @csrf
     <div class="row">
       <label for="positionName">Teamnaam:</label>

@@ -4,8 +4,8 @@
     <div class="row">
       @foreach($users as $user)
       <div class="col-12">
-          <h6>{{ $user->username }}</h6>
-          <playername firstname="{{ $user->username }}"></playername>
+          <h6>{{ $user->firstName }}</h6>
+          <playername firstname="{{ $user->firstName }}"></playername>
           {{ $user->email }}
           @if($user->media)
           <div style="max-width:100px;">
@@ -17,7 +17,7 @@
           @if($user->teams)
           <h6>Teams:</h6>
             @foreach($user->teams as $team)
-              @if($team->teamName !== $user->username)
+              @if($team->teamName !== $user->firstName)
               <li>{{ $team->teamName }}</li>
               @endif
             @endforeach

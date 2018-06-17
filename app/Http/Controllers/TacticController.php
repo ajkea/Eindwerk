@@ -6,6 +6,7 @@ use App\Tactic;
 use App\Team;
 use App\PlayersInTactic;
 use App\Coordinate;
+use DB;
 use Illuminate\Http\Request;
 
 class TacticController extends Controller
@@ -46,11 +47,21 @@ class TacticController extends Controller
             'FKteamID' => 'integer|required',
         ]);
 
-        Tactic::create([
+        $tactic = Tactic::create([
             'tacticName' => $request->name,
             'tacticDescription' => $request->description,
             'tacticType' => $request->type,
             'FKteamID' => $request->FKteamID,
+        ]);
+
+        PlayersInTactic::create([
+            'FKplayerID' => 1,
+            'FKtacticID' => $tactic->id,
+        ]);
+
+        PlayersInTactic::create([
+            'FKplayerID' => 2,
+            'FKtacticID' => $tactic->id,
         ]);
 
         return back()->with('succes', 'De tactiek '.$request->name.' is succesvol toegevoegd');
@@ -69,8 +80,16 @@ class TacticController extends Controller
         foreach($playersInTactic as $player){
             array_push($pitID, $player->id);
         }
-
-        $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)->get();
+        // return $pitID;
+        $coordinates = Coordinate::whereIn('FKplayersInTacticID', $pitID)
+            ->join('players_in_tactics', 'coordinates.FKplayersInTacticID', '=', 'players_in_tactics.id')
+            ->join('players', 'players_in_tactics.FKplayerID', '=', 'players.ID')
+            ->orderBy('FKplayersInTacticID', 'asc')
+            ->orderBy('step', 'asc')
+            ->select('coordinates.*', 'players.shirtNumber', 'players.firstName', 'players.lastName')
+            ->get();
+            
+        // return $coordinates;
 
         $max = Coordinate::whereIn('FKplayersInTacticID', $pitID)->max('step');
 
@@ -127,29 +146,74 @@ class TacticController extends Controller
         $player = PlayersInTactic::where('FKtacticID', $request->tacticID)
             ->where('FKplayerID', $request->playerID)->first();
 
-        $coordinate = Coordinate::create([
-            'FKplayersInTacticID' => $player->id,
-            'xCoordinate' => $request->x,
-            'yCoordinate' => $request->y,
-            'step' => $request->step,
-        ]);
+        $playerCoordinateExistTest = Coordinate::join('players_in_tactics', 'coordinates.FKplayersInTacticID', '=', 'players_in_tactics.id')
+            ->where('step', $request->step)
+            ->where('FKplayersInTacticID', $player->id)
+            ->where('players_in_tactics.FKplayerID', '<>', '2')
+            ->count();
+            
+        if ($playerCoordinateExistTest == 0){
+            $coordinate = Coordinate::create([
+                'FKplayersInTacticID' => $player->id,
+                'xCoordinate' => 50,
+                'yCoordinate' => 40,
+                'step' => $request->step,
+            ]);
+        }
+        else {
+            return back()->with('error', 'Deze speler heeft al een positie in deze stap.')->withInput();
+        }
 
-        return back()->with('succes', 'Extra positie toegevoegd');
+        return back()->withInput();
     }
 
     public function removeCoordinate(Request $request)
     {
-        $minX = ($request->x) - 2.5;
-        $maxX = ($request->x) + 2.5;
-        $minY = ($request->y) - 2.5;
-        $maxY = ($request->y) + 2.5;
-        $coordinate = DB::table('coordinates')
-            ->whereBetween('xCoordinate',[$minX,$maxX])
+        $minX = ($request->x - 20);
+        $maxX = ($request->x + 20);
+        $minY = ($request->y - 20);
+        $maxY = ($request->y + 20);
+        $coordinate = Coordinate::whereBetween('xCoordinate',[$minX,$maxX])
             ->whereBetween('yCoordinate',[$minY,$maxY])
             ->where('step', $request->step)
-            ->where('FKtacticID', $request->tacticID)
             ->first();
-        Coordinate::destroy($coordinate);
-        return back()->with('succesRemove', 'Coördinaat verwijderd');
+
+        if (!empty($coordinate->id)){
+            Coordinate::destroy($coordinate->id);
+            return back()->withInput();
+        }
+        else {
+            
+            return back()->with('succes', 'lukt niet')->withInput();
+        }
+    }
+
+    public function EditCoordinate(Request $request)
+    {
+        $minStartX = ($request->xStart - 20);
+        $maxStartX = ($request->xStart + 20);
+        $minStartY = ($request->yStart - 20);
+        $maxStartY = ($request->yStart + 20);
+
+        $endX = ($request->xEnd);
+        $endY = ($request->yEnd);
+
+        $coordinate = Coordinate::whereBetween('xCoordinate',[$minStartX,$maxStartX])
+            ->whereBetween('yCoordinate',[$minStartY,$maxStartY])
+            ->where('step', $request->step)
+            ->first();
+
+        if (!empty($coordinate->id)){
+
+            $coordinate->xCoordinate = $endX;
+            $coordinate->yCoordinate = $endY;
+
+            $coordinate->save();
+
+            return back()->withInput();
+        }
+        else {
+            return back()->withInput();
+        }
     }
 }

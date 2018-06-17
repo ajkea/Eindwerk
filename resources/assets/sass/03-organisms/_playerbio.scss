@@ -1,0 +1,25 @@
+.playerbio--card {
+  width: 100%;
+}
+
+.player-bio-stat--description {
+  font-size: .8rem;
+  margin-left: 1rem;
+  line-height: 0;
+  font-weight: 700;
+}
+
+.player-bio-image {
+  margin: 1rem;
+  max-height: 300px;
+  vertical-align: middle;
+  object-fit: cover;
+  padding-bottom: 1rem;
+}
+.player-bio-image--button {
+  margin-bottom: 2rem;
+}
+
+.player-bio-stat__first {
+  margin-top: 2rem;
+}

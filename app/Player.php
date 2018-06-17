@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
     protected $fillable = [
-        'firstName', 'lastName', 'birthDate', 'description', 'FKpositionID', 'FKmediaID'
+        'firstName', 'lastName', 'birthDate', 'description', 'FKpositionID', 'FKmediaID', 'shirtNumber'
     ];
 
     public function media() {
@@ -20,6 +20,10 @@ class Player extends Model
 
     public function playerskill() {
         return $this->hasOne('App\PlayerSkill', 'FKplayerID');
+    }
+
+    public function playerstat() {
+        return $this->hasOne('App\PlayerStat', 'FKplayerID');
     }
 
     public function teams() {

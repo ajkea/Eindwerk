@@ -28,20 +28,22 @@ Route::resource('/pit', 'PlayersInTacticController')->middleware('auth');
 Route::resource('/coor', 'CoordinateController')->middleware('auth');
 
 Route::post('/userteams/addUser', 'TeamController@addUserToTeam')->middleware('auth');
+Route::post('/userteams/addPlayer', 'TeamController@addPlayerToTeam')->middleware('auth');
 Route::post('tactics/addToTeam', 'TacticController@store')->middleware('auth');
 Route::post('tactics/addPlayer', 'TacticController@addPlayer')->middleware('auth');
 Route::post('tactics/addCoordinates', 'TacticController@addCoordinate')->middleware('auth');
 Route::post('tactics/removeCoordinates', 'TacticController@removeCoordinate')->middleware('auth');
+Route::post('tactics/editCoordinates', 'TacticController@EditCoordinate')->middleware('auth');
 
 Route::post('tactics/addOnCanvas', array('as' => 'changeStatus', 'uses' => 'TacticController@addCoordinate'));
 
+Route::get('/overview', 'OverviewController@index')->middleware('auth')->name('overview');
+Route::get('/overview/search', 'OverviewController@search')->middleware('auth');
+Route::post('/teams/delete', 'OverviewController@deleteTeam')->middleware('auth');
+Route::post('/players/delete', 'OverviewController@deletePlayer')->middleware('auth');
+Route::post('/players/edit', 'PlayerController@editPlayer')->middleware('auth');
 Route::get('/canvas', function () {
     return view('test.canvas');
 });
-
-
-// Team toevoegen nodig? anders kans op toevoegen van random teams andere personen
-// Route::post('/userteams/addTeam', 'TeamController@addTeamToUser')->middleware('auth');
-
 
 Route::get('/players/{id}/deleteImage', 'PlayerController@deleteImage');
