@@ -1,7 +1,11 @@
 .navbar {
-  height: 70px;
+  height: 51px;
   background: $color-green;
   z-index: 100;
+
+  .button {
+    margin-left: 1rem;
+  }
 }
 
 .navbar-content {

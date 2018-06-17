@@ -46,9 +46,11 @@
             <input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99" placeholder="shirtnummer" value="{{ $player->shirtNumber }}">
           </div>
         </div>
+        @if(auth()->user()->role == 'user')
         <div class="col-12 col-md">
           Neem premium om toegang te krijgen tot statistieken en eigenschappen van je spelers.
         </div>
+        @else
         <div class="col-12 col-md player-bio--stats">
 
           <p class="player-bio-stat--description">Gespeelde matchen:</p>
@@ -120,12 +122,13 @@
             </select>
           </div>
         </div>
+        @endif
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <button class="button button--form button__wide" type="submit" value="submit"><i class="fal fa-user"></i> Bijwerken</button
         </div>
-        <div class="row">
-          <div class="col-12 col-md-4">
-            <button class="button button--form button__wide" type="submit" value="submit"><i class="fal fa-user"></i> Bijwerken</button
-          </div>
-        </div>
+      </div>
     </fieldset>
   </form>
   <div class="hidden">

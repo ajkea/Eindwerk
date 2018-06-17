@@ -3287,9 +3287,13 @@ input[type=range] {
 }
 
 .navbar {
-  height: 70px;
+  height: 51px;
   background: #03DAC6;
   z-index: 100;
+}
+
+.navbar .button {
+  margin-left: 1rem;
 }
 
 .navbar-content {
