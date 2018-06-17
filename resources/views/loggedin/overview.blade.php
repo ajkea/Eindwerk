@@ -42,60 +42,6 @@
               <input type="number" name="shirtNumber" id="shirtNumber" min='1' max="99" placeholder="shirtnummer">
             </div>
           </div>
-          @if(Auth::check() && Auth::user()->role !== "user")
-          <div class="form--crud-section">
-            <div class="input-range">
-              <label for="shooting">
-                <input type="range" name="shooting" id="shooting" min="0" max="100" value="0">
-                <input type="number" name="shooting" id="shooting" min="0" max="100" placeholder="shooting">
-              </label>
-              <output for="shooting" class="output"></output>
-            </div>
-            <div class="input-range">
-              <label for="defending">
-                <input type="range" name="defending" id="defending" min="0" max="100" value="0">
-                <input type="number" name="defending" id="defending" min="0" max="100" placeholder="defending">
-              </label>
-              <output for="defending" class="output"></output>
-            </div>
-            <div class="input-range">
-              <label for="speed">
-                <input type="range" name="speed" id="speed" min="0" max="100" value="0">
-                <input type="number" name="speed" id="speed" min="0" max="100">
-              </label>
-              <output for="speed" class="output"></output>
-            </div>
-            <div class="input-range">
-              <label for="stamina">
-                <input type="range" name="stamina" id="stamina" min="0" max="100" value="0">
-                <input type="number" name="stamina" id="stamina" min="0" max="100">
-              </label>
-              <output for="stamina" class="output"></output>
-            </div>
-            <div class="input-range">
-              <label for="dribbling">
-                <input type="range" name="dribbling" id="dribbling" min="0" max="100" value="0">
-                <input type="number" name="dribbling" id="dribbling" min="0" max="100">
-              </label>
-              <output for="dribbling" class="output"></output>
-            </div>
-            <div class="input-range">
-              <label for="height">
-                <input type="range" name="height" id="height" min="0" max="100" value="0">
-                <input type="number" name="height" id="height" min="0" max="100">
-              </label>
-              <output for="height" class="output"></output>
-            </div>
-            <div class="input-range">
-              <label for="weight">
-                <input type="range" name="weight" id="weight" min="0" max="100" value="0">
-                <input type="number" name="weight" id="weight" min="0" max="100">
-              </label>
-              <output for="weight" class="output"></output>
-            </div>
-            <input type="text" name="preferredFoot" id="preferredFoot" placeholder="Link/rechts voetig">
-          </div>
-          @endif
           <button class="button button--form" type="submit" value="submit"><i class="fal fa-user-plus"></i> Toevoegen</button
         </fieldset>
       </form>
@@ -134,80 +80,80 @@
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-        <div id="player-info-{{ $player->id }}"class="overview-player-bio row collapse">
-          <div class="col-12 col-md-4">
-            <h6>{{ $player->firstName.' '.$player->lastName }}</h6>
-            <p>{{ $player->birthDate }}</p>
-            <p>{{ $player->description }}</p>
-            <p>{{ $player->position->positionName }}</p>
-          </div>
-          <div class="col-12 col-md-4">
-            <h6>Statistieken:</h6>
-            <p class="player-bio-stat--description">Goals:</p>
-            <p>{{ $player->playerstat->goals }}</p>
-            <p class="player-bio-stat--description">Assists:</p>
-            <p>{{ $player->playerstat->assists }}</p>
-            <p class="player-bio-stat--description">Gespeelde matchen:</p>
-            <p>{{ $player->playerstat->playedGames }}</p>
-            <p class="player-bio-stat--description">Kaarten:</p>
-            <p>gele: {{ $player->playerstat->yellowCards }} rode: {{ $player->playerstat->redCards }}</p>
-          </div>
-          <div class="col-12 col-md player-bio--skills">
-            <div class="form--crud-section">
-              <div class="input-range">
-                <label for="shooting">
-                  <p class="player-bio-stat--description">Schot: <output name="shootingOutput" id="shootingOut">{{ $player->playerskill->shooting }}</output>/ 10</p>
-                  <input type="range" name="shooting" id="shooting" min="0" max="10" value="{{ $player->playerskill->shooting }}" oninput="shootingOut.value = shooting.value" disabled>
-                </label>
-                <output for="shooting" class="output"></output>
+            <div class="div-table-row" style="display: table-caption">
+              <div id="player-info-{{ $player->id }}"class="col-12 form form--crud overview-player-bio collapse">
+                <div class="col">
+                  <h6>{{ $player->firstName.' '.$player->lastName }}</h6>
+                  <p>{{ $player->birthDate }}</p>
+                  <p>{{ $player->description }}</p>
+                  <p>{{ $player->position->positionName }}</p>
+                </div>
+                <div class="col">
+                  <h6>Statistieken:</h6>
+                  <p class="player-bio-stat--description">Goals:</p>
+                  <p>{{ $player->playerstat->goals }}</p>
+                  <p class="player-bio-stat--description">Assists:</p>
+                  <p>{{ $player->playerstat->assists }}</p>
+                  <p class="player-bio-stat--description">Gespeelde matchen:</p>
+                  <p>{{ $player->playerstat->playedGames }}</p>
+                  <p class="player-bio-stat--description">Kaarten:</p>
+                  <p>gele: {{ $player->playerstat->yellowCards }} rode: {{ $player->playerstat->redCards }}</p>
+                </div>
+                <div class="col">
+                  <div class="form--crud-section">
+                    <div class="input-range">
+                      <label for="shooting">
+                        <p class="player-bio-stat--description">Schot: <output name="shootingOutput" id="shootingOut">{{ $player->playerskill->shooting }}</output>/ 10</p>
+                        <input type="range" name="shooting" id="shooting" min="0" max="10" value="{{ $player->playerskill->shooting }}" oninput="shootingOut.value = shooting.value" disabled>
+                      </label>
+                      <output for="shooting" class="output"></output>
+                    </div>
+                    <div class="input-range">
+                      <label for="defending">
+                        <p class="player-bio-stat--description">Verdedigen: <output name="defendingOutput" id="defendingOut">{{ $player->playerskill->defending }}</output> / 10</p>
+                        <input type="range" name="defending" id="defending" min="0" max="10" value="{{ $player->playerskill->defending }}" oninput="defendingOut.value = defending.value" disabled>
+                      </label>
+                      <output for="defending" class="output"></output>
+                    </div>
+                    <div class="input-range">
+                      <label for="speed">
+                        <p class="player-bio-stat--description">Snelheid: <output name="speedOutput" id="speedOut">{{ $player->playerskill->speed }}</output> km/u</p>
+                        <input type="range" name="speed" id="speed" min="0" max="40" value="{{ $player->playerskill->speed }}" oninput="speedOut.value = speed.value" disabled>
+                      </label>
+                      <output for="speed" class="output"></output>
+                    </div>
+                    <div class="input-range">
+                      <label for="stamina">
+                          <p class="player-bio-stat--description">Conditie: <output name="staminaOutput" id="staminaOut">{{ $player->playerskill->stamina }}</output> / 10</p>
+                        <input type="range" name="stamina" id="stamina" min="0" max="10" value="{{ $player->playerskill->stamina }}" oninput="staminaOut.value = stamina.value" disabled>
+                      </label>
+                      <output for="stamina" class="output"></output>
+                    </div>
+                    <div class="input-range">
+                      <label for="dribbling">
+                        <p class="player-bio-stat--description">Dribbelen: <output name="dribblingOutput" id="dribblingOut">{{ $player->playerskill->dribbling }}</output> / 10</p>
+                        <input type="range" name="dribbling" id="dribbling" min="0" max="10" value="{{ $player->playerskill->dribbling }}" oninput="dribblingOut.value = dribbling.value" disabled>
+                      </label>
+                    </div>
+                    <div class="input-range">
+                      <label for="height">
+                        <p class="player-bio-stat--description">Lengte in cm:</p>
+                        <p>{{ $player->playerskill->height }}</p>
+                      </label>
+                      <output for="height" class="output"></output>
+                    </div>
+                    <div class="input-range">
+                      <label for="weight">
+                          <p class="player-bio-stat--description">Gewicht in kg:</p>
+                          <p>{{ $player->playerskill->weight }}</p>
+                      </label>
+                    </div>
+                    <p class="player-bio-stat--description">Beste voet:</p>
+                    <p>{{ $player->playerskill->preferredFoot }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="input-range">
-                <label for="defending">
-                  <p class="player-bio-stat--description">Verdedigen: <output name="defendingOutput" id="defendingOut">{{ $player->playerskill->defending }}</output> / 10</p>
-                  <input type="range" name="defending" id="defending" min="0" max="10" value="{{ $player->playerskill->defending }}" oninput="defendingOut.value = defending.value" disabled>
-                </label>
-                <output for="defending" class="output"></output>
-              </div>
-              <div class="input-range">
-                <label for="speed">
-                  <p class="player-bio-stat--description">Snelheid: <output name="speedOutput" id="speedOut">{{ $player->playerskill->speed }}</output> km/u</p>
-                  <input type="range" name="speed" id="speed" min="0" max="40" value="{{ $player->playerskill->speed }}" oninput="speedOut.value = speed.value" disabled>
-                </label>
-                <output for="speed" class="output"></output>
-              </div>
-              <div class="input-range">
-                <label for="stamina">
-                    <p class="player-bio-stat--description">Conditie: <output name="staminaOutput" id="staminaOut">{{ $player->playerskill->stamina }}</output> / 10</p>
-                  <input type="range" name="stamina" id="stamina" min="0" max="10" value="{{ $player->playerskill->stamina }}" oninput="staminaOut.value = stamina.value" disabled>
-                </label>
-                <output for="stamina" class="output"></output>
-              </div>
-              <div class="input-range">
-                <label for="dribbling">
-                  <p class="player-bio-stat--description">Dribbelen: <output name="dribblingOutput" id="dribblingOut">{{ $player->playerskill->dribbling }}</output> / 10</p>
-                  <input type="range" name="dribbling" id="dribbling" min="0" max="10" value="{{ $player->playerskill->dribbling }}" oninput="dribblingOut.value = dribbling.value" disabled>
-                </label>
-              </div>
-              <div class="input-range">
-                <label for="height">
-                  <p class="player-bio-stat--description">Lengte in cm:</p>
-                  <p>{{ $player->playerskill->height }}</p>
-                </label>
-                <output for="height" class="output"></output>
-              </div>
-              <div class="input-range">
-                <label for="weight">
-                    <p class="player-bio-stat--description">Gewicht in kg:</p>
-                    <p>{{ $player->playerskill->weight }}</p>
-                </label>
-              </div>
-              <p class="player-bio-stat--description">Beste voet:</p>
-              <p>{{ $player->playerskill->preferredFoot }}</p>
             </div>
-          </div>
-        </div>
         @endif
         @endforeach
         @endisset
@@ -236,7 +182,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -274,7 +220,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">
@@ -312,7 +258,7 @@
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
+              <div class="div-table-cell div-table-cell--buttons" ><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-edit"></i></a>
                   <form action="/players/delete" method="post">
                     @csrf
                     <input type="hidden" name="playerID" value="{{ $player->id }}">

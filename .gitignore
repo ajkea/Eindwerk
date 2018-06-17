@@ -7,8 +7,6 @@ app/storage/
 
 public/storage
 public/hot
-public/css
-public/js
 storage/*.key
 .env.*.php
 .env.php
@@ -21,5 +19,3 @@ Homestead.json
 /.vagrant
 npm-debug.log
 yarn-error.log
-
-public/images/upload/
