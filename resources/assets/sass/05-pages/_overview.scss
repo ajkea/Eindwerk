@@ -7,13 +7,20 @@
   }
 }
 
-.tab-content {
-  display: none;
+// .tab-content {
+//   display: none;
+// }
 
-  .collapse {
-    display: none;
-  }
+
+.collapse {
+  display: none !important;
 }
+
 .collapse.show {
-  display: block;
+  display: initial !important;
 }
+
+.overview-player-bio.collapse.show {
+  display: inline-flex !important;
+}
+

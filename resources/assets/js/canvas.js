@@ -27,12 +27,12 @@ window.resetCanvas = function() {
 }
 
 window.resetSteps = function() {
-    updateStep(1);
     document.getElementById('step').value = '1';
+    updateStep(1);
 }
 
 window.runSteps = function(max){
-    let i = 1;
+    let i = 0;
     let counter = max;
     let interval = setInterval(function(){
       updateStep(i);
@@ -42,7 +42,7 @@ window.runSteps = function(max){
         clearInterval(interval);
         return updateStep(i);
       }
-    },400);
+    },800);
 }
 
 window.updateStep = function() {

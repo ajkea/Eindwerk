@@ -3782,15 +3782,17 @@ fieldset {
   color: red;
 }
 
-.tab-content {
-  display: none;
-}
-
-.tab-content .collapse {
-  display: none;
+.collapse {
+  display: none !important;
 }
 
 .collapse.show {
-  display: block;
+  display: initial !important;
+}
+
+.overview-player-bio.collapse.show {
+  display: -webkit-inline-box !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
 }
 

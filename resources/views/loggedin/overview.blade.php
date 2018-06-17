@@ -101,7 +101,7 @@
       </form>
     </div>
     <div class="col-12">
-      <div class="overview-players-block">
+      <div class="overview-players-block col-12">
         <h6>Keepers:</h6>
         <div class="div-table">
           <div class="div-table-row div-table-head">
@@ -115,55 +115,105 @@
           @foreach ($players as $player)
             @if($player->FKpositionID === 3)
             <div class="div-table-row">
-                @isset ($player->media)
-                  <div class="div-table-cell table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ $player->media->alt }}"></div>
-                @endisset
-                @empty ($player->media)
-                  <div class="div-table-cell table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></div>
-                @endempty
+              @isset ($player->media)
+                <div class="div-table-cell table-image--avatar"><img class="img-profile--avatar" src="{{ url('images/upload/'.$player->media->source)}}" alt="{{ $player->media->alt }}"></div>
+              @endisset
+              @empty ($player->media)
+                <div class="div-table-cell table-image--avatar"><i class="fas fa-user-circle fa-3x img-profile--avatar"></i></div>
+              @endempty
               <div class="div-table-cell">{{ $player->firstName.' '.$player->lastName }}</div>
               <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
               <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
-              <div class="div-table-cell div-table-cell--buttons"><a class="button button__info" href="/players/{{ $player->id }}"><i class="fal fa-edit"></i></a>
-                  <form action="/players/delete" method="post">
-                    @csrf
-                    <input type="hidden" name="playerID" value="{{ $player->id }}">
-                    <input type="hidden" name="firstName" value="{{ $player->firstName }}">
-                    <input type="hidden" name="lastName" value="{{ $player->lastName }}">
-                    <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
-                  </form>
+              <div class="div-table-cell div-table-cell--buttons"><a href="#player-info-{{ $player->id }}" data-toggle="collapse" class="button"><i class="fas fa-info"></i></a><a class="button button__info" href="/players/{{ $player->id }}"><i class="fal fa-edit"></i></a>
+                <form action="/players/delete" method="post">
+                  @csrf
+                  <input type="hidden" name="playerID" value="{{ $player->id }}">
+                  <input type="hidden" name="firstName" value="{{ $player->firstName }}">
+                  <input type="hidden" name="lastName" value="{{ $player->lastName }}">
+                  <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
+                </form>
               </div>
             </div>
           </div>
         </div>
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <h6>{{ $player->firstName.' '.$player->lastName }}</h6>
-                <p>{{ $player->birthDate }}</p>
-                <p>{{ $player->description }}</p>
-                <p>{{ $player->position->positionName }}</p>
+        <div id="player-info-{{ $player->id }}"class="overview-player-bio row collapse">
+          <div class="col-12 col-md-4">
+            <h6>{{ $player->firstName.' '.$player->lastName }}</h6>
+            <p>{{ $player->birthDate }}</p>
+            <p>{{ $player->description }}</p>
+            <p>{{ $player->position->positionName }}</p>
+          </div>
+          <div class="col-12 col-md-4">
+            <h6>Statistieken:</h6>
+            <p class="player-bio-stat--description">Goals:</p>
+            <p>{{ $player->playerstat->goals }}</p>
+            <p class="player-bio-stat--description">Assists:</p>
+            <p>{{ $player->playerstat->assists }}</p>
+            <p class="player-bio-stat--description">Gespeelde matchen:</p>
+            <p>{{ $player->playerstat->playedGames }}</p>
+            <p class="player-bio-stat--description">Kaarten:</p>
+            <p>gele: {{ $player->playerstat->yellowCards }} rode: {{ $player->playerstat->redCards }}</p>
+          </div>
+          <div class="col-12 col-md player-bio--skills">
+            <div class="form--crud-section">
+              <div class="input-range">
+                <label for="shooting">
+                  <p class="player-bio-stat--description">Schot: <output name="shootingOutput" id="shootingOut">{{ $player->playerskill->shooting }}</output>/ 10</p>
+                  <input type="range" name="shooting" id="shooting" min="0" max="10" value="{{ $player->playerskill->shooting }}" oninput="shootingOut.value = shooting.value" disabled>
+                </label>
+                <output for="shooting" class="output"></output>
               </div>
-              <div class="col-12 col-md-4">
-                <h6>Statistieken:</h6>
-                <p class="player-bio-stat--description">Goals:</p>
-                <p>{{ $player->playerstat->goals }}</p>
-                <p class="player-bio-stat--description">Assists:</p>
-                <p>{{ $player->playerstat->assists }}</p>
-                <p class="player-bio-stat--description">Gespeelde matchen:</p>
-                <p>{{ $player->playerstat->playedGames }}</p>
-                <p class="player-bio-stat--description">Kaarten:</p>
-                <p>gele: {{ $player->playerstat->yellowCards }} rode: {{ $player->playerstat->redCards }}</p>
+              <div class="input-range">
+                <label for="defending">
+                  <p class="player-bio-stat--description">Verdedigen: <output name="defendingOutput" id="defendingOut">{{ $player->playerskill->defending }}</output> / 10</p>
+                  <input type="range" name="defending" id="defending" min="0" max="10" value="{{ $player->playerskill->defending }}" oninput="defendingOut.value = defending.value" disabled>
+                </label>
+                <output for="defending" class="output"></output>
               </div>
-              <div class="col-12 col-md-4">
-                
+              <div class="input-range">
+                <label for="speed">
+                  <p class="player-bio-stat--description">Snelheid: <output name="speedOutput" id="speedOut">{{ $player->playerskill->speed }}</output> km/u</p>
+                  <input type="range" name="speed" id="speed" min="0" max="40" value="{{ $player->playerskill->speed }}" oninput="speedOut.value = speed.value" disabled>
+                </label>
+                <output for="speed" class="output"></output>
               </div>
+              <div class="input-range">
+                <label for="stamina">
+                    <p class="player-bio-stat--description">Conditie: <output name="staminaOutput" id="staminaOut">{{ $player->playerskill->stamina }}</output> / 10</p>
+                  <input type="range" name="stamina" id="stamina" min="0" max="10" value="{{ $player->playerskill->stamina }}" oninput="staminaOut.value = stamina.value" disabled>
+                </label>
+                <output for="stamina" class="output"></output>
+              </div>
+              <div class="input-range">
+                <label for="dribbling">
+                  <p class="player-bio-stat--description">Dribbelen: <output name="dribblingOutput" id="dribblingOut">{{ $player->playerskill->dribbling }}</output> / 10</p>
+                  <input type="range" name="dribbling" id="dribbling" min="0" max="10" value="{{ $player->playerskill->dribbling }}" oninput="dribblingOut.value = dribbling.value" disabled>
+                </label>
+              </div>
+              <div class="input-range">
+                <label for="height">
+                  <p class="player-bio-stat--description">Lengte in cm:</p>
+                  <p>{{ $player->playerskill->height }}</p>
+                </label>
+                <output for="height" class="output"></output>
+              </div>
+              <div class="input-range">
+                <label for="weight">
+                    <p class="player-bio-stat--description">Gewicht in kg:</p>
+                    <p>{{ $player->playerskill->weight }}</p>
+                </label>
+              </div>
+              <p class="player-bio-stat--description">Beste voet:</p>
+              <p>{{ $player->playerskill->preferredFoot }}</p>
             </div>
-            @endif
-          @endforeach
-          @endisset
+          </div>
+        </div>
+        @endif
+        @endforeach
+        @endisset
         </div>
       </div>
-      <div class="overview-players-block">
+      <div class="overview-players-block col-12">
         <h6>Verdedigers:</h6>
         <div class="div-table">
           <div class="div-table-row div-table-head">
@@ -201,7 +251,7 @@
           @endisset
         </div>
       </div>
-      <div class="overview-players-block">
+      <div class="overview-players-block col-12">
         <h6>Middenvelders:</h6>
         <div class="div-table">
           <div class="div-table-row div-table-head">
@@ -239,7 +289,7 @@
           @endisset
         </div>
       </div>
-      <div class="overview-players-block">
+      <div class="overview-players-block col-12">
         <h6>Aanvallers:</h6>
         <div class="div-table">
           <div class="div-table-row div-table-head">
@@ -276,54 +326,6 @@
           @endforeach
           @endisset
         </div>
-      </div>
-    </div>
-  </div>
-  <div id="teams" class="tab-pane row tab-content" role="tabpanel">
-    <div class="col-12">
-      <h6>Ploegen:</h6>
-      <a href="#team-form-add" data-toggle="collapse" class="button"><i class="fas fa-users"></i> Toevoegen</a>
-    </div>
-    <div class="col-12">
-      <form id="team-form-add" class="form form--crud" action="/teams" method="post">
-        @csrf
-        <fieldset>
-          <legend> Ploeg toevoegen</legend>
-          <input type="text" name="teamName" id="teamName" placeholder="ploegnaam"> 
-          <textarea  rows="2" type="text" name="teamDescription" id="teamDescription" placeholder="extra infomatie"></textarea>
-          <button type="submit" class="button button--form" value="toevoegen"><i class="fal fa-users"></i> toevoegen</button>
-        </fieldset>
-      </form>
-    </div>
-    <div class="col-12">
-      <div class="div-table">
-        <div class="div-table-row div-table-head">
-          <div class="div-table-col">#</div>
-          <div class="div-table-col">ploegnaam</div>
-          <div class="div-table-col"># spelers</div>
-          <div class="div-table-col"># tactieken</div>
-          <div class="div-table-col"></div>
-        </div>
-        @foreach($teams as $team)
-          @if( $loop->index === 0)
-          @else
-          <div class="div-table-row">
-            <div class="div-table-cell">{{ $loop->index }}</div>
-            <div class="div-table-cell">{{ $team->teamName }}</div>
-            <div class="div-table-cell">{{ count($team->players) -2 }}</div>
-            <div class="div-table-cell">{{ count($team->tactics) }}</div>
-            <div class="div-table-cell div-table-cell--buttons">
-              <a class="button button__info" href="/teams/{{ $team->FKteamID }}"><i class="fas fa-edit"></i></a>
-              <form action="/teams/delete" method="post">
-                @csrf
-                <input type="hidden" name="teamID" value="{{ $team->id }}">
-                <input type="hidden" name="teamname" value="{{ $team->teamName }}">
-                <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
-              </form>
-            </div>
-          </div>
-          @endif
-        @endforeach
       </div>
     </div>
   </div>
