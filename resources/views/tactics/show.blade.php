@@ -13,33 +13,43 @@
       <p>{{ session('succes') }}sf</p>
     </div>
     @endif
-    <div class="col-12 col-xl-7 center">
-      <input type="number" name="step" id="step" value="{{ ( !empty(old('step')) ? old('step') : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}" autofocus="true">
-      <button onclick="runSteps('{{$max}}')">Play!</button>
-      <button onclick="resetSteps()">Reset steps</button>
-      <form id="addCoordinates" action="/tactics/addCoordinates" method="post">
-        @csrf
-        <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
-        <select name="playerID" id="playerIDForm">
-            <option disabled selected value>kies een speler</option>
-          @foreach($tactic->players as $player)
-            @if($loop->first)
-              <option value="{{ $player->id }}">{{ $player->firstName }}</option>
-            @elseif($loop->index == 1)
-              @if(Auth::check() && Auth::user()->role !== "user")
-                <option value="{{ $player->id }}">{{ $player->firstName }}</option>)
+    <div class="col-12 col-xl-7">
+      <ol>
+        <li>Voeg een speler toe aan de tactiek</li>
+        <li>Selecteer een speler uit de lijst</li>
+        <li>Versleep de speler naar een positie naar keuze</li>
+        <li>Doe dit voor al je stappen</li>
+      </ol>
+      <p class="player-bio-stat--description">Verwijder een speler door erop te klikken met de rechtermuisknop</p>
+      <fieldset>
+        <legend>Tactiek menu</legend>
+        <p class="player-bio-stat--description">Stap:</p>
+        <input type="number" name="step" id="step" value="{{ ( !empty(old('step')) ? old('step') : '1') }}" onchange="updateStep()" min="1" max="{{$max+1}}" autofocus="true">
+        <button onclick="runSteps('{{$max}}')">Afspelen</button>
+        <form id="addCoordinates" action="/tactics/addCoordinates" method="post">
+          @csrf
+          <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
+          <select name="playerID" id="playerIDForm">
+              <option disabled selected value>kies een speler</option>
+            @foreach($tactic->players as $player)
+              @if($loop->first)
+                <option value="{{ $player->id }}">{{ $player->firstName }}</option>
+              @elseif($loop->index == 1)
+                @if(Auth::check() && Auth::user()->role !== "user")
+                  <option value="{{ $player->id }}">{{ $player->firstName }}</option>)
+                @else
+                  <option disabled>PREMIUM - {{ $player->firstName }}</option>)
+                @endif
               @else
-                <option disabled>PREMIUM - {{ $player->firstName }}</option>)
+                <option value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
               @endif
-            @else
-              <option value="{{ $player->id }}">{{ $player->shirtNumber.' - '.$player->firstName.' '.$player->lastName }}</option>
-            @endif
-          @endforeach
-        </select>
-        <input type="hidden" name="x" id="xCoordinateAdd">
-        <input type="hidden" name="y" id="yCoordinateAdd">
-        <input type="hidden" name="step" id="formStepAdd">
-      </form>
+            @endforeach
+          </select>
+          <input type="hidden" name="x" id="xCoordinateAdd">
+          <input type="hidden" name="y" id="yCoordinateAdd">
+          <input type="hidden" name="step" id="formStepAdd">
+        </form>
+      </fieldset>
     </div>
       <div class="col-12 col-xl-7">
         <form id="removeCoordinates" action="{{ url('tactics/removeCoordinates')}}" method="post">
@@ -86,6 +96,23 @@
         @endif
         @endforeach
       </div>
+      <form class="form form--crud" action="/tactics/addPlayer" method="post">
+        @csrf
+        <fieldset>
+          <legend>Speler toevoegen</legend>
+          <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
+          <p>Voeg een speler toe aan het speelveld.</p>
+          <p>Speler die je wilt toevoegen:</p>
+          <select name="playerID" id="playerID">
+            @foreach($team->players as $player)
+              @if($loop->index > 1)
+              <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+              @endif
+            @endforeach
+          </select>
+          <button type="submit">Toevoegen</button>
+        </fieldset>
+      </form>
     </div>
     <div class="row">
       <form id="editCoordinates" action="{{ url('tactics/editCoordinates')}}" method="post">
@@ -96,20 +123,6 @@
         <input type="hidden" name="xEnd" id="xCoordinateEditEnd">
         <input type="hidden" name="yEnd" id="yCoordinateEditEnd">
         <input type="hidden" name="step" id="formStepEdit">
-    </form>
-    <form action="/tactics/addPlayer" method="post" style="border: 1px solid black">
-      @csrf
-      <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
-      <p>Speler toevoegen aan tactiek: {{ $tactic->tacticName }}</p>
-      <p>Speler die je wilt toevoegen:</p>
-      <select name="playerID" id="playerID">
-        @foreach($team->players as $player)
-          @if($loop->index > 1)
-          <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
-          @endif
-        @endforeach
-      </select>
-      <button type="submit">Toevoegen</button>
     </form>
     </div>
   </div>

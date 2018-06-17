@@ -146,8 +146,10 @@ class TacticController extends Controller
         $player = PlayersInTactic::where('FKtacticID', $request->tacticID)
             ->where('FKplayerID', $request->playerID)->first();
 
-        $playerCoordinateExistTest = Coordinate::where('step', $request->step)
+        $playerCoordinateExistTest = Coordinate::join('players_in_tactics', 'coordinates.FKplayersInTacticID', '=', 'players_in_tactics.id')
+            ->where('step', $request->step)
             ->where('FKplayersInTacticID', $player->id)
+            ->where('players_in_tactics.FKplayerID', '<>', '2')
             ->count();
             
         if ($playerCoordinateExistTest == 0){

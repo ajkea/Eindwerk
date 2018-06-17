@@ -173,12 +173,6 @@ window.drawLineBetweenCoordinates = function (coordinatesLow, coordinatesCurrent
             ctx.stroke();
         }
     }
-
-    // ctx.beginPath();
-    // ctx.setLineDash([5,5]);
-    // ctx.moveTo(coordinatesLow[i].xCoordinate,coordinatesLow[i].yCoordinate);
-    // ctx.lineTo(coordinatesCurrent[i].xCoordinate,coordinatesCurrent[i].yCoordinate);
-    // ctx.stroke();
 }
 
 function addCoordinates(canvas){
