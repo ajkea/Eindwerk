@@ -24,13 +24,13 @@
                         <h4 class="form--title">Registreer</h4>
                     </div>
                     <div class="col-12">
+                        <input id="email" type="text" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
+                    </div>
+                    <div class="col-12">
                         <input id="firstName" type="text" class="{{ $errors->has('firstName') ? ' is-invalid' : '' }}" name="firstName" value="{{ old('firstName') }}" placeholder="Voornaam" required>    
                     </div>
                     <div class="col-12">
                         <input id="lastName" type="text" class="{{ $errors->has('lastName') ? ' is-invalid' : '' }}" name="lastName" value="{{ old('lastName') }}" placeholder="Achternaam" required>
-                    </div>
-                    <div class="col-12">
-                        <input id="email" type="text" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
                     </div>
                     <div class="col-12">
                         <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Wachtwoord" required>    

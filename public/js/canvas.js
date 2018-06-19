@@ -220,15 +220,7 @@ window.drawPreviousCoordinate = function (coordinates) {
         ctx.beginPath();
         ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 10, 0, 2 * Math.PI);
         ctx.stroke();
-    } else if (coordinates.shirtNumber == 101) {
-        ctx.beginPath();
-        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 8, 0, 2 * Math.PI);
-        ctx.fillStyle = "#BB0000";
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 8, 0, 2 * Math.PI);
-        ctx.stroke();
-    } else {
+    } else if (coordinates.shirtNumber == 101) {} else {
         ctx.beginPath();
         ctx.arc(coordinates.xCoordinate, coordinates.yCoordinate, 16, 0, 2 * Math.PI);
         ctx.fillStyle = "#666666";
@@ -246,12 +238,14 @@ window.drawLineBetweenCoordinates = function (coordinatesLow, coordinatesCurrent
     var ctx = canvas.getContext("2d");
 
     for (i = 0; i < coordinatesCurrent.length; i++) {
-        if (coordinatesLow.FKplayersInTacticID == coordinatesCurrent[i].FKplayersInTacticID) {
-            ctx.beginPath();
-            ctx.setLineDash([5, 5]);
-            ctx.moveTo(coordinatesLow.xCoordinate, coordinatesLow.yCoordinate);
-            ctx.lineTo(coordinatesCurrent[i].xCoordinate, coordinatesCurrent[i].yCoordinate);
-            ctx.stroke();
+        if (coordinatesLow.shirtNumber !== 101) {
+            if (coordinatesLow.FKplayersInTacticID == coordinatesCurrent[i].FKplayersInTacticID) {
+                ctx.beginPath();
+                ctx.setLineDash([5, 5]);
+                ctx.moveTo(coordinatesLow.xCoordinate, coordinatesLow.yCoordinate);
+                ctx.lineTo(coordinatesCurrent[i].xCoordinate, coordinatesCurrent[i].yCoordinate);
+                ctx.stroke();
+            }
         }
     }
 };

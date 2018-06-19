@@ -3065,6 +3065,8 @@ img {
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -3271,6 +3273,26 @@ input[type=range] {
   border-bottom: 0;
 }
 
+.no-premium {
+  opacity: .4;
+}
+
+.no-premium input {
+  cursor: not-allowed;
+}
+
+.box-premium {
+  padding: 1rem;
+  padding-bottom: 3rem;
+  background: #247ba0;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.box-premium p {
+  margin-bottom: 2rem;
+}
+
 .notification {
   padding: .5rem 1rem;
   color: #FFFFFF;
@@ -3379,6 +3401,8 @@ footer {
   vertical-align: middle;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   padding-bottom: 1rem;
 }
 

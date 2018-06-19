@@ -86,19 +86,15 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        $team = Team::find($team->id)
-            ->join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
-            ->where('user_teams.FKuserID', '=', auth()->user()->id)
-            ->where('teams.id', '=', $team->id)
-            ->where('teams.teamName', '<>', auth()->user()->firstName)
-            ->first();
+        $team = Team::find($team->id);
 
         $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
         ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
-        ->where('teams.teamName', '=', auth()->user()->firstName)
+        ->where('teams.id', '=', $team->id)
         ->orderBy('players.id', 'asc')
         ->select('players.*')
         ->get();
+
             
         if(!empty($team->id)){
             return view('teams.show', compact('team', $team, 'players', $players));
@@ -148,12 +144,12 @@ class TeamController extends Controller
 
     public function addUserToTeam(Request $request)
     {
-        $user = User::where('firstName', $request->firstName)
+        $user = User::where('email', $request->email)
         ->where('role', '!=', 'user')->first();
         if(isset($user)){
             $team = Team::find($request->teamID);
             $team->users()->attach($user);
-            return back()->with('succesTeam', $user->firstName.' is toegevoegd');
+            return back()->with('succes', $user->email.' is toegevoegd');
         }
         else {
 

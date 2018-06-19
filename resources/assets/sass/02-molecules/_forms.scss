@@ -64,3 +64,22 @@ legend {
 input[type=range] {
   border-bottom: 0;
 }
+
+.no-premium {
+  opacity: .4;
+  input {
+    cursor: not-allowed;
+  }
+}
+
+.box-premium {
+  padding: 1rem;
+  padding-bottom: 3rem;
+  background: $color-primary;
+  color: white;
+  margin-bottom: 1rem;
+
+  p{
+    margin-bottom: 2rem;
+  }
+}

@@ -43,14 +43,13 @@ class TacticController extends Controller
         $request->validate([
             'name' => 'string|required',
             'description' => 'string|required',
-            'type' => 'string|required',
             'FKteamID' => 'integer|required',
         ]);
 
         $tactic = Tactic::create([
             'tacticName' => $request->name,
             'tacticDescription' => $request->description,
-            'tacticType' => $request->type,
+            'tacticType' => 'vrij spel',
             'FKteamID' => $request->FKteamID,
         ]);
 
