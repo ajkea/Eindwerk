@@ -88,6 +88,7 @@ class TeamController extends Controller
     {
         $team = Team::find($team->id);
 
+        $teamOriginal = Team::where('teamName', '=', Auth::user()->firstName)->first();
         $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
         ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
         ->where('teams.teamName', '=', Auth::user()->firstName)
@@ -99,7 +100,7 @@ class TeamController extends Controller
 
             
         if(!empty($team->id)){
-            return view('teams.show', compact('team', $team, 'players', $players));
+            return view('teams.show', compact('team', $team, 'teamOriginal', $teamOriginal));
         }
         else {
             return redirect()->route('overview')->with('error', 'Je hebt geen toegang tot dit team');

@@ -12,7 +12,7 @@
       @endif
     </div>
     <div class="col-12">
-      <h6>Tactieken:s</h6>
+      <h6>Tactieken:</h6>
       @foreach($team->tactics as $tactic)
       <div class="tactic-list">
         <p class="player-bio-stat--description">Titel:</p>
@@ -79,8 +79,8 @@
         <input type="hidden" name="teamID" value="{{ $team->id }}">
         <p class="player-bio-stat--description">Spelers toevoegen:</p>
         <select name="playerID" id="playerID">
-          @foreach($players as $player)
-            <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+          @foreach($teamOriginal->players as $player)=
+            <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>=
           @endforeach
         </select>
         <button class="button"><i class="fal fa-user-plus"></i></button>
