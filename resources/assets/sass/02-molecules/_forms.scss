@@ -83,3 +83,17 @@ input[type=range] {
     margin-bottom: 2rem;
   }
 }
+
+.tactic-list {
+  padding: 1rem 0;
+  p {
+    margin-left: 0;
+  }
+}
+
+.link-tactic {
+  color: $color-primary;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 2rem;
+}

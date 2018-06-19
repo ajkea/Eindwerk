@@ -90,7 +90,9 @@ class TeamController extends Controller
 
         $players = Player::join('players_in_teams', 'players_in_teams.FKplayerID', '=', 'players.id')
         ->join('teams', 'teams.id', '=', 'players_in_teams.FKteamID')
-        ->where('teams.id', '=', $team->id)
+        ->where('teams.teamName', '=', Auth::user()->firstName)
+        ->where('players_in_teams.FKplayerID', '=', 'players.id')
+        ->where('players_in_teams.FKteamID', '<>', $team->id)
         ->orderBy('players.id', 'asc')
         ->select('players.*')
         ->get();

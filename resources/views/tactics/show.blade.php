@@ -9,9 +9,9 @@
   <script type="text/javascript" src="{{ asset('js/canvas.js') }}"></script>
   <div class="row">
     @if(session('succes'))
-    <div class="notification notification__succes">
-      <p>{{ session('succes') }}sf</p>
-    </div>
+      <div class="notification notification__succes alert" role="alert">{{ session('succes') }}
+        <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
+      </div>
     @endif
     <div class="col-12 col-xl-7">
       <ol>
@@ -84,12 +84,11 @@
             <div class="div-table-cell">{{ date('d-m-Y', strtotime($player->birthDate)) }}</div>
             <div class="div-table-cell" >{{ $player->shirtNumber }}</div>
             <div class="div-table-cell div-table-cell--buttons" ><a class="button button__info" href="/players/{{ $player->id }}"><i class="fas fa-info-circle"></i></a>
-              <form action="/players/delete" method="post">
+              <form action="/tactics/deletePlayer" method="post">
                 @csrf
                 <input type="hidden" name="playerID" value="{{ $player->id }}">
-                <input type="hidden" name="firstName" value="{{ $player->firstName }}">
-                <input type="hidden" name="lastName" value="{{ $player->lastName }}">
-                <button type="submit" class="button button__delete"><i class="fas fa-trash-alt"></i></button>
+                <input type="hidden" name="tacticID" value="{{ $tactic->id }}">
+                <button type="submit" class="button button__delete"><i class="fas fa-user-minus"></i></button>
               </form>
             </div>
           </div>

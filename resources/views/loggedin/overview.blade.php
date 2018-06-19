@@ -6,7 +6,8 @@
     <h1>Overzicht</h1>
     <p>Hey {{ auth()->user()->firstName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je spelers die je beheert.</p>
     @if(session('succes'))
-    <div class="notification notification__succes alert" role="alert">{{ session('succes') }}
+    <div class="notification notification__succes alert" role="alert">
+      <p>{{ session('succes') }}</p>
       <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
     </div>
     @endif

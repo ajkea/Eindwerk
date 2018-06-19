@@ -3293,6 +3293,21 @@ input[type=range] {
   margin-bottom: 2rem;
 }
 
+.tactic-list {
+  padding: 1rem 0;
+}
+
+.tactic-list p {
+  margin-left: 0;
+}
+
+.link-tactic {
+  color: #247ba0;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
 .notification {
   padding: .5rem 1rem;
   color: #FFFFFF;
@@ -3309,7 +3324,7 @@ input[type=range] {
 }
 
 .navbar {
-  height: 51px;
+  height: 54px;
   background: #03DAC6;
   z-index: 100;
 }

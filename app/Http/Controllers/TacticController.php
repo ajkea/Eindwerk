@@ -140,6 +140,16 @@ class TacticController extends Controller
         return back()->with('succes', 'Gelukt!');
     }
 
+    public function deletePlayer(Request $request)
+    {
+        $playersInTactic = PlayersInTactic::where('FKplayerID', '=', $request->playerID)
+            ->where('FKtacticID', '=', $request->tacticID)
+            ->first();
+
+        $playersInTactic->delete();
+        return back()->with('succes', 'Speler is verwijderd uit deze tactiek!');
+    }
+
     public function addCoordinate(Request $request)
     {
         $player = PlayersInTactic::where('FKtacticID', $request->tacticID)

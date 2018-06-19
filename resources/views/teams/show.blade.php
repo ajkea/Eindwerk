@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
     <div class="col-12">
-      <h4>Ploeg: {{ $team->teamName }}</h4>
+      <h3>Ploeg: {{ $team->teamName }}</h3>
       <p>{{ $team->teamDescription }}</p>
       @if(session('succes'))
         <div class="notification notification__succes alert" role="alert">{{ session('succes') }}
@@ -12,10 +12,12 @@
       @endif
     </div>
     <div class="col-12">
-      <h6>Tactieken:</h6>
+      <h6>Tactieken:s</h6>
       @foreach($team->tactics as $tactic)
-      <div class="tactic">
+      <div class="tactic-list">
+        <p class="player-bio-stat--description">Titel:</p>
         <a class="link-tactic" href="../tactics/{{ $tactic->id }}">{{ $tactic->tacticName }}</a>
+        <p class="player-bio-stat--description">Beschrijving:</p>
         <p>{{ $tactic->tacticDescription }}</p>
       </div>
       
@@ -78,7 +80,7 @@
         <p class="player-bio-stat--description">Spelers toevoegen:</p>
         <select name="playerID" id="playerID">
           @foreach($players as $player)
-              <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
+            <option value="{{ $player->id }}">{{ $player->firstName.' '.$player->lastName }}</option>
           @endforeach
         </select>
         <button class="button"><i class="fal fa-user-plus"></i></button>

@@ -31,7 +31,7 @@
             <select name="FKpositionID" id="FKpositionID" required>
               @foreach($positions as $position)
                 @if($loop->index < 2)
-                @elseif($loop->index == $player->position->id)
+                @elseif(($loop->index+1) == $player->position->id)
                 <option selected value="{{ $position->id }}">{{ $position->positionName }}</option>
                 @else
                 <option value="{{ $position->id }}">{{ $position->positionName }}</option>

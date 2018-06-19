@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="navbar-content container">
     <ul class="navbar-list--left">
-      <li><a class="navbar-link" href="{{ url('/overview') }}">
+      <li><a class="navbar-link" href="{{ url('/') }}">
         {{ config('app.name', 'Managineer') }}
       </a></li>
     </ul>
