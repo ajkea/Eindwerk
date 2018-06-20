@@ -10,6 +10,11 @@
           <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
         </div>
       @endif
+      @if(session('error'))
+        <div class="notification notification__error alert" role="alert">{{ session('error') }}
+          <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
+        </div>
+      @endif
     </div>
     <div class="col-12 col-md-6">
       <h6>Tactieken:</h6>
@@ -28,7 +33,7 @@
         <p class="player-bio-stat--description">Naam:</p>
         <div class="users-bio">
           <p>{{ $user->firstName.' '.$user->lastName }}</p>
-          @if($user->id !== Auth::user()->id)
+          @if(!$loop->first)
           <form action="/teams/deletePlayer" method="post">
             @csrf
             <input type="hidden" name="userID" value="{{ $user->id }}">

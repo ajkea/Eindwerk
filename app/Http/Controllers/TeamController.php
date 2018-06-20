@@ -20,6 +20,7 @@ class TeamController extends Controller
      */
     public function index()
     {
+
         $teams = Team::join('user_teams', 'user_teams.FKteamID', '=', 'teams.id')
             ->where('user_teams.FKuserID', '=', auth()->user()->id)
             ->get();
@@ -150,13 +151,22 @@ class TeamController extends Controller
         $user = User::where('email', $request->email)
         ->where('role', '!=', 'user')->first();
         if(isset($user)){
-            $team = Team::find($request->teamID);
-            $team->users()->attach($user);
-            return back()->with('succes', $user->email.' is toegevoegd');
+            $userExist = UserTeam::where('FKuserID', '=', $user->id)
+                ->where('FKteamID', '=', $request->teamID)
+                ->first();
+
+            if(isset($userExist)){
+                return back()->with('error', 'Deze gebruiker is al eigenaar van deze ploeg.');
+            }
+            else {
+                $team = Team::find($request->teamID);
+                $team->users()->attach($user);
+                return back()->with('succes', $user->email.' is toegevoegd');
+            }
         }
         else {
 
-            return back()->with('error', 'Deze gebruiker is geen premium user, of bestaat niet.');
+            return back()->with('error', 'Deze gebruiker is geen premium, of bestaat niet.');
         }
     }
 

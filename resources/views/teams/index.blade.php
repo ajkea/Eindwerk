@@ -5,7 +5,12 @@
     <div class="col-12">
       <p>Hey {{ auth()->user()->firstName }}, welkom bij Managineer! Op deze pagina vind je een overzicht van al je ploegen die je beheert.</p>
       @if(session('succes'))
-      <div class="notification notification__succes alert right" role="alert">{{ session('succes') }}
+      <div class="notification notification__succes alert" role="alert">{{ session('succes') }}
+        <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
+      </div>
+      @endif
+      @if(session('error'))
+      <div class="notification notification__error alert" role="alert">{{ session('erros') }}
         <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
       </div>
       @endif

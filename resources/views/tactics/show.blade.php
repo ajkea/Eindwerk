@@ -8,11 +8,18 @@
   </script>
   <script type="text/javascript" src="{{ asset('js/canvas.js') }}"></script>
   <div class="row">
-    @if(session('succes'))
-      <div class="notification notification__succes alert" role="alert">{{ session('succes') }}
-        <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
-      </div>
-    @endif
+    <div class="col-12">
+      @if(session('succes'))
+        <div class="notification notification__succes alert" role="alert">{{ session('succes') }}
+          <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
+        </div>
+      @endif
+      @if(session('error'))
+        <div class="notification notification__error alert" role="alert">{{ session('error') }}
+          <a class="close" data-dismiss="alert" aria-label="Close"><i class="fal fa-times"></i></a>
+        </div>
+      @endif
+    </div>
     <div class="col-12 col-xl-7">
       <ol>
         <li>Voeg een speler toe aan de tactiek</li>

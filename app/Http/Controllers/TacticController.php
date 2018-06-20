@@ -132,12 +132,21 @@ class TacticController extends Controller
 
     public function addPlayer(Request $request)
     {
-        $playersInTactic = PlayersInTactic::create([
-            'FKtacticID' => $request->tacticID,
-            'FKplayerID' => $request->playerID,
-        ]);
+        $playersAlreadyInTactic = PlayersInTactic::where('FKtacticID', '=', $request->tacticID)
+            ->where('FKplayerID', '=', $request->playerID)
+            ->first();
 
-        return back()->with('succes', 'Gelukt!');
+            if(isset($playersAlreadyInTactic)) {
+                return back()->with('error', 'Deze speler zit al in deze tactiek.');
+            }
+            else {
+                $playersInTactic = PlayersInTactic::create([
+                    'FKtacticID' => $request->tacticID,
+                    'FKplayerID' => $request->playerID,
+                ]);
+
+                return back()->with('succes', 'Gelukt!');
+            }
     }
 
     public function deletePlayer(Request $request)
@@ -193,7 +202,7 @@ class TacticController extends Controller
         }
         else {
             
-            return back()->with('succes', 'lukt niet')->withInput();
+            return back()->withInput();
         }
     }
 
