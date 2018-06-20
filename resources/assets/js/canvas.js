@@ -42,7 +42,7 @@ window.runSteps = function(max){
         clearInterval(interval);
         return updateStep(i);
       }
-    },800);
+    },1400);
 }
 
 window.updateStep = function() {

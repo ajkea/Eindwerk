@@ -11,7 +11,7 @@
         </div>
       @endif
     </div>
-    <div class="col-12">
+    <div class="col-12 col-md-6">
       <h6>Tactieken:</h6>
       @foreach($team->tactics as $tactic)
       <div class="tactic-list">
@@ -20,7 +20,23 @@
         <p class="player-bio-stat--description">Beschrijving:</p>
         <p>{{ $tactic->tacticDescription }}</p>
       </div>
-      
+      @endforeach
+    </div>
+    <div class="col-12 col-md-6">
+      <h6>Gebruikers</h6>
+      @foreach($team->users as $user)
+        <p class="player-bio-stat--description">Naam:</p>
+        <div class="users-bio">
+          <p>{{ $user->firstName.' '.$user->lastName }}</p>
+          @if($user->id !== Auth::user()->id)
+          <form action="/teams/deletePlayer" method="post">
+            @csrf
+            <input type="hidden" name="userID" value="{{ $user->id }}">
+            <input type="hidden" name="teamID" value="{{ $team->id }}">
+            <button type="submit" class="button button__delete"><i class="fas fa-user-minus"></i></button>
+          </form>
+          @endif
+        </div>
       @endforeach
     </div>
     <div class="col-12">

@@ -168,4 +168,15 @@ class TeamController extends Controller
 
         return back()->with('succes', $player->firstName.' is toegevoegd');
     }
+
+    public function deletePlayer(Request $request)
+    {
+        $playersInTeam = UserTeam::where('FKuserID', '=', $request->userID)
+            ->where('FKteamID', '=', $request->teamID)
+            ->first();
+
+        $playersInTeam->delete();
+        return back()->with('succes', 'Gebruiker is verwijderd uit deze ploeg!');
+    }
 }
+

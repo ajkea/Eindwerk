@@ -3308,6 +3308,16 @@ input[type=range] {
   font-size: 2rem;
 }
 
+.users-bio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.users-bio form {
+  margin-left: 1rem;
+}
+
 .notification {
   padding: .5rem 1rem;
   color: #FFFFFF;

@@ -48,7 +48,7 @@
                         <div class="col-12 col-sm-4 center feature-item">
                             <i class="fal fa-play-circle fa-5x"></i>
                             <h6 class="head-feature">Ongelimiteerd</h6>
-                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegd. Er is hier geen beperking op het aantal.</p>
+                            <p class="text-feature">Kies zelf hoeveel ploegen en hoeveel spelers je toevoegt. Er is hier geen beperking op het aantal.</p>
                         </div>
                     </div>
                 </fieldset>
@@ -61,7 +61,7 @@
                         <div class="col-12 col-sm-4 center feature-item">
                             <i class="fal fa-link fa-5x"></i>
                             <h6 class="head-feature">Delen met vrienden</h6>
-                            <p class="text-feature">Deel je tactieken en ploegen met andere premium gebruikers. Zo kan je samenwerken aan 1 of meerder ploegen.</p>        
+                            <p class="text-feature">Deel je tactieken en ploegen met andere premium gebruikers. Zo kan je samenwerken aan 1 of meerdere ploegen.</p>        
                         </div>
                         <div class="col-12 col-sm-4 center feature-item">
                             <i class="fal fa-male fa-5x"></i>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-12 col-sm-4 center feature-item">
                             <i class="far fa-chart-bar fa-5x"></i>
-                            <h6 class="head-feature">Uitgebreidde statistieken</h6>
+                            <h6 class="head-feature">Uitgebreide statistieken</h6>
                             <p class="text-feature">Houd statistieken bij van je spelers zoals goals, assists, gele kaarten, ... Verder kan je informatie bijhouden zoals voorkeursvoet, grootte en gewicht.</p>
                         </div>
                 </fieldset>
@@ -116,7 +116,7 @@
                                 <ul>
                                     <li>Deel je teams</li>
                                     <li>Werk samen aan een tactiek</li>
-                                    <li>Kies uit meerdere templates</li>
+                                    <li>Voeg tegenstanders toe</li>
                                     <li>Uitgebreidere informatie</li>
                                     <li>Overzicht van goals, assists, ...</li>
                                     <li>Veel liefde van ons</li>
